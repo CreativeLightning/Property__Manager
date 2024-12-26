@@ -145,6 +145,7 @@ Public Class frmAddTenant
                 Dim rowsAffected As Integer = command.ExecuteNonQuery()
                 If rowsAffected > 0 Then
                     transaction.Commit()
+                    TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
                     MessageBox.Show("Tenant added successfully.")
                 Else
                     transaction.Rollback()
