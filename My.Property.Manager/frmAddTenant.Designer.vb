@@ -22,233 +22,251 @@ Partial Class frmAddTenant
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblPhone2 = New System.Windows.Forms.Label()
-        Me.lblPhone = New System.Windows.Forms.Label()
-        Me.lblSSN = New System.Windows.Forms.Label()
-        Me.LName = New System.Windows.Forms.TextBox()
-        Me.lblLName = New System.Windows.Forms.Label()
-        Me.FName = New System.Windows.Forms.TextBox()
-        Me.lblFName = New System.Windows.Forms.Label()
-        Me.ButtonSave = New System.Windows.Forms.Button()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Property_ManagerDataSet = New My_Property_Manager.Property_ManagerDataSet()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.SSN = New System.Windows.Forms.TextBox()
-        Me.Phone = New System.Windows.Forms.TextBox()
-        Me.Phone2 = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DOB = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Notes = New System.Windows.Forms.RichTextBox()
         Me.Phone3 = New System.Windows.Forms.TextBox()
+        Me.Phone2 = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DOB = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Property_ManagerDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Phone = New System.Windows.Forms.TextBox()
+        Me.SSN = New System.Windows.Forms.TextBox()
+        Me.LName = New System.Windows.Forms.TextBox()
+        Me.FName = New System.Windows.Forms.TextBox()
+        Me.ButtonSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.dbStatus = New System.Windows.Forms.TextBox()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'GroupBox2
         '
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.DOB)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.Phone3)
-        Me.GroupBox1.Controls.Add(Me.Phone2)
-        Me.GroupBox1.Controls.Add(Me.Phone)
-        Me.GroupBox1.Controls.Add(Me.SSN)
-        Me.GroupBox1.Controls.Add(Me.lblPhone2)
-        Me.GroupBox1.Controls.Add(Me.lblPhone)
-        Me.GroupBox1.Controls.Add(Me.lblSSN)
-        Me.GroupBox1.Controls.Add(Me.LName)
-        Me.GroupBox1.Controls.Add(Me.lblLName)
-        Me.GroupBox1.Controls.Add(Me.FName)
-        Me.GroupBox1.Controls.Add(Me.lblFName)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 13)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(552, 355)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Tenant Information"
+        Me.GroupBox2.Controls.Add(Me.dbStatus)
+        Me.GroupBox2.Controls.Add(Me.DOB)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Notes)
+        Me.GroupBox2.Controls.Add(Me.Phone3)
+        Me.GroupBox2.Controls.Add(Me.Phone2)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.Phone)
+        Me.GroupBox2.Controls.Add(Me.SSN)
+        Me.GroupBox2.Controls.Add(Me.LName)
+        Me.GroupBox2.Controls.Add(Me.FName)
+        Me.GroupBox2.Location = New System.Drawing.Point(13, 13)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(346, 415)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "New Tenant Information"
         '
-        'lblPhone2
+        'DOB
         '
-        Me.lblPhone2.AutoSize = True
-        Me.lblPhone2.Location = New System.Drawing.Point(27, 134)
-        Me.lblPhone2.Name = "lblPhone2"
-        Me.lblPhone2.Size = New System.Drawing.Size(50, 13)
-        Me.lblPhone2.TabIndex = 6
-        Me.lblPhone2.Text = "Phone 2:"
+        Me.DOB.Location = New System.Drawing.Point(100, 118)
+        Me.DOB.Name = "DOB"
+        Me.DOB.Size = New System.Drawing.Size(113, 20)
+        Me.DOB.TabIndex = 17
+        Me.DOB.Text = "02/01/1971"
         '
-        'lblPhone
+        'Label9
         '
-        Me.lblPhone.AutoSize = True
-        Me.lblPhone.Location = New System.Drawing.Point(36, 106)
-        Me.lblPhone.Name = "lblPhone"
-        Me.lblPhone.Size = New System.Drawing.Size(41, 13)
-        Me.lblPhone.TabIndex = 5
-        Me.lblPhone.Text = "Phone:"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(34, 257)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(35, 13)
+        Me.Label9.TabIndex = 16
+        Me.Label9.Text = "Notes"
         '
-        'lblSSN
+        'Notes
         '
-        Me.lblSSN.AutoSize = True
-        Me.lblSSN.Location = New System.Drawing.Point(45, 77)
-        Me.lblSSN.Name = "lblSSN"
-        Me.lblSSN.Size = New System.Drawing.Size(32, 13)
-        Me.lblSSN.TabIndex = 4
-        Me.lblSSN.Text = "SSN:"
-        '
-        'LName
-        '
-        Me.LName.Location = New System.Drawing.Point(83, 49)
-        Me.LName.Name = "LName"
-        Me.LName.Size = New System.Drawing.Size(115, 20)
-        Me.LName.TabIndex = 3
-        '
-        'lblLName
-        '
-        Me.lblLName.AutoSize = True
-        Me.lblLName.Location = New System.Drawing.Point(16, 49)
-        Me.lblLName.Name = "lblLName"
-        Me.lblLName.Size = New System.Drawing.Size(61, 13)
-        Me.lblLName.TabIndex = 2
-        Me.lblLName.Text = "Last Name:"
-        '
-        'FName
-        '
-        Me.FName.Location = New System.Drawing.Point(83, 20)
-        Me.FName.Name = "FName"
-        Me.FName.Size = New System.Drawing.Size(115, 20)
-        Me.FName.TabIndex = 1
-        '
-        'lblFName
-        '
-        Me.lblFName.AutoSize = True
-        Me.lblFName.Location = New System.Drawing.Point(17, 23)
-        Me.lblFName.Name = "lblFName"
-        Me.lblFName.Size = New System.Drawing.Size(60, 13)
-        Me.lblFName.TabIndex = 0
-        Me.lblFName.Text = "First Name:"
-        '
-        'ButtonSave
-        '
-        Me.ButtonSave.Location = New System.Drawing.Point(23, 379)
-        Me.ButtonSave.Name = "ButtonSave"
-        Me.ButtonSave.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonSave.TabIndex = 1
-        Me.ButtonSave.Text = "&Save"
-        Me.ButtonSave.UseVisualStyleBackColor = True
-        '
-        'BindingSource1
-        '
-        Me.BindingSource1.DataSource = Me.Property_ManagerDataSet
-        Me.BindingSource1.Position = 0
-        '
-        'Property_ManagerDataSet
-        '
-        Me.Property_ManagerDataSet.DataSetName = "Property_ManagerDataSet"
-        Me.Property_ManagerDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Location = New System.Drawing.Point(124, 379)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 2
-        Me.btnCancel.Text = "&Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'SSN
-        '
-        Me.SSN.Location = New System.Drawing.Point(83, 77)
-        Me.SSN.Name = "SSN"
-        Me.SSN.Size = New System.Drawing.Size(115, 20)
-        Me.SSN.TabIndex = 7
-        '
-        'Phone
-        '
-        Me.Phone.Location = New System.Drawing.Point(83, 106)
-        Me.Phone.Name = "Phone"
-        Me.Phone.Size = New System.Drawing.Size(115, 20)
-        Me.Phone.TabIndex = 8
-        '
-        'Phone2
-        '
-        Me.Phone2.Location = New System.Drawing.Point(83, 134)
-        Me.Phone2.Name = "Phone2"
-        Me.Phone2.Size = New System.Drawing.Size(115, 20)
-        Me.Phone2.TabIndex = 9
+        Me.Notes.Location = New System.Drawing.Point(36, 282)
+        Me.Notes.Name = "Notes"
+        Me.Notes.Size = New System.Drawing.Size(274, 119)
+        Me.Notes.TabIndex = 8
+        Me.Notes.Text = "Some notes go here!"
         '
         'Phone3
         '
-        Me.Phone3.Location = New System.Drawing.Point(83, 161)
+        Me.Phone3.Location = New System.Drawing.Point(101, 203)
         Me.Phone3.Name = "Phone3"
-        Me.Phone3.Size = New System.Drawing.Size(115, 20)
-        Me.Phone3.TabIndex = 10
+        Me.Phone3.Size = New System.Drawing.Size(112, 20)
+        Me.Phone3.TabIndex = 7
+        '
+        'Phone2
+        '
+        Me.Phone2.Location = New System.Drawing.Point(101, 176)
+        Me.Phone2.Name = "Phone2"
+        Me.Phone2.Size = New System.Drawing.Size(112, 20)
+        Me.Phone2.TabIndex = 6
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(25, 125)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(69, 13)
+        Me.Label8.TabIndex = 10
+        Me.Label8.Text = "Date of Birth:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(44, 206)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(50, 13)
+        Me.Label7.TabIndex = 9
+        Me.Label7.Text = "Phone 3:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(44, 179)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(50, 13)
+        Me.Label6.TabIndex = 8
+        Me.Label6.Text = "Phone 2:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(53, 152)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(41, 13)
+        Me.Label5.TabIndex = 7
+        Me.Label5.Text = "Phone:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(14, 94)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(80, 13)
+        Me.Label4.TabIndex = 6
+        Me.Label4.Text = "Social Security:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(33, 67)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(61, 13)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Last Name:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(27, 168)
+        Me.Label1.Location = New System.Drawing.Point(34, 39)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(50, 13)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Phone 3:"
+        Me.Label1.Size = New System.Drawing.Size(60, 13)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "First Name:"
         '
-        'DOB
+        'Phone
         '
-        Me.DOB.Location = New System.Drawing.Point(83, 197)
-        Me.DOB.MaxDate = New Date(2071, 2, 1, 0, 0, 0, 0)
-        Me.DOB.MinDate = New Date(1940, 2, 1, 0, 0, 0, 0)
-        Me.DOB.Name = "DOB"
-        Me.DOB.Size = New System.Drawing.Size(200, 20)
-        Me.DOB.TabIndex = 12
-        Me.DOB.Value = New Date(2024, 2, 1, 0, 0, 0, 0)
+        Me.Phone.Location = New System.Drawing.Point(100, 145)
+        Me.Phone.Name = "Phone"
+        Me.Phone.Size = New System.Drawing.Size(113, 20)
+        Me.Phone.TabIndex = 5
+        Me.Phone.Text = "501-489-1840"
         '
-        'Label2
+        'SSN
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 203)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(69, 13)
-        Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Date of Birth:"
+        Me.SSN.Location = New System.Drawing.Point(100, 91)
+        Me.SSN.Name = "SSN"
+        Me.SSN.Size = New System.Drawing.Size(113, 20)
+        Me.SSN.TabIndex = 3
+        Me.SSN.Text = "847-23-7273"
+        '
+        'LName
+        '
+        Me.LName.Location = New System.Drawing.Point(100, 64)
+        Me.LName.Name = "LName"
+        Me.LName.Size = New System.Drawing.Size(113, 20)
+        Me.LName.TabIndex = 2
+        Me.LName.Text = "Hayes"
+        '
+        'FName
+        '
+        Me.FName.Location = New System.Drawing.Point(100, 37)
+        Me.FName.Name = "FName"
+        Me.FName.Size = New System.Drawing.Size(113, 20)
+        Me.FName.TabIndex = 1
+        Me.FName.Text = "Steven"
+        '
+        'ButtonSave
+        '
+        Me.ButtonSave.Location = New System.Drawing.Point(30, 431)
+        Me.ButtonSave.Name = "ButtonSave"
+        Me.ButtonSave.Size = New System.Drawing.Size(75, 23)
+        Me.ButtonSave.TabIndex = 9
+        Me.ButtonSave.Text = "Save"
+        Me.ButtonSave.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(113, 431)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 10
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'dbStatus
+        '
+        Me.dbStatus.Location = New System.Drawing.Point(101, 230)
+        Me.dbStatus.Name = "dbStatus"
+        Me.dbStatus.Size = New System.Drawing.Size(225, 20)
+        Me.dbStatus.TabIndex = 18
         '
         'frmAddTenant
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(579, 414)
+        Me.ClientSize = New System.Drawing.Size(376, 466)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.ButtonSave)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Name = "frmAddTenant"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add New Tenant"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Property_ManagerDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents lblFName As Label
+
+
+
+    Friend WithEvents Label2 As Label
+    Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents FName As TextBox
-    Friend WithEvents ButtonSave As Button
-    Friend WithEvents BindingSource1 As BindingSource
-    Friend WithEvents Property_ManagerDataSet As Property_ManagerDataSet
-    Friend WithEvents LName As TextBox
-    Friend WithEvents lblLName As Label
-    Friend WithEvents btnCancel As Button
-    Friend WithEvents lblPhone2 As Label
-    Friend WithEvents lblPhone As Label
-    Friend WithEvents lblSSN As Label
+    Friend WithEvents Phone As TextBox
     Friend WithEvents SSN As TextBox
-    Friend WithEvents DOB As DateTimePicker
+    Friend WithEvents LName As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents ButtonSave As Button
+    Friend WithEvents btnCancel As Button
     Friend WithEvents Phone3 As TextBox
     Friend WithEvents Phone2 As TextBox
-    Friend WithEvents Phone As TextBox
-    Friend WithEvents Label2 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Notes As RichTextBox
+    Friend WithEvents DOB As TextBox
+    Friend WithEvents dbStatus As TextBox
 End Class
