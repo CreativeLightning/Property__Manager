@@ -3,6 +3,7 @@
 Public Class frmAddTenant
     Private TenantsTableAdapter As New Property_ManagerDataSetTableAdapters.TenantsTableAdapter()
     Public Property Property_ManagerDataSet As New Property_ManagerDataSet()
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -117,7 +118,7 @@ Public Class frmAddTenant
         Dim userIDValue As String = "1" ' or some default value
 
         ' Define the connection string
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Property_Manager.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
 
         ' Create a connection object
         Using connection As New OleDb.OleDbConnection(connectionString)
@@ -131,31 +132,33 @@ Public Class frmAddTenant
                 ' Add parameters to the command
                 command.Parameters.Add(New OleDb.OleDbParameter("Fname", FName.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("Lname", LName.Text))
-                command.Parameters.Add(New OleDb.OleDbParameter("SSN", ssnValue))
-                command.Parameters.Add(New OleDb.OleDbParameter("Phone", If(String.IsNullOrEmpty(phoneValue), DBNull.Value, phoneValue)))
-                command.Parameters.Add(New OleDb.OleDbParameter("Phone2", If(String.IsNullOrEmpty(phone2Value), DBNull.Value, phone2Value)))
-                command.Parameters.Add(New OleDb.OleDbParameter("Phone3", If(String.IsNullOrEmpty(phone3Value), DBNull.Value, phone3Value)))
-                command.Parameters.Add(New OleDb.OleDbParameter("DOB", dobValue))
-                command.Parameters.Add(New OleDb.OleDbParameter("Notes", notesValue))
-                command.Parameters.Add(New OleDb.OleDbParameter("Active", activeValue))
-                command.Parameters.Add(New OleDb.OleDbParameter("PropertyID", propertyIDValue))
-                command.Parameters.Add(New OleDb.OleDbParameter("UserID", userIDValue))
+                command.Parameters.Add(New OleDb.OleDbParameter("SSN", SSN.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Phone", Phone.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Phone2", Phone2.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Phone3", Phone3.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("DOB", DOB.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Notes", Notes.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Active", "y"))
+                command.Parameters.Add(New OleDb.OleDbParameter("PropertyID", "0"))
+                command.Parameters.Add(New OleDb.OleDbParameter("UserID", "0"))
 
-                ' Execute the command
-                Dim rowsAffected As Integer = command.ExecuteNonQuery()
-                If rowsAffected > 0 Then
-                    transaction.Commit()
+
+                Try
+                    ' Execute the command
+                    command.ExecuteNonQuery()
+                    command.Transaction.Commit()
+                    'TenantsTableAdapter.InsertCommand = command
                     TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
+                    Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
                     MessageBox.Show("Tenant added successfully.")
-                Else
-                    transaction.Rollback()
-                    MessageBox.Show("No rows were inserted into the database.")
-                End If
+                Catch ex As Exception
+                    ' Handle any errors that may have occurred
+                    If transaction.Connection IsNot Nothing Then
+                        transaction.Rollback()
+                    End If
+                    MessageBox.Show("An error occurred: " & ex.Message)
+                End Try
 
-            Catch ex As Exception
-                ' Handle any errors that may have occurred
-                transaction.Rollback()
-                MessageBox.Show("An error occurred while saving the tenant: " & ex.Message)
             Finally
                 ' Ensure the connection is closed
                 connection.Close()
