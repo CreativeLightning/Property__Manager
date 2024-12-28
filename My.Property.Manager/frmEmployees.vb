@@ -208,14 +208,17 @@
     End Sub
 
     Private Sub btnCanel_Click(sender As Object, e As EventArgs) Handles btnCanel.Click
-        btnSaveNew.Visible = False
-        btnCanel.Visible = False
-        cboEmployees.Visible = True
-        ClearTextBoxes()
-        cboEmployees.Items.Clear()
-        PopulateEmployeesComboBox()
-        If cboEmployees.Items.Count > 0 Then
-            cboEmployees.SelectedIndex = 0
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to cancel adding a new employee?", "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then
+            btnSaveNew.Visible = False
+            btnCanel.Visible = False
+            cboEmployees.Visible = True
+            ClearTextBoxes()
+            cboEmployees.Items.Clear()
+            PopulateEmployeesComboBox()
+            If cboEmployees.Items.Count > 0 Then
+                cboEmployees.SelectedIndex = 0
+            End If
         End If
     End Sub
 

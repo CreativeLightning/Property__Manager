@@ -5,38 +5,13 @@ Public Class frmProperties
     Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Private Sub frmProperties_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ClearFields()
+        FillBathrooms()
+        FillBedrooms()
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         Me.Close()
     End Sub
 
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        ' Clear the combo box before adding new items
-        cboPropertyAddress.Items.Clear()
-
-        ' Get the search text
-        Dim searchText As String = txtSearch.Text
-
-        ' Assuming you have a method to get the properties from the database
-        Dim properties As List(Of Properties) = GetPropertiesByStreetName(searchText)
-
-        ' Loop through the properties and add them to the combo box
-        For Each prop As Properties In properties
-            Dim address As String = $"{prop.StreetNumber} {prop.StreetName} {prop.AptSuiteNumber}"
-            cboPropertyAddress.Items.Add(New With {.Address = address, .ID = prop.ID})
-            cboPropertyAddress.DisplayMember = "Address"
-        Next
-
-        ' Make lblNoneFound visible if no properties are found
-        lblNoneFound.Visible = (properties.Count = 0)
-        If properties.Count = 0 Then
-            ClearFields()
-            cboPropertyAddress.Items.Clear()
-            cboPropertyAddress.Text = ""
-        Else
-            cboPropertyAddress.SelectedIndex = 0
-        End If
-    End Sub
     Public Class Properties
         Public Property StreetNumber As String
         Public Property StreetName As String
@@ -54,6 +29,7 @@ Public Class frmProperties
         Public Property Bathrooms As Decimal
         Public Property Bedrooms As Decimal
         Public Property ID As Integer
+        Public Property Vacant As Boolean
     End Class
 
     Private Sub ClearFields()
@@ -70,36 +46,29 @@ Public Class frmProperties
         txtPurchaseDate.Text = ""
         txtPurchasePrice.Text = ""
         txtSearch.Text = ""
-        txtSearch.Focus()
+        txtNotes.Text = ""
+        cboPropertyAddress.Text = ""
+        cboBathrooms.SelectedIndex = -1
+        cboBedrooms.SelectedIndex = -1
+    End Sub
+    Private Sub FillBathrooms()
         cboBathrooms.Items.Clear()
-        cboBathrooms.Items.Add(1)
-        cboBathrooms.Items.Add(1.5)
-        cboBathrooms.Items.Add(2)
-        cboBathrooms.Items.Add(2.5)
-        cboBathrooms.Items.Add(3)
-        cboBathrooms.Items.Add(3.5)
-        cboBathrooms.Items.Add(4)
-        cboBathrooms.Items.Add(4.5)
-        cboBathrooms.Items.Add(5)
-        cboBathrooms.Items.Add(5.5)
+        For i As Decimal = 1 To 10 Step 0.5
+            cboBathrooms.Items.Add(i)
+        Next
+    End Sub
+    Private Sub FillBedrooms()
         cboBedrooms.Items.Clear()
-        cboBedrooms.Items.Add(1)
-        cboBedrooms.Items.Add(2)
-        cboBedrooms.Items.Add(3)
-        cboBedrooms.Items.Add(4)
-        cboBedrooms.Items.Add(5)
-        cboBedrooms.Items.Add(6)
-        cboBedrooms.Items.Add(7)
-        cboBedrooms.Items.Add(8)
-        cboBedrooms.Items.Add(9)
-        cboBedrooms.Items.Add(10)
+        For i As Integer = 1 To 10
+            cboBedrooms.Items.Add(i)
+        Next
     End Sub
     Private Function GetPropertiesByStreetName(streetName As String) As List(Of Properties)
         Dim properties As New List(Of Properties)
 
         ' Replace with your actual database connection and query logic
         Using connection As New OleDbConnection(connectionString)
-            Dim query As String = "SELECT ID, StreetNumber, StreetName, AptSuiteNumber, City, State, Zip, Rent, Deposit, Parcel, PurchaseDate, PurchasePrice, HomeShortName, Notes, Bathrooms, Bedrooms FROM Properties WHERE StreetName LIKE @StreetName"
+            Dim query As String = "SELECT ID, StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE StreetName LIKE @StreetName"
             Using command As New OleDbCommand(query, connection)
                 command.Parameters.AddWithValue("@StreetName", "%" & streetName & "%")
                 connection.Open()
@@ -110,18 +79,6 @@ Public Class frmProperties
                         prop.StreetNumber = reader("StreetNumber").ToString()
                         prop.StreetName = reader("StreetName").ToString()
                         prop.AptSuiteNumber = reader("AptSuiteNumber").ToString()
-                        prop.City = reader("City").ToString()
-                        prop.State = reader("State").ToString()
-                        prop.Zip = reader("Zip").ToString()
-                        prop.Rent = reader("Rent").ToString()
-                        prop.Deposit = reader("Deposit").ToString()
-                        prop.Parcel = reader("Parcel").ToString()
-                        prop.PurchaseDate = reader("PurchaseDate").ToString()
-                        prop.PurchasePrice = reader("PurchasePrice").ToString()
-                        prop.HomeShortName = reader("HomeShortName").ToString()
-                        prop.Notes = reader("Notes").ToString()
-                        prop.Bathrooms = Convert.ToDecimal(reader("Bathrooms"))
-                        prop.Bedrooms = Convert.ToDecimal(reader("Bedrooms"))
                         properties.Add(prop)
                     End While
                 End Using
@@ -135,7 +92,7 @@ Public Class frmProperties
         Dim selectedID As Integer = CType(cboPropertyAddress.SelectedItem, Object).ID
 
         Using connection As New OleDbConnection(connectionString)
-            Dim query As String = "SELECT ID, StreetNumber, StreetName, AptSuiteNumber, City, State, Zip, Rent, Deposit, Parcel, PurchaseDate, PurchasePrice, HomeShortName, Notes, Bathrooms, Bedrooms FROM Properties WHERE ID = @ID"
+            Dim query As String = "SELECT ID, StreetNumber, StreetName, AptSuiteNumber, City, State, Zip, Rent, Deposit, Parcel, PurchaseDate, PurchasePrice, HomeShortName, Notes, Bathrooms, Bedrooms, Vacant FROM Properties WHERE ID = @ID"
             Using command As New OleDbCommand(query, connection)
                 command.Parameters.AddWithValue("@ID", selectedID)
                 connection.Open()
@@ -158,6 +115,7 @@ Public Class frmProperties
                         selectedProperty.Notes = reader("Notes").ToString()
                         selectedProperty.Bathrooms = Convert.ToDecimal(reader("Bathrooms"))
                         selectedProperty.Bedrooms = Convert.ToDecimal(reader("Bedrooms"))
+                        selectedProperty.Vacant = Convert.ToBoolean(reader("Vacant"))
                     End If
                 End Using
             End Using
@@ -166,29 +124,7 @@ Public Class frmProperties
         Return selectedProperty
     End Function
 
-    Private Sub cboPropertyAddress_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPropertyAddress.SelectedIndexChanged
-        If cboPropertyAddress.SelectedIndex <> -1 Then
-            Dim selectedProperty As Properties = GetSelectedPropertyByID(sender, e)
 
-            If selectedProperty IsNot Nothing Then
-                txtStreetNumber.Text = selectedProperty.StreetNumber
-                txtStreetName.Text = selectedProperty.StreetName
-                txtAptSuiteNumber.Text = selectedProperty.AptSuiteNumber
-                txtCity.Text = selectedProperty.City
-                txtState.Text = selectedProperty.State
-                txtZip.Text = selectedProperty.Zip
-                txtRent.Text = selectedProperty.Rent
-                txtDeposit.Text = selectedProperty.Deposit
-                txtParcel.Text = selectedProperty.Parcel
-                txtPurchaseDate.Text = selectedProperty.PurchaseDate
-                txtPurchasePrice.Text = selectedProperty.PurchasePrice
-                txtHomeShortName.Text = selectedProperty.HomeShortName
-                txtNotes.Text = selectedProperty.Notes
-                cboBathrooms.SelectedItem = selectedProperty.Bathrooms
-                cboBedrooms.SelectedItem = selectedProperty.Bedrooms
-            End If
-        End If
-    End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Get the values from the text boxes and combo boxes
@@ -205,12 +141,13 @@ Public Class frmProperties
         Dim purchasePrice As String = txtPurchasePrice.Text
         Dim homeShortName As String = txtHomeShortName.Text
         Dim notes As String = txtNotes.Text
-        Dim bathrooms As Decimal = Convert.ToDecimal(cboBathrooms.SelectedItem)
-        Dim bedrooms As Integer = Convert.ToDecimal(cboBedrooms.SelectedItem)
+        Dim bathrooms As Decimal = Convert.ToDecimal(cboBathrooms.SelectedIndex)
+        Dim bedrooms As Integer = Convert.ToDecimal(cboBedrooms.SelectedIndex)
+        Dim vacant As Boolean = chkVacant.Checked
         Dim selectedID As Integer = CType(cboPropertyAddress.SelectedItem, Object).ID
         ' Update the database with the new values
         Using connection As New OleDbConnection(connectionString)
-            Dim query As String = "UPDATE Properties SET StreetNumber = @StreetNumber, StreetName = @StreetName, AptSuiteNumber = @AptSuiteNumber, City = @City, State = @State, Zip = @Zip, Rent = @Rent, Deposit = @Deposit, Parcel = @Parcel, PurchaseDate = @PurchaseDate, PurchasePrice = @PurchasePrice, HomeShortName = @HomeShortName, Notes = @Notes, Bathrooms = @Bathrooms, Bedrooms = @Bedrooms WHERE ID = @ID"
+            Dim query As String = "UPDATE Properties SET StreetNumber = @StreetNumber, StreetName = @StreetName, AptSuiteNumber = @AptSuiteNumber, City = @City, State = @State, Zip = @Zip, Rent = @Rent, Deposit = @Deposit, Parcel = @Parcel, PurchaseDate = @PurchaseDate, PurchasePrice = @PurchasePrice, HomeShortName = @HomeShortName, Notes = @Notes, Bathrooms = @Bathrooms, Bedrooms = @Bedrooms, Vacant = @Vacant WHERE ID = @ID"
             Using command As New OleDbCommand(query, connection)
                 command.Parameters.AddWithValue("@StreetNumber", If(String.IsNullOrEmpty(streetNumber), "N/A", streetNumber))
                 command.Parameters.AddWithValue("@StreetName", If(String.IsNullOrEmpty(streetName), "N/A", streetName))
@@ -227,15 +164,15 @@ Public Class frmProperties
                 command.Parameters.AddWithValue("@Notes", If(String.IsNullOrEmpty(notes), "N/A", notes))
                 command.Parameters.AddWithValue("@Bathrooms", bathrooms)
                 command.Parameters.AddWithValue("@Bedrooms", bedrooms)
+                command.Parameters.AddWithValue("@Vacant", vacant)
                 command.Parameters.AddWithValue("@ID", selectedID)
                 connection.Open()
-                MessageBox.Show(selectedID)
                 command.ExecuteNonQuery()
-
             End Using
         End Using
         ClearFields()
         cboPropertyAddress.Items.Clear()
+        ClearFields()
         MessageBox.Show("Property details updated successfully.")
     End Sub
 
@@ -245,6 +182,8 @@ Public Class frmProperties
         btnSaveNew.Visible = True
         btnCancel.Visible = True
         btnSave.Visible = False
+        grpSearch.Visible = False
+        ClearFields()
     End Sub
 
     Private Sub btnSaveNew_Click(sender As Object, e As EventArgs) Handles btnSaveNew.Click
@@ -262,8 +201,8 @@ Public Class frmProperties
         Dim purchasePrice As String = txtPurchasePrice.Text
         Dim homeShortName As String = txtHomeShortName.Text
         Dim notes As String = txtNotes.Text
-        Dim bathrooms As Decimal = Convert.ToDecimal(cboBathrooms.SelectedItem)
-        Dim bedrooms As Integer = Convert.ToDecimal(cboBedrooms.SelectedItem)
+        Dim bathrooms As Decimal = Convert.ToDecimal(cboBathrooms.SelectedIndex)
+        Dim bedrooms As Integer = Convert.ToDecimal(cboBedrooms.SelectedIndex)
 
         ' Insert the new property into the database
         Using connection As New OleDbConnection(connectionString)
@@ -294,6 +233,74 @@ Public Class frmProperties
         btnSaveNew.Visible = False
         btnCancel.Visible = False
         btnSave.Visible = True
+        grpSearch.Visible = True
         MessageBox.Show("New property added successfully.")
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to cancel and clear all fields?", "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then
+            btnSaveNew.Visible = False
+            btnCancel.Visible = False
+            btnSave.Visible = True
+            grpSearch.Visible = True
+            ClearFields()
+            cboPropertyAddress.Items.Clear()
+            txtSearch.Focus()
+        End If
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        ' Clear the combo box before adding new items
+        cboPropertyAddress.Items.Clear()
+
+        ' Get the search text
+        Dim searchText As String = txtSearch.Text
+
+        ' Assuming you have a method to get the properties from the database
+        Dim properties As List(Of Properties) = GetPropertiesByStreetName(searchText)
+
+        ' Loop through the properties and add them to the combo box
+        For Each prop As Properties In properties
+            Dim address As String = $"{prop.StreetNumber} {prop.StreetName} {prop.AptSuiteNumber}"
+            cboPropertyAddress.Items.Add(New With {.Address = address, .ID = prop.ID})
+            cboPropertyAddress.DisplayMember = "Address"
+        Next
+
+        ' Make lblNoneFound visible if no properties are found
+        lblNoneFound.Visible = (properties.Count = 0)
+        If properties.Count = 0 Then
+            ClearFields()
+            cboPropertyAddress.Items.Clear()
+            cboPropertyAddress.Text = ""
+            lblNoneFound.Visible = True
+        Else
+            cboPropertyAddress.SelectedIndex = 0
+        End If
+    End Sub
+
+    Private Sub cboPropertyAddress_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPropertyAddress.SelectedIndexChanged
+        If cboPropertyAddress.SelectedIndex <> -1 Then
+            Dim selectedProperty As Properties = GetSelectedPropertyByID(sender, e)
+
+            If selectedProperty IsNot Nothing Then
+                txtStreetNumber.Text = selectedProperty.StreetNumber
+                txtStreetName.Text = selectedProperty.StreetName
+                txtAptSuiteNumber.Text = selectedProperty.AptSuiteNumber
+                txtCity.Text = selectedProperty.City
+                txtState.Text = selectedProperty.State
+                txtZip.Text = selectedProperty.Zip
+                txtRent.Text = selectedProperty.Rent
+                txtDeposit.Text = selectedProperty.Deposit
+                txtParcel.Text = selectedProperty.Parcel
+                txtPurchaseDate.Text = selectedProperty.PurchaseDate
+                txtPurchasePrice.Text = selectedProperty.PurchasePrice
+                txtHomeShortName.Text = selectedProperty.HomeShortName
+                txtNotes.Text = selectedProperty.Notes
+                cboBathrooms.SelectedIndex = selectedProperty.Bathrooms
+                cboBedrooms.SelectedIndex = selectedProperty.Bedrooms
+                chkVacant.Checked = selectedProperty.Vacant
+            End If
+        End If
     End Sub
 End Class
