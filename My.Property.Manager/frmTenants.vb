@@ -3,8 +3,8 @@
 Public Class frmTenants
     Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Private TenantsTableAdapter As New Property_ManagerDataSetTableAdapters.TenantsTableAdapter()
+    Private PropertiesTableAdapter As New Property_ManagerDataSetTableAdapters.PropertiesTableAdapter()
     Public Property Property_ManagerDataSet As New Property_ManagerDataSet()
-    Public Property PropertyIDNumber As Integer
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -15,6 +15,7 @@ Public Class frmTenants
     Private Sub frmAddTenant_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Load data into the 'Property_ManagerDataSet.Tenants' table
         Me.TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
+        Me.PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
     End Sub
 
     Private Sub btnSaveNew_Click(sender As Object, e As EventArgs) Handles btnSaveNew.Click
