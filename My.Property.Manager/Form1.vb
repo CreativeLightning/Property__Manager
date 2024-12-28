@@ -1,8 +1,16 @@
 ﻿Public Class Form1
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        If Login = False Then
+            frmLogin.Show()
+            Me.Hide()
+        End If
+        If Admin = False Then
+            btnEmployees.Enabled = False
+            btnVendors.Enabled = False
+            btnPayments.Enabled = False
+            btnProperties.Enabled = False
+        End If
     End Sub
 
     Private Sub btnPayments_Click(sender As Object, e As EventArgs) Handles btnPayments.Click

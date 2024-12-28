@@ -14,7 +14,7 @@ Public Class frmTenants
         TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
         PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
         PaymentTypesTableAdapter.Fill(Me.Property_ManagerDataSet.PaymentTypes)
-        'Me.PaymentsTableAdapter.Fill(Me.Property_ManagerDataSet.Payments)
+        'PaymentsTableAdapter.Fill(Me.Property_ManagerDataSet.Payments)
     End Sub
 
     Private Sub btnSaveNew_Click(sender As Object, e As EventArgs) Handles btnSaveNew.Click
@@ -118,9 +118,10 @@ Public Class frmTenants
                 connection.Close()
             End Try
         End Using
-
-        ' Close the form
-        Me.Close()
+        grpSearch.Visible = True
+        grpTenantInfo.Visible = True
+        grpPayment.Visible = False
+        ClearTextboxes()
     End Sub
 
     Private Function RemoveNonNumeric(input As String) As String
@@ -156,7 +157,7 @@ Public Class frmTenants
         Me.Close()
     End Sub
 
-    Private Sub txtSSN_TextChanged(sender As Object, e As EventArgs)
+    Private Sub txtSSN_TextChanged(sender As Object, e As EventArgs) Handles txtSSN.TextChanged
         ' Remove any non-numeric characters
         Dim digitsOnly As String = New String(txtSSN.Text.Where(Function(c) Char.IsDigit(c)).ToArray())
 
@@ -209,15 +210,15 @@ Public Class frmTenants
         textBox.SelectionStart = textBox.Text.Length ' Set the cursor to the end of the text
     End Sub
 
-    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs)
+    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
         FormatPhoneNumber(txtPhone, lblInvalidPhone)
     End Sub
 
-    Private Sub txtPhone2_TextChanged(sender As Object, e As EventArgs)
+    Private Sub txtPhone2_TextChanged(sender As Object, e As EventArgs) Handles txtPhone2.TextChanged
         FormatPhoneNumber(txtPhone2, lblInvalidPhone)
     End Sub
 
-    Private Sub txtPhone3_TextChanged(sender As Object, e As EventArgs)
+    Private Sub txtPhone3_TextChanged(sender As Object, e As EventArgs) Handles txtPhone3.TextChanged
         FormatPhoneNumber(txtPhone3, lblInvalidPhone)
     End Sub
 
@@ -237,7 +238,7 @@ Public Class frmTenants
         End If
     End Sub
 
-    Private Sub txtDOB_TextChanged(sender As Object, e As EventArgs)
+    Private Sub txtDOB_TextChanged(sender As Object, e As EventArgs) Handles txtDOB.TextChanged
         Dim text As String = txtDOB.Text
         lblInvalidDOB.Visible = text.Length <> 10
         If text.Length = 2 OrElse text.Length = 5 Then
@@ -271,13 +272,28 @@ Public Class frmTenants
                 Dim streetName As String = propertyRow("StreetName").ToString()
                 lblProperty.Text = $"{streetNumber} {streetName}"
                 btnTakePayment.Visible = True
+                cboPickProperty.Visible = False
+                btnAssign.Visible = False
             Else
-                lblProperty.Text = "No Property Assigned"
+                lblProperty.Text = "Choose Property"
                 btnTakePayment.Visible = False
+                FillcboPickProperty()
+                cboPickProperty.Visible = True
+                btnAssign.Visible = True
             End If
         End If
     End Sub
-
+    Private Sub FillcboPickProperty()
+        cboPickProperty.Items.Clear()
+        Dim propertyRows As DataRow() = Property_ManagerDataSet.Properties.Select()
+        For Each propertyRow As DataRow In propertyRows
+            Dim streetNumber As String = propertyRow("StreetNumber").ToString()
+            Dim streetName As String = propertyRow("StreetName").ToString()
+            Dim PropertyID As Integer = propertyRow("ID")
+            cboPickProperty.ValueMember = PropertyID
+            cboPickProperty.Items.Add($"{streetNumber} {streetName}")
+        Next
+    End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Validate Fname
         If String.IsNullOrEmpty(txtFName.Text) Then
@@ -357,6 +373,8 @@ Public Class frmTenants
                     TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
                     Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
                     MessageBox.Show("Tenant updated successfully.")
+                    TenantsTableAdapter.ClearBeforeFill = True
+                    TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
                 Catch ex As Exception
                     ' Handle any errors that may have occurred
                     If transaction.Connection IsNot Nothing Then
@@ -371,8 +389,7 @@ Public Class frmTenants
             End Try
         End Using
 
-        ' Close the form
-        Me.Close()
+        ClearTextboxes()
     End Sub
 
     Private Sub btnTakePayment_Click(sender As Object, e As EventArgs) Handles btnTakePayment.Click
@@ -468,5 +485,41 @@ Public Class frmTenants
         Me.Close()
     End Sub
 
+    Private Sub ClearTextboxes()
+        txtFName.Text = ""
+        txtLName.Text = ""
+        txtSSN.Text = ""
+        txtPhone.Text = ""
+        txtPhone2.Text = ""
+        txtPhone3.Text = ""
+        txtDOB.Text = ""
+        txtNotes.Text = ""
+    End Sub
 
+    Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
+        AssignProperty()
+    End Sub
+    Private Sub AssignProperty()
+        Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
+        Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
+        Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
+        If tenantRow IsNot Nothing Then
+            Dim propertyIndex As Integer = cboPickProperty.SelectedIndex
+            tenantRow("PropertyID") = propertyIndex + 1
+            Try
+                TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
+                Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
+                MessageBox.Show("Property assigned successfully.")
+                TenantsTableAdapter.ClearBeforeFill = True
+                TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
+                btnAssign.Visible = False
+                cboPickProperty.Visible = False
+                btnTakePayment.Visible = True
+                lblProperty.Text = $"{cboPickProperty.SelectedItem.ToString()}"
+            Catch ex As Exception
+                MessageBox.Show("An error occurred: " & ex.Message)
+            End Try
+        End If
+
+    End Sub
 End Class

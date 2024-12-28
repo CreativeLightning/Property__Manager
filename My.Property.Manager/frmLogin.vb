@@ -2,10 +2,9 @@ Imports System.Windows.Forms
 
 Public Class frmLogin
     Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
-    Private UsersTableAdapter As New Property_ManagerDataSetTableAdapters.UsersTableAdapter()
     Public Property Property_ManagerDataSet As New Property_ManagerDataSet()
 
-    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         ' Set the initial state of the form
         Me.Text = "Login Form"
         Me.StartPosition = FormStartPosition.CenterScreen
@@ -18,13 +17,13 @@ Public Class frmLogin
         txtUsername.Focus()
 
         ' Fill the Users table
-        Me.UsersTableAdapter.Fill(Me.Property_ManagerDataSet.Users)
+        UsersTableAdapter.Fill(Me.Property_ManagerDataSet.Users)
 
         ' Check if there is only one user in the table
         If Me.Property_ManagerDataSet.Users.Count = 1 Then
             Dim frmSetupUser As New frmSetupUser()
             frmSetupUser.Show()
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 
@@ -36,7 +35,9 @@ Public Class frmLogin
 
         If userRow IsNot Nothing Then
             User = userRow.ID
+            Admin = userRow.Admin
             Dim form1 As New Form1()
+            Login = True
             form1.Show()
             Me.Hide()
         Else
@@ -45,14 +46,8 @@ Public Class frmLogin
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
-        Me.Close()
+        Application.Exit()
     End Sub
 
-    Private Sub frmLogin_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        ' Check if there are any other open forms
-        If Application.OpenForms.Count = 0 Then
-            Application.Exit()
-        End If
-    End Sub
 
 End Class

@@ -83,7 +83,7 @@ Partial Class frmSetupUser
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
-        Me.txtPassword.TabIndex = 3
+        Me.txtPassword.TabIndex = 2
         '
         'OK
         '
@@ -108,7 +108,7 @@ Partial Class frmSetupUser
         Me.txtPassword2.Name = "txtPassword2"
         Me.txtPassword2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword2.Size = New System.Drawing.Size(220, 20)
-        Me.txtPassword2.TabIndex = 7
+        Me.txtPassword2.TabIndex = 3
         '
         'Label1
         '
@@ -126,6 +126,7 @@ Partial Class frmSetupUser
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
         Me.ClientSize = New System.Drawing.Size(401, 192)
+        Me.ControlBox = False
         Me.Controls.Add(Me.txtPassword2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Cancel)

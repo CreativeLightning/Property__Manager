@@ -68,6 +68,8 @@ Partial Class frmTenants
         Me.Label10 = New System.Windows.Forms.Label()
         Me.lblTenantName = New System.Windows.Forms.Label()
         Me.btnRecordPayment = New System.Windows.Forms.Button()
+        Me.cboPickProperty = New System.Windows.Forms.ComboBox()
+        Me.btnAssign = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpTenantInfo.SuspendLayout()
@@ -77,7 +79,7 @@ Partial Class frmTenants
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(15, 297)
+        Me.Label9.Location = New System.Drawing.Point(9, 339)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(38, 13)
         Me.Label9.TabIndex = 34
@@ -85,9 +87,9 @@ Partial Class frmTenants
         '
         'txtNotes
         '
-        Me.txtNotes.Location = New System.Drawing.Point(18, 336)
+        Me.txtNotes.Location = New System.Drawing.Point(54, 336)
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.Size = New System.Drawing.Size(426, 106)
+        Me.txtNotes.Size = New System.Drawing.Size(323, 106)
         Me.txtNotes.TabIndex = 30
         Me.txtNotes.Text = ""
         '
@@ -181,16 +183,16 @@ Partial Class frmTenants
         'lblProperty
         '
         Me.lblProperty.AutoSize = True
-        Me.lblProperty.Location = New System.Drawing.Point(142, 317)
+        Me.lblProperty.Location = New System.Drawing.Point(156, 314)
         Me.lblProperty.Name = "lblProperty"
         Me.lblProperty.Size = New System.Drawing.Size(0, 13)
         Me.lblProperty.TabIndex = 45
         '
         'btnTakePayment
         '
-        Me.btnTakePayment.Location = New System.Drawing.Point(333, 307)
+        Me.btnTakePayment.Location = New System.Drawing.Point(54, 309)
         Me.btnTakePayment.Name = "btnTakePayment"
-        Me.btnTakePayment.Size = New System.Drawing.Size(94, 23)
+        Me.btnTakePayment.Size = New System.Drawing.Size(88, 23)
         Me.btnTakePayment.TabIndex = 46
         Me.btnTakePayment.Text = "Take Payment"
         Me.btnTakePayment.UseVisualStyleBackColor = True
@@ -511,9 +513,30 @@ Partial Class frmTenants
         Me.btnRecordPayment.Text = "Record Payment"
         Me.btnRecordPayment.UseVisualStyleBackColor = True
         '
+        'cboPickProperty
+        '
+        Me.cboPickProperty.FormattingEnabled = True
+        Me.cboPickProperty.Location = New System.Drawing.Point(251, 311)
+        Me.cboPickProperty.Name = "cboPickProperty"
+        Me.cboPickProperty.Size = New System.Drawing.Size(196, 21)
+        Me.cboPickProperty.TabIndex = 49
+        Me.cboPickProperty.Visible = False
+        '
+        'btnAssign
+        '
+        Me.btnAssign.Location = New System.Drawing.Point(383, 339)
+        Me.btnAssign.Name = "btnAssign"
+        Me.btnAssign.Size = New System.Drawing.Size(66, 38)
+        Me.btnAssign.TabIndex = 50
+        Me.btnAssign.Text = "Assign Property"
+        Me.btnAssign.UseVisualStyleBackColor = True
+        Me.btnAssign.Visible = False
+        '
         'frmTenants
         '
         Me.ClientSize = New System.Drawing.Size(461, 456)
+        Me.Controls.Add(Me.btnAssign)
+        Me.Controls.Add(Me.cboPickProperty)
         Me.Controls.Add(Me.grpPayment)
         Me.Controls.Add(Me.grpTenantInfo)
         Me.Controls.Add(Me.btnTakePayment)
@@ -587,4 +610,6 @@ Partial Class frmTenants
     Friend WithEvents btnBack As Button
     Friend WithEvents txtPaymentDate As TextBox
     Friend WithEvents Label13 As Label
+    Friend WithEvents cboPickProperty As ComboBox
+    Friend WithEvents btnAssign As Button
 End Class

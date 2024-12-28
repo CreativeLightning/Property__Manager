@@ -114,7 +114,7 @@
 
         ' Optionally, refresh the data in the ComboBox and text boxes
         'PopulateEmployeesComboBox()
-
+        ClearTextBoxes()
     End Sub
     Private Sub ClearTextBoxes()
         txtFName.Text = ""
