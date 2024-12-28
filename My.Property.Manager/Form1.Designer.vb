@@ -43,7 +43,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.btnPayments)
         Me.GroupBox1.Location = New System.Drawing.Point(13, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(190, 279)
+        Me.GroupBox1.Size = New System.Drawing.Size(190, 147)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Begin Here"
@@ -86,7 +86,7 @@ Partial Class Form1
         '
         'btnTenants
         '
-        Me.btnTenants.Location = New System.Drawing.Point(7, 50)
+        Me.btnTenants.Location = New System.Drawing.Point(7, 21)
         Me.btnTenants.Name = "btnTenants"
         Me.btnTenants.Size = New System.Drawing.Size(75, 23)
         Me.btnTenants.TabIndex = 1
@@ -95,7 +95,7 @@ Partial Class Form1
         '
         'btnPayments
         '
-        Me.btnPayments.Location = New System.Drawing.Point(7, 20)
+        Me.btnPayments.Location = New System.Drawing.Point(7, 50)
         Me.btnPayments.Name = "btnPayments"
         Me.btnPayments.Size = New System.Drawing.Size(75, 23)
         Me.btnPayments.TabIndex = 0
@@ -104,7 +104,7 @@ Partial Class Form1
         '
         'btnExit
         '
-        Me.btnExit.Location = New System.Drawing.Point(70, 300)
+        Me.btnExit.Location = New System.Drawing.Point(66, 166)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
         Me.btnExit.TabIndex = 1
@@ -115,7 +115,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(215, 335)
+        Me.ClientSize = New System.Drawing.Size(215, 200)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "Form1"

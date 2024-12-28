@@ -1,10 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Public Class frmTenants
-    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
-    Private TenantsTableAdapter As New Property_ManagerDataSetTableAdapters.TenantsTableAdapter()
-    Private PropertiesTableAdapter As New Property_ManagerDataSetTableAdapters.PropertiesTableAdapter()
-    Public Property Property_ManagerDataSet As New Property_ManagerDataSet()
+    Private Property_ManagerDataSet As New Property_ManagerDataSet()
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -14,8 +11,10 @@ Public Class frmTenants
 
     Private Sub frmAddTenant_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Load data into the 'Property_ManagerDataSet.Tenants' table
-        Me.TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
-        Me.PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
+        TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
+        PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
+        PaymentTypesTableAdapter.Fill(Me.Property_ManagerDataSet.PaymentTypes)
+        'Me.PaymentsTableAdapter.Fill(Me.Property_ManagerDataSet.Payments)
     End Sub
 
     Private Sub btnSaveNew_Click(sender As Object, e As EventArgs) Handles btnSaveNew.Click
@@ -157,7 +156,7 @@ Public Class frmTenants
         Me.Close()
     End Sub
 
-    Private Sub txtSSN_TextChanged(sender As Object, e As EventArgs) Handles txtSSN.TextChanged
+    Private Sub txtSSN_TextChanged(sender As Object, e As EventArgs)
         ' Remove any non-numeric characters
         Dim digitsOnly As String = New String(txtSSN.Text.Where(Function(c) Char.IsDigit(c)).ToArray())
 
@@ -210,15 +209,15 @@ Public Class frmTenants
         textBox.SelectionStart = textBox.Text.Length ' Set the cursor to the end of the text
     End Sub
 
-    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
+    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs)
         FormatPhoneNumber(txtPhone, lblInvalidPhone)
     End Sub
 
-    Private Sub txtPhone2_TextChanged(sender As Object, e As EventArgs) Handles txtPhone2.TextChanged
+    Private Sub txtPhone2_TextChanged(sender As Object, e As EventArgs)
         FormatPhoneNumber(txtPhone2, lblInvalidPhone)
     End Sub
 
-    Private Sub txtPhone3_TextChanged(sender As Object, e As EventArgs) Handles txtPhone3.TextChanged
+    Private Sub txtPhone3_TextChanged(sender As Object, e As EventArgs)
         FormatPhoneNumber(txtPhone3, lblInvalidPhone)
     End Sub
 
@@ -238,7 +237,7 @@ Public Class frmTenants
         End If
     End Sub
 
-    Private Sub txtDOB_TextChanged(sender As Object, e As EventArgs) Handles txtDOB.TextChanged
+    Private Sub txtDOB_TextChanged(sender As Object, e As EventArgs)
         Dim text As String = txtDOB.Text
         lblInvalidDOB.Visible = text.Length <> 10
         If text.Length = 2 OrElse text.Length = 5 Then
@@ -265,15 +264,16 @@ Public Class frmTenants
 
             ' Collect the PropertyID value from the Properties table
             Dim propertyid As Integer = tenantRow("PropertyID")
-            MsgBox(propertyid)
             Dim propertyRows As DataRow() = Property_ManagerDataSet.Properties.Select($"ID = {propertyid}")
             If propertyRows.Length > 0 Then
                 Dim propertyRow As DataRow = propertyRows(0)
                 Dim streetNumber As String = propertyRow("StreetNumber").ToString()
                 Dim streetName As String = propertyRow("StreetName").ToString()
                 lblProperty.Text = $"{streetNumber} {streetName}"
+                btnTakePayment.Visible = True
             Else
                 lblProperty.Text = "No Property Assigned"
+                btnTakePayment.Visible = False
             End If
         End If
     End Sub
@@ -374,5 +374,99 @@ Public Class frmTenants
         ' Close the form
         Me.Close()
     End Sub
+
+    Private Sub btnTakePayment_Click(sender As Object, e As EventArgs) Handles btnTakePayment.Click
+        grpSearch.Visible = False
+        grpTenantInfo.Visible = False
+        grpPayment.Visible = True
+        grpPayment.Location = New Point(111, 92)
+        btnTakePayment.Visible = False
+        txtNotes.Text = ""
+        txtPaymentDate.Text = Date.Today.ToString("MM/dd/yyyy")
+        lblTenantName.Text = "Tenant Name: " & cboTenants.SelectedItem.ToString()
+        ' Fill cboPaymentType with data from PaymentTypesTableAdapter
+        cboPaymentType.DataSource = Me.Property_ManagerDataSet.PaymentTypes
+        cboPaymentType.DisplayMember = "PaymentType"
+        cboPaymentType.ValueMember = "ID"
+
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        grpPayment.Visible = False
+        grpSearch.Visible = True
+        grpTenantInfo.Visible = True
+
+        ' Clear the payment fields
+        txtAmount.Text = ""
+        btnTakePayment.Visible = True
+
+    End Sub
+
+    Private Sub btnRecordPayment_Click(sender As Object, e As EventArgs) Handles btnRecordPayment.Click
+        ' Validate Amount
+        Dim amountValue As Integer
+        If Not Integer.TryParse(txtAmount.Text, amountValue) Then
+            MessageBox.Show("Please enter a valid amount.")
+            Return
+        End If
+
+        ' Validate Payment Type
+        If cboPaymentType.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a payment type.")
+            Return
+        End If
+
+        ' Get the selected tenant ID
+        Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
+        Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
+
+        ' Get the selected property ID
+        Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
+        Dim propertyID As Integer = Integer.Parse(tenantRow("PropertyID").ToString())
+
+        ' Define the connection string
+        Using connection As New OleDb.OleDbConnection(connectionString)
+            connection.Open()
+            Dim transaction As OleDb.OleDbTransaction = connection.BeginTransaction()
+
+            Try
+                ' Create a command object
+                Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
+
+                ' Add parameters to the command
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", txtPaymentDate.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.SelectedValue))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", txtPaymentIDNumber.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Amount", amountValue))
+                command.Parameters.Add(New OleDb.OleDbParameter("Tenant", tenantID))
+                command.Parameters.Add(New OleDb.OleDbParameter("Property", propertyID))
+                command.Parameters.Add(New OleDb.OleDbParameter("TakenBy", User))
+                command.Parameters.Add(New OleDb.OleDbParameter("Notes", txtNotes.Text))
+
+                Try
+                    ' Execute the command
+                    command.ExecuteNonQuery()
+                    transaction.Commit()
+                    PaymentsTableAdapter.Update(Property_ManagerDataSet.Payments)
+                    Property_ManagerDataSet.Tables("Payments").AcceptChanges()
+                    MessageBox.Show("Payment recorded successfully.")
+                Catch ex As Exception
+                    ' Handle any errors that may have occurred
+                    If transaction.Connection IsNot Nothing Then
+                        transaction.Rollback()
+                    End If
+                    MessageBox.Show("An error occurred: " & ex.Message)
+                End Try
+
+            Finally
+                ' Ensure the connection is closed
+                connection.Close()
+            End Try
+        End Using
+
+        ' Close the form
+        Me.Close()
+    End Sub
+
 
 End Class

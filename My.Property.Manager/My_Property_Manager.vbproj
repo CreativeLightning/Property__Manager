@@ -287,12 +287,19 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="ComboBoxItem.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTenants.Designer.vb">
@@ -331,6 +338,13 @@
     <Compile Include="frmWorkOrders.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Globals.vb" />
+    <Compile Include="frmSetupUser.Designer.vb">
+      <DependentUpon>frmSetupUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetupUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -347,10 +361,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Property_ManagerDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Property_Manager\Property_ManagerDataSetTableAdapters.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTenants.resx">
       <DependentUpon>frmTenants.vb</DependentUpon>
@@ -369,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmWorkOrders.resx">
       <DependentUpon>frmWorkOrders.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetupUser.resx">
+      <DependentUpon>frmSetupUser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

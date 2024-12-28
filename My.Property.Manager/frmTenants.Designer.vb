@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmTenants
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,15 +20,27 @@ Partial Class frmTenants
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtNotes = New System.Windows.Forms.RichTextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnHome = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.grpSearch = New System.Windows.Forms.GroupBox()
+        Me.lblNoneFound = New System.Windows.Forms.Label()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.cboTenants = New System.Windows.Forms.ComboBox()
+        Me.lblProperty = New System.Windows.Forms.Label()
+        Me.btnTakePayment = New System.Windows.Forms.Button()
+        Me.grpTenantInfo = New System.Windows.Forms.GroupBox()
+        Me.lblInvalidDOB = New System.Windows.Forms.Label()
+        Me.btnSaveNew = New System.Windows.Forms.Button()
         Me.lblInvalidPhone = New System.Windows.Forms.Label()
         Me.lblInvalidSSN = New System.Windows.Forms.Label()
         Me.txtDOB = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtNotes = New System.Windows.Forms.RichTextBox()
         Me.txtPhone3 = New System.Windows.Forms.TextBox()
         Me.txtPhone2 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -42,70 +54,25 @@ Partial Class frmTenants
         Me.txtSSN = New System.Windows.Forms.TextBox()
         Me.txtLName = New System.Windows.Forms.TextBox()
         Me.txtFName = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnHome = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.grpSearch = New System.Windows.Forms.GroupBox()
-        Me.lblNoneFound = New System.Windows.Forms.Label()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.cboTenants = New System.Windows.Forms.ComboBox()
-        Me.btnSaveNew = New System.Windows.Forms.Button()
-        Me.lblInvalidDOB = New System.Windows.Forms.Label()
-        Me.lblProperty = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.grpPayment = New System.Windows.Forms.GroupBox()
+        Me.txtPaymentDate = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.btnBack = New System.Windows.Forms.Button()
+        Me.txtPaymentIDNumber = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cboPaymentType = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblTenantName = New System.Windows.Forms.Label()
+        Me.btnRecordPayment = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.grpSearch.SuspendLayout()
+        Me.grpTenantInfo.SuspendLayout()
+        Me.grpPayment.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(352, 98)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 9
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Location = New System.Drawing.Point(352, 152)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 10
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        Me.btnCancel.Visible = False
-        '
-        'lblInvalidPhone
-        '
-        Me.lblInvalidPhone.AutoSize = True
-        Me.lblInvalidPhone.ForeColor = System.Drawing.Color.Red
-        Me.lblInvalidPhone.Location = New System.Drawing.Point(314, 211)
-        Me.lblInvalidPhone.Name = "lblInvalidPhone"
-        Me.lblInvalidPhone.Size = New System.Drawing.Size(112, 13)
-        Me.lblInvalidPhone.TabIndex = 37
-        Me.lblInvalidPhone.Text = "Invalid Phone Number"
-        Me.lblInvalidPhone.Visible = False
-        '
-        'lblInvalidSSN
-        '
-        Me.lblInvalidSSN.AutoSize = True
-        Me.lblInvalidSSN.ForeColor = System.Drawing.Color.Red
-        Me.lblInvalidSSN.Location = New System.Drawing.Point(314, 157)
-        Me.lblInvalidSSN.Name = "lblInvalidSSN"
-        Me.lblInvalidSSN.Size = New System.Drawing.Size(38, 13)
-        Me.lblInvalidSSN.TabIndex = 36
-        Me.lblInvalidSSN.Text = "Invalid"
-        Me.lblInvalidSSN.Visible = False
-        '
-        'txtDOB
-        '
-        Me.txtDOB.Location = New System.Drawing.Point(195, 181)
-        Me.txtDOB.Name = "txtDOB"
-        Me.txtDOB.Size = New System.Drawing.Size(113, 20)
-        Me.txtDOB.TabIndex = 35
         '
         'Label9
         '
@@ -118,116 +85,11 @@ Partial Class frmTenants
         '
         'txtNotes
         '
-        Me.txtNotes.Location = New System.Drawing.Point(18, 313)
+        Me.txtNotes.Location = New System.Drawing.Point(18, 336)
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.Size = New System.Drawing.Size(426, 98)
+        Me.txtNotes.Size = New System.Drawing.Size(426, 106)
         Me.txtNotes.TabIndex = 30
         Me.txtNotes.Text = ""
-        '
-        'txtPhone3
-        '
-        Me.txtPhone3.Location = New System.Drawing.Point(196, 266)
-        Me.txtPhone3.Name = "txtPhone3"
-        Me.txtPhone3.Size = New System.Drawing.Size(112, 20)
-        Me.txtPhone3.TabIndex = 28
-        '
-        'txtPhone2
-        '
-        Me.txtPhone2.Location = New System.Drawing.Point(196, 239)
-        Me.txtPhone2.Name = "txtPhone2"
-        Me.txtPhone2.Size = New System.Drawing.Size(112, 20)
-        Me.txtPhone2.TabIndex = 26
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(120, 188)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(69, 13)
-        Me.Label8.TabIndex = 33
-        Me.Label8.Text = "Date of Birth:"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(139, 269)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(50, 13)
-        Me.Label7.TabIndex = 32
-        Me.Label7.Text = "Phone 3:"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(139, 242)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(50, 13)
-        Me.Label6.TabIndex = 31
-        Me.Label6.Text = "Phone 2:"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(148, 215)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(41, 13)
-        Me.Label5.TabIndex = 29
-        Me.Label5.Text = "Phone:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(109, 157)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(80, 13)
-        Me.Label4.TabIndex = 27
-        Me.Label4.Text = "Social Security:"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(128, 130)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 13)
-        Me.Label3.TabIndex = 25
-        Me.Label3.Text = "Last Name:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(129, 102)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 13)
-        Me.Label1.TabIndex = 23
-        Me.Label1.Text = "First Name:"
-        '
-        'txtPhone
-        '
-        Me.txtPhone.Location = New System.Drawing.Point(195, 208)
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(113, 20)
-        Me.txtPhone.TabIndex = 24
-        '
-        'txtSSN
-        '
-        Me.txtSSN.Location = New System.Drawing.Point(195, 154)
-        Me.txtSSN.Name = "txtSSN"
-        Me.txtSSN.Size = New System.Drawing.Size(113, 20)
-        Me.txtSSN.TabIndex = 22
-        '
-        'txtLName
-        '
-        Me.txtLName.Location = New System.Drawing.Point(195, 127)
-        Me.txtLName.Name = "txtLName"
-        Me.txtLName.Size = New System.Drawing.Size(113, 20)
-        Me.txtLName.TabIndex = 21
-        '
-        'txtFName
-        '
-        Me.txtFName.Location = New System.Drawing.Point(195, 100)
-        Me.txtFName.Name = "txtFName"
-        Me.txtFName.Size = New System.Drawing.Size(113, 20)
-        Me.txtFName.TabIndex = 20
         '
         'GroupBox1
         '
@@ -316,79 +178,360 @@ Partial Class frmTenants
         Me.cboTenants.Size = New System.Drawing.Size(210, 21)
         Me.cboTenants.TabIndex = 38
         '
-        'btnSaveNew
+        'lblProperty
         '
-        Me.btnSaveNew.Location = New System.Drawing.Point(352, 124)
-        Me.btnSaveNew.Name = "btnSaveNew"
-        Me.btnSaveNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnSaveNew.TabIndex = 43
-        Me.btnSaveNew.Text = "Save New"
-        Me.btnSaveNew.UseVisualStyleBackColor = True
-        Me.btnSaveNew.Visible = False
+        Me.lblProperty.AutoSize = True
+        Me.lblProperty.Location = New System.Drawing.Point(142, 317)
+        Me.lblProperty.Name = "lblProperty"
+        Me.lblProperty.Size = New System.Drawing.Size(0, 13)
+        Me.lblProperty.TabIndex = 45
+        '
+        'btnTakePayment
+        '
+        Me.btnTakePayment.Location = New System.Drawing.Point(333, 307)
+        Me.btnTakePayment.Name = "btnTakePayment"
+        Me.btnTakePayment.Size = New System.Drawing.Size(94, 23)
+        Me.btnTakePayment.TabIndex = 46
+        Me.btnTakePayment.Text = "Take Payment"
+        Me.btnTakePayment.UseVisualStyleBackColor = True
+        Me.btnTakePayment.Visible = False
+        '
+        'grpTenantInfo
+        '
+        Me.grpTenantInfo.Controls.Add(Me.lblInvalidDOB)
+        Me.grpTenantInfo.Controls.Add(Me.btnSaveNew)
+        Me.grpTenantInfo.Controls.Add(Me.lblInvalidPhone)
+        Me.grpTenantInfo.Controls.Add(Me.lblInvalidSSN)
+        Me.grpTenantInfo.Controls.Add(Me.txtDOB)
+        Me.grpTenantInfo.Controls.Add(Me.txtPhone3)
+        Me.grpTenantInfo.Controls.Add(Me.txtPhone2)
+        Me.grpTenantInfo.Controls.Add(Me.Label8)
+        Me.grpTenantInfo.Controls.Add(Me.Label7)
+        Me.grpTenantInfo.Controls.Add(Me.Label6)
+        Me.grpTenantInfo.Controls.Add(Me.Label5)
+        Me.grpTenantInfo.Controls.Add(Me.Label4)
+        Me.grpTenantInfo.Controls.Add(Me.Label3)
+        Me.grpTenantInfo.Controls.Add(Me.Label1)
+        Me.grpTenantInfo.Controls.Add(Me.txtPhone)
+        Me.grpTenantInfo.Controls.Add(Me.txtSSN)
+        Me.grpTenantInfo.Controls.Add(Me.txtLName)
+        Me.grpTenantInfo.Controls.Add(Me.txtFName)
+        Me.grpTenantInfo.Controls.Add(Me.btnCancel)
+        Me.grpTenantInfo.Controls.Add(Me.btnSave)
+        Me.grpTenantInfo.Location = New System.Drawing.Point(111, 92)
+        Me.grpTenantInfo.Name = "grpTenantInfo"
+        Me.grpTenantInfo.Size = New System.Drawing.Size(336, 213)
+        Me.grpTenantInfo.TabIndex = 47
+        Me.grpTenantInfo.TabStop = False
+        Me.grpTenantInfo.Text = "Tenant Information"
         '
         'lblInvalidDOB
         '
         Me.lblInvalidDOB.AutoSize = True
         Me.lblInvalidDOB.ForeColor = System.Drawing.Color.Red
-        Me.lblInvalidDOB.Location = New System.Drawing.Point(314, 185)
+        Me.lblInvalidDOB.Location = New System.Drawing.Point(211, 103)
         Me.lblInvalidDOB.Name = "lblInvalidDOB"
         Me.lblInvalidDOB.Size = New System.Drawing.Size(64, 13)
-        Me.lblInvalidDOB.TabIndex = 44
+        Me.lblInvalidDOB.TabIndex = 64
         Me.lblInvalidDOB.Text = "Invalid DOB"
         Me.lblInvalidDOB.Visible = False
         '
-        'lblProperty
+        'btnSaveNew
         '
-        Me.lblProperty.AutoSize = True
-        Me.lblProperty.Location = New System.Drawing.Point(142, 294)
-        Me.lblProperty.Name = "lblProperty"
-        Me.lblProperty.Size = New System.Drawing.Size(0, 13)
-        Me.lblProperty.TabIndex = 45
+        Me.btnSaveNew.Location = New System.Drawing.Point(249, 42)
+        Me.btnSaveNew.Name = "btnSaveNew"
+        Me.btnSaveNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveNew.TabIndex = 63
+        Me.btnSaveNew.Text = "Save New"
+        Me.btnSaveNew.UseVisualStyleBackColor = True
+        Me.btnSaveNew.Visible = False
         '
-        'Button1
+        'lblInvalidPhone
         '
-        Me.Button1.Location = New System.Drawing.Point(364, 258)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 46
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.lblInvalidPhone.AutoSize = True
+        Me.lblInvalidPhone.ForeColor = System.Drawing.Color.Red
+        Me.lblInvalidPhone.Location = New System.Drawing.Point(211, 129)
+        Me.lblInvalidPhone.Name = "lblInvalidPhone"
+        Me.lblInvalidPhone.Size = New System.Drawing.Size(112, 13)
+        Me.lblInvalidPhone.TabIndex = 62
+        Me.lblInvalidPhone.Text = "Invalid Phone Number"
+        Me.lblInvalidPhone.Visible = False
+        '
+        'lblInvalidSSN
+        '
+        Me.lblInvalidSSN.AutoSize = True
+        Me.lblInvalidSSN.ForeColor = System.Drawing.Color.Red
+        Me.lblInvalidSSN.Location = New System.Drawing.Point(211, 75)
+        Me.lblInvalidSSN.Name = "lblInvalidSSN"
+        Me.lblInvalidSSN.Size = New System.Drawing.Size(38, 13)
+        Me.lblInvalidSSN.TabIndex = 61
+        Me.lblInvalidSSN.Text = "Invalid"
+        Me.lblInvalidSSN.Visible = False
+        '
+        'txtDOB
+        '
+        Me.txtDOB.Location = New System.Drawing.Point(92, 99)
+        Me.txtDOB.Name = "txtDOB"
+        Me.txtDOB.Size = New System.Drawing.Size(113, 20)
+        Me.txtDOB.TabIndex = 60
+        '
+        'txtPhone3
+        '
+        Me.txtPhone3.Location = New System.Drawing.Point(93, 184)
+        Me.txtPhone3.Name = "txtPhone3"
+        Me.txtPhone3.Size = New System.Drawing.Size(112, 20)
+        Me.txtPhone3.TabIndex = 55
+        '
+        'txtPhone2
+        '
+        Me.txtPhone2.Location = New System.Drawing.Point(93, 157)
+        Me.txtPhone2.Name = "txtPhone2"
+        Me.txtPhone2.Size = New System.Drawing.Size(112, 20)
+        Me.txtPhone2.TabIndex = 53
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(17, 106)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(69, 13)
+        Me.Label8.TabIndex = 59
+        Me.Label8.Text = "Date of Birth:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(36, 187)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(50, 13)
+        Me.Label7.TabIndex = 58
+        Me.Label7.Text = "Phone 3:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(36, 160)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(50, 13)
+        Me.Label6.TabIndex = 57
+        Me.Label6.Text = "Phone 2:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(45, 133)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(41, 13)
+        Me.Label5.TabIndex = 56
+        Me.Label5.Text = "Phone:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 75)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(80, 13)
+        Me.Label4.TabIndex = 54
+        Me.Label4.Text = "Social Security:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(25, 48)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(61, 13)
+        Me.Label3.TabIndex = 52
+        Me.Label3.Text = "Last Name:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(26, 20)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(60, 13)
+        Me.Label1.TabIndex = 50
+        Me.Label1.Text = "First Name:"
+        '
+        'txtPhone
+        '
+        Me.txtPhone.Location = New System.Drawing.Point(92, 126)
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(113, 20)
+        Me.txtPhone.TabIndex = 51
+        '
+        'txtSSN
+        '
+        Me.txtSSN.Location = New System.Drawing.Point(92, 72)
+        Me.txtSSN.Name = "txtSSN"
+        Me.txtSSN.Size = New System.Drawing.Size(113, 20)
+        Me.txtSSN.TabIndex = 49
+        '
+        'txtLName
+        '
+        Me.txtLName.Location = New System.Drawing.Point(92, 45)
+        Me.txtLName.Name = "txtLName"
+        Me.txtLName.Size = New System.Drawing.Size(113, 20)
+        Me.txtLName.TabIndex = 48
+        '
+        'txtFName
+        '
+        Me.txtFName.Location = New System.Drawing.Point(92, 18)
+        Me.txtFName.Name = "txtFName"
+        Me.txtFName.Size = New System.Drawing.Size(113, 20)
+        Me.txtFName.TabIndex = 47
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(249, 70)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 46
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.Visible = False
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(249, 16)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 45
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'grpPayment
+        '
+        Me.grpPayment.Controls.Add(Me.txtPaymentDate)
+        Me.grpPayment.Controls.Add(Me.Label13)
+        Me.grpPayment.Controls.Add(Me.btnBack)
+        Me.grpPayment.Controls.Add(Me.txtPaymentIDNumber)
+        Me.grpPayment.Controls.Add(Me.Label12)
+        Me.grpPayment.Controls.Add(Me.cboPaymentType)
+        Me.grpPayment.Controls.Add(Me.Label11)
+        Me.grpPayment.Controls.Add(Me.txtAmount)
+        Me.grpPayment.Controls.Add(Me.Label10)
+        Me.grpPayment.Controls.Add(Me.lblTenantName)
+        Me.grpPayment.Controls.Add(Me.btnRecordPayment)
+        Me.grpPayment.Location = New System.Drawing.Point(467, 92)
+        Me.grpPayment.Name = "grpPayment"
+        Me.grpPayment.Size = New System.Drawing.Size(309, 213)
+        Me.grpPayment.TabIndex = 48
+        Me.grpPayment.TabStop = False
+        Me.grpPayment.Text = "Payment Information"
+        '
+        'txtPaymentDate
+        '
+        Me.txtPaymentDate.Location = New System.Drawing.Point(84, 46)
+        Me.txtPaymentDate.Name = "txtPaymentDate"
+        Me.txtPaymentDate.Size = New System.Drawing.Size(121, 20)
+        Me.txtPaymentDate.TabIndex = 58
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(44, 48)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(33, 13)
+        Me.Label13.TabIndex = 57
+        Me.Label13.Text = "Date:"
+        '
+        'btnBack
+        '
+        Me.btnBack.Location = New System.Drawing.Point(117, 177)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(75, 23)
+        Me.btnBack.TabIndex = 56
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
+        'txtPaymentIDNumber
+        '
+        Me.txtPaymentIDNumber.Location = New System.Drawing.Point(83, 126)
+        Me.txtPaymentIDNumber.Name = "txtPaymentIDNumber"
+        Me.txtPaymentIDNumber.Size = New System.Drawing.Size(122, 20)
+        Me.txtPaymentIDNumber.TabIndex = 61
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(16, 129)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(61, 13)
+        Me.Label12.TabIndex = 54
+        Me.Label12.Text = "ID Number:"
+        '
+        'cboPaymentType
+        '
+        Me.cboPaymentType.FormattingEnabled = True
+        Me.cboPaymentType.Location = New System.Drawing.Point(84, 97)
+        Me.cboPaymentType.Name = "cboPaymentType"
+        Me.cboPaymentType.Size = New System.Drawing.Size(121, 21)
+        Me.cboPaymentType.TabIndex = 60
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(43, 103)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(34, 13)
+        Me.Label11.TabIndex = 52
+        Me.Label11.Text = "Type:"
+        '
+        'txtAmount
+        '
+        Me.txtAmount.Location = New System.Drawing.Point(83, 72)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.Size = New System.Drawing.Size(122, 20)
+        Me.txtAmount.TabIndex = 59
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(31, 75)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(46, 13)
+        Me.Label10.TabIndex = 50
+        Me.Label10.Text = "Amount:"
+        '
+        'lblTenantName
+        '
+        Me.lblTenantName.AutoSize = True
+        Me.lblTenantName.Location = New System.Drawing.Point(28, 25)
+        Me.lblTenantName.Name = "lblTenantName"
+        Me.lblTenantName.Size = New System.Drawing.Size(72, 13)
+        Me.lblTenantName.TabIndex = 48
+        Me.lblTenantName.Text = "Tenant Name"
+        '
+        'btnRecordPayment
+        '
+        Me.btnRecordPayment.Location = New System.Drawing.Point(198, 177)
+        Me.btnRecordPayment.Name = "btnRecordPayment"
+        Me.btnRecordPayment.Size = New System.Drawing.Size(94, 23)
+        Me.btnRecordPayment.TabIndex = 62
+        Me.btnRecordPayment.Text = "Record Payment"
+        Me.btnRecordPayment.UseVisualStyleBackColor = True
         '
         'frmTenants
         '
-        Me.ClientSize = New System.Drawing.Size(456, 424)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(461, 456)
+        Me.Controls.Add(Me.grpPayment)
+        Me.Controls.Add(Me.grpTenantInfo)
+        Me.Controls.Add(Me.btnTakePayment)
         Me.Controls.Add(Me.lblProperty)
-        Me.Controls.Add(Me.lblInvalidDOB)
-        Me.Controls.Add(Me.btnSaveNew)
         Me.Controls.Add(Me.grpSearch)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.lblInvalidPhone)
-        Me.Controls.Add(Me.lblInvalidSSN)
-        Me.Controls.Add(Me.txtDOB)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.txtNotes)
-        Me.Controls.Add(Me.txtPhone3)
-        Me.Controls.Add(Me.txtPhone2)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.txtPhone)
-        Me.Controls.Add(Me.txtSSN)
-        Me.Controls.Add(Me.txtLName)
-        Me.Controls.Add(Me.txtFName)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnSave)
         Me.Name = "frmTenants"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tenant Management"
         Me.GroupBox1.ResumeLayout(False)
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
+        Me.grpTenantInfo.ResumeLayout(False)
+        Me.grpTenantInfo.PerformLayout()
+        Me.grpPayment.ResumeLayout(False)
+        Me.grpPayment.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -398,13 +541,25 @@ Partial Class frmTenants
 
 
     Friend WithEvents Label2 As Label
-    Friend WithEvents btnSave As Button
-    Friend WithEvents btnCancel As Button
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txtNotes As RichTextBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents btnHome As Button
+    Friend WithEvents btnAdd As Button
+    Friend WithEvents grpSearch As GroupBox
+    Friend WithEvents lblNoneFound As Label
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents cboTenants As ComboBox
+    Friend WithEvents lblProperty As Label
+    Friend WithEvents btnTakePayment As Button
+    Friend WithEvents grpTenantInfo As GroupBox
+    Friend WithEvents lblInvalidDOB As Label
+    Friend WithEvents btnSaveNew As Button
     Friend WithEvents lblInvalidPhone As Label
     Friend WithEvents lblInvalidSSN As Label
     Friend WithEvents txtDOB As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents txtNotes As RichTextBox
     Friend WithEvents txtPhone3 As TextBox
     Friend WithEvents txtPhone2 As TextBox
     Friend WithEvents Label8 As Label
@@ -418,17 +573,18 @@ Partial Class frmTenants
     Friend WithEvents txtSSN As TextBox
     Friend WithEvents txtLName As TextBox
     Friend WithEvents txtFName As TextBox
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents btnHome As Button
-    Friend WithEvents btnAdd As Button
-    Friend WithEvents grpSearch As GroupBox
-    Friend WithEvents lblNoneFound As Label
-    Friend WithEvents txtSearch As TextBox
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents cboTenants As ComboBox
-    Friend WithEvents btnSaveNew As Button
-    Friend WithEvents lblInvalidDOB As Label
-    Friend WithEvents lblProperty As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents grpPayment As GroupBox
+    Friend WithEvents btnRecordPayment As Button
+    Friend WithEvents lblTenantName As Label
+    Friend WithEvents txtAmount As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents cboPaymentType As ComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents txtPaymentIDNumber As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents btnBack As Button
+    Friend WithEvents txtPaymentDate As TextBox
+    Friend WithEvents Label13 As Label
 End Class

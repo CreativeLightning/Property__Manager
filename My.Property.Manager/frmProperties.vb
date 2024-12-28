@@ -1,8 +1,6 @@
 ﻿Imports System.Data.OleDb
 
 Public Class frmProperties
-    ' Connection string to the database
-    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Private Sub frmProperties_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ClearFields()
         FillBathrooms()

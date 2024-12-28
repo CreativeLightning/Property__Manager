@@ -1,4 +1,10 @@
 ﻿Public Class Form1
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+    End Sub
+
     Private Sub btnPayments_Click(sender As Object, e As EventArgs) Handles btnPayments.Click
         frmPayments.Show()
     End Sub
@@ -26,7 +32,9 @@
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
-            Me.Close()
+            Application.Exit()
         End If
     End Sub
+
+
 End Class

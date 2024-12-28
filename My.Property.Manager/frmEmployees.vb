@@ -1,5 +1,4 @@
 ﻿Public Class frmEmployees
-    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Private Sub frmEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Load data into the 'Property_ManagerDataSet.Employees' table
         Me.EmployeesTableAdapter.Fill(Me.Property_ManagerDataSet.Employees)
