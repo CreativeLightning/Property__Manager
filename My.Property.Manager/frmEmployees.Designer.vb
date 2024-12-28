@@ -28,6 +28,7 @@ Partial Class frmEmployees
         Me.btnHome = New System.Windows.Forms.Button()
         Me.btnAddEmployee = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblInvalidDate = New System.Windows.Forms.Label()
         Me.lblInvalidPhone = New System.Windows.Forms.Label()
         Me.lblInvalidSSN = New System.Windows.Forms.Label()
         Me.btnCanel = New System.Windows.Forms.Button()
@@ -62,7 +63,6 @@ Partial Class frmEmployees
         Me.Property_ManagerDataSet = New My_Property_Manager.Property_ManagerDataSet()
         Me.EmployeesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.EmployeesTableAdapter = New My_Property_Manager.Property_ManagerDataSetTableAdapters.EmployeesTableAdapter()
-        Me.lblInvalidDate = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.Property_ManagerDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -148,6 +148,17 @@ Partial Class frmEmployees
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Employee Information"
+        '
+        'lblInvalidDate
+        '
+        Me.lblInvalidDate.AutoSize = True
+        Me.lblInvalidDate.ForeColor = System.Drawing.Color.Red
+        Me.lblInvalidDate.Location = New System.Drawing.Point(245, 323)
+        Me.lblInvalidDate.Name = "lblInvalidDate"
+        Me.lblInvalidDate.Size = New System.Drawing.Size(64, 13)
+        Me.lblInvalidDate.TabIndex = 31
+        Me.lblInvalidDate.Text = "Invalid Date"
+        Me.lblInvalidDate.Visible = False
         '
         'lblInvalidPhone
         '
@@ -423,17 +434,6 @@ Partial Class frmEmployees
         'EmployeesTableAdapter
         '
         Me.EmployeesTableAdapter.ClearBeforeFill = True
-        '
-        'lblInvalidDate
-        '
-        Me.lblInvalidDate.AutoSize = True
-        Me.lblInvalidDate.ForeColor = System.Drawing.Color.Red
-        Me.lblInvalidDate.Location = New System.Drawing.Point(245, 323)
-        Me.lblInvalidDate.Name = "lblInvalidDate"
-        Me.lblInvalidDate.Size = New System.Drawing.Size(64, 13)
-        Me.lblInvalidDate.TabIndex = 31
-        Me.lblInvalidDate.Text = "Invalid Date"
-        Me.lblInvalidDate.Visible = False
         '
         'frmEmployees
         '
