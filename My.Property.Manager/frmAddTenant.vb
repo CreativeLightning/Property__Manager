@@ -14,7 +14,6 @@ Public Class frmAddTenant
     Private Sub frmAddTenant_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Load data into the 'Property_ManagerDataSet.Tenants' table
         Me.TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
-        Me.dbStatus.Text = ConnectionState.Open.ToString()
     End Sub
 
     Private Sub DOB_TextChanged(sender As Object, e As EventArgs) Handles DOB.TextChanged
@@ -34,6 +33,13 @@ Public Class frmAddTenant
         End If
         If text.Length > 6 Then
             text = text.Insert(6, "-")
+        End If
+        If text.Length <= 11 Then
+            lblInvalidSSN.Visible = False
+        End If
+        If text.Length > 11 Then
+            lblInvalidSSN.Visible = True
+            lblInvalidSSN.Text = "Too Many Numbers"
         End If
         SSN.Text = text
         SSN.SelectionStart = text.Length
@@ -58,6 +64,13 @@ Public Class frmAddTenant
         End If
         If text.Length > 7 Then
             text = text.Insert(7, "-")
+        End If
+        If text.Length <= 12 Then
+            lblInvalidPhone.Visible = False
+        End If
+        If text.Length > 12 Then
+            lblInvalidPhone.Visible = True
+            lblInvalidPhone.Text = "Too Many Numbers"
         End If
         textBox.Text = text
         textBox.SelectionStart = text.Length ' Move cursor to the end
@@ -176,6 +189,5 @@ Public Class frmAddTenant
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
-
 
 End Class

@@ -23,6 +23,8 @@ Partial Class frmAddTenant
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblInvalidPhone = New System.Windows.Forms.Label()
+        Me.lblInvalidSSN = New System.Windows.Forms.Label()
         Me.DOB = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Notes = New System.Windows.Forms.RichTextBox()
@@ -41,13 +43,13 @@ Partial Class frmAddTenant
         Me.FName = New System.Windows.Forms.TextBox()
         Me.ButtonSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.dbStatus = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.dbStatus)
+        Me.GroupBox2.Controls.Add(Me.lblInvalidPhone)
+        Me.GroupBox2.Controls.Add(Me.lblInvalidSSN)
         Me.GroupBox2.Controls.Add(Me.DOB)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.Notes)
@@ -71,13 +73,34 @@ Partial Class frmAddTenant
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "New Tenant Information"
         '
+        'lblInvalidPhone
+        '
+        Me.lblInvalidPhone.AutoSize = True
+        Me.lblInvalidPhone.ForeColor = System.Drawing.Color.Red
+        Me.lblInvalidPhone.Location = New System.Drawing.Point(219, 152)
+        Me.lblInvalidPhone.Name = "lblInvalidPhone"
+        Me.lblInvalidPhone.Size = New System.Drawing.Size(38, 13)
+        Me.lblInvalidPhone.TabIndex = 19
+        Me.lblInvalidPhone.Text = "Invalid"
+        Me.lblInvalidPhone.Visible = False
+        '
+        'lblInvalidSSN
+        '
+        Me.lblInvalidSSN.AutoSize = True
+        Me.lblInvalidSSN.ForeColor = System.Drawing.Color.Red
+        Me.lblInvalidSSN.Location = New System.Drawing.Point(219, 94)
+        Me.lblInvalidSSN.Name = "lblInvalidSSN"
+        Me.lblInvalidSSN.Size = New System.Drawing.Size(38, 13)
+        Me.lblInvalidSSN.TabIndex = 18
+        Me.lblInvalidSSN.Text = "Invalid"
+        Me.lblInvalidSSN.Visible = False
+        '
         'DOB
         '
         Me.DOB.Location = New System.Drawing.Point(100, 118)
         Me.DOB.Name = "DOB"
         Me.DOB.Size = New System.Drawing.Size(113, 20)
         Me.DOB.TabIndex = 17
-        Me.DOB.Text = "02/01/1971"
         '
         'Label9
         '
@@ -94,7 +117,7 @@ Partial Class frmAddTenant
         Me.Notes.Name = "Notes"
         Me.Notes.Size = New System.Drawing.Size(274, 119)
         Me.Notes.TabIndex = 8
-        Me.Notes.Text = "Some notes go here!"
+        Me.Notes.Text = ""
         '
         'Phone3
         '
@@ -179,7 +202,6 @@ Partial Class frmAddTenant
         Me.Phone.Name = "Phone"
         Me.Phone.Size = New System.Drawing.Size(113, 20)
         Me.Phone.TabIndex = 5
-        Me.Phone.Text = "501-489-1840"
         '
         'SSN
         '
@@ -187,7 +209,6 @@ Partial Class frmAddTenant
         Me.SSN.Name = "SSN"
         Me.SSN.Size = New System.Drawing.Size(113, 20)
         Me.SSN.TabIndex = 3
-        Me.SSN.Text = "847-23-7273"
         '
         'LName
         '
@@ -195,7 +216,6 @@ Partial Class frmAddTenant
         Me.LName.Name = "LName"
         Me.LName.Size = New System.Drawing.Size(113, 20)
         Me.LName.TabIndex = 2
-        Me.LName.Text = "Hayes"
         '
         'FName
         '
@@ -203,7 +223,6 @@ Partial Class frmAddTenant
         Me.FName.Name = "FName"
         Me.FName.Size = New System.Drawing.Size(113, 20)
         Me.FName.TabIndex = 1
-        Me.FName.Text = "Steven"
         '
         'ButtonSave
         '
@@ -222,13 +241,6 @@ Partial Class frmAddTenant
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'dbStatus
-        '
-        Me.dbStatus.Location = New System.Drawing.Point(101, 230)
-        Me.dbStatus.Name = "dbStatus"
-        Me.dbStatus.Size = New System.Drawing.Size(225, 20)
-        Me.dbStatus.TabIndex = 18
         '
         'frmAddTenant
         '
@@ -268,5 +280,6 @@ Partial Class frmAddTenant
     Friend WithEvents Label9 As Label
     Friend WithEvents Notes As RichTextBox
     Friend WithEvents DOB As TextBox
-    Friend WithEvents dbStatus As TextBox
+    Friend WithEvents lblInvalidSSN As Label
+    Friend WithEvents lblInvalidPhone As Label
 End Class
