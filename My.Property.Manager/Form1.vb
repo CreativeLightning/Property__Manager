@@ -11,6 +11,7 @@
             btnPayments.Enabled = False
             btnProperties.Enabled = False
             btnCharges.Enabled = False
+            btnUsers.Enabled = False
         End If
     End Sub
 
@@ -47,5 +48,17 @@
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub chkHelpMessages_CheckedChanged(sender As Object, e As EventArgs) Handles chkHelpMessages.CheckedChanged
+        If chkHelpMessages.Checked = True Then
+            HelpMessages = True
+        Else
+            HelpMessages = False
+        End If
+    End Sub
+
+    Private Sub btnUsers_Click(sender As Object, e As EventArgs) Handles btnUsers.Click
+        frmUsers.Show()
     End Sub
 End Class

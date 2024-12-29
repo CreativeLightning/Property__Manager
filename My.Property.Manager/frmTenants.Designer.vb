@@ -70,6 +70,7 @@ Partial Class frmTenants
         Me.btnRecordPayment = New System.Windows.Forms.Button()
         Me.cboPickProperty = New System.Windows.Forms.ComboBox()
         Me.btnAssign = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpTenantInfo.SuspendLayout()
@@ -95,6 +96,7 @@ Partial Class frmTenants
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnDelete)
         Me.GroupBox1.Controls.Add(Me.btnHome)
         Me.GroupBox1.Controls.Add(Me.btnAdd)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
@@ -140,7 +142,7 @@ Partial Class frmTenants
         '
         Me.lblNoneFound.AutoSize = True
         Me.lblNoneFound.ForeColor = System.Drawing.Color.Red
-        Me.lblNoneFound.Location = New System.Drawing.Point(250, 19)
+        Me.lblNoneFound.Location = New System.Drawing.Point(257, 16)
         Me.lblNoneFound.Name = "lblNoneFound"
         Me.lblNoneFound.Size = New System.Drawing.Size(66, 13)
         Me.lblNoneFound.TabIndex = 41
@@ -149,7 +151,7 @@ Partial Class frmTenants
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(107, 16)
+        Me.txtSearch.Location = New System.Drawing.Point(124, 15)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(127, 20)
         Me.txtSearch.TabIndex = 37
@@ -159,9 +161,9 @@ Partial Class frmTenants
         Me.Label18.AutoSize = True
         Me.Label18.Location = New System.Drawing.Point(20, 19)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(75, 13)
+        Me.Label18.Size = New System.Drawing.Size(102, 13)
         Me.Label18.TabIndex = 40
-        Me.Label18.Text = "Tenant Name:"
+        Me.Label18.Text = "Type Tenant Name:"
         '
         'Label17
         '
@@ -532,6 +534,16 @@ Partial Class frmTenants
         Me.btnAssign.UseVisualStyleBackColor = True
         Me.btnAssign.Visible = False
         '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(6, 74)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 2
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        Me.btnDelete.Visible = False
+        '
         'frmTenants
         '
         Me.ClientSize = New System.Drawing.Size(461, 456)
@@ -612,4 +624,5 @@ Partial Class frmTenants
     Friend WithEvents Label13 As Label
     Friend WithEvents cboPickProperty As ComboBox
     Friend WithEvents btnAssign As Button
+    Friend WithEvents btnDelete As Button
 End Class

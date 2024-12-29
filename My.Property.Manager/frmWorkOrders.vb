@@ -227,13 +227,13 @@ Public Class frmWorkOrders
         cboSelections.Text = ""
         If TheType = 1 Then 'All Open Work Orders
             Using connection As New OleDbConnection(connectionString)
-                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE Completed = False"
+                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE Completed = False ORDER BY ID"
                 Using cmd As New OleDbCommand(query, connection)
                     connection.Open()
                     Dim reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim ID As Integer = reader.GetInt32(0)
-                        Dim description As String = reader.GetString(1)
+                        Dim description As String = "#" & reader.GetInt32(0).ToString & " " & reader.GetString(1)
                         Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
                         Using cmd2 As New OleDbCommand(query2, connection)
                             Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
@@ -255,13 +255,13 @@ Public Class frmWorkOrders
             End If
         ElseIf TheType = 2 Then 'Closed Work Orders
             Using connection As New OleDbConnection(connectionString)
-                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE Completed = True"
+                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE Completed = True ORDER BY ID"
                 Using cmd As New OleDbCommand(query, connection)
                     connection.Open()
                     Dim reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim ID As Integer = reader.GetInt32(0)
-                        Dim description As String = reader.GetString(1)
+                        Dim description As String = "#" & reader.GetInt32(0).ToString & " " & reader.GetString(1)
                         Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
                         Using cmd2 As New OleDbCommand(query2, connection)
                             Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
@@ -284,13 +284,13 @@ Public Class frmWorkOrders
         ElseIf TheType = 3 Then 'Work Orders by Employee ID
 
             Using connection As New OleDbConnection(connectionString)
-                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE AssignedTo = " & cboEmployees.SelectedItem.substring(0, cboEmployees.SelectedItem.IndexOf(" "))
+                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE AssignedTo = " & cboEmployees.SelectedItem.substring(0, cboEmployees.SelectedItem.IndexOf(" ")) & " ORDER BY ID"
                 Using cmd As New OleDbCommand(query, connection)
                     connection.Open()
                     Dim reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim ID As Integer = reader.GetInt32(0)
-                        Dim description As String = reader.GetString(1)
+                        Dim description As String = "#" & reader.GetInt32(0).ToString & " " & reader.GetString(1)
                         Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
                         Using cmd2 As New OleDbCommand(query2, connection)
                             Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
@@ -312,13 +312,13 @@ Public Class frmWorkOrders
             End If
         ElseIf TheType = 4 Then 'Work Orders by Vendor ID
             Using connection As New OleDbConnection(connectionString)
-                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE VendorID = " & cboVendors.SelectedItem.substring(0, cboVendors.SelectedItem.IndexOf(" "))
+                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE VendorID = " & cboVendors.SelectedItem.substring(0, cboVendors.SelectedItem.IndexOf(" ")) & " ORDER BY ID"
                 Using cmd As New OleDbCommand(query, connection)
                     connection.Open()
                     Dim reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim ID As Integer = reader.GetInt32(0)
-                        Dim description As String = reader.GetString(1)
+                        Dim description As String = "#" & reader.GetInt32(0).ToString & " " & reader.GetString(1)
                         Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
                         Using cmd2 As New OleDbCommand(query2, connection)
                             Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
@@ -340,14 +340,14 @@ Public Class frmWorkOrders
             End If
         ElseIf TheType = 5 Then 'Work Orders by Property ID
             Using connection As New OleDbConnection(connectionString)
-                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE PropertyID = " & cboProperties.SelectedItem.substring(0, cboProperties.SelectedItem.IndexOf(" "))
+                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE PropertyID = " & cboProperties.SelectedItem.substring(0, cboProperties.SelectedItem.IndexOf(" ")) & " ORDER BY ID"
                 PropertyID = cboProperties.SelectedItem.substring(0, cboProperties.SelectedItem.IndexOf(" "))
                 Using cmd As New OleDbCommand(query, connection)
                     connection.Open()
                     Dim reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim ID As Integer = reader.GetInt32(0)
-                        Dim description As String = reader.GetString(1)
+                        Dim description As String = "#" & reader.GetInt32(0).ToString & " " & reader.GetString(1)
                         Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
                         Using cmd2 As New OleDbCommand(query2, connection)
                             Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
@@ -378,9 +378,11 @@ Public Class frmWorkOrders
     End Sub
     Private Sub btnWOByEmployee_Click(sender As Object, e As EventArgs) Handles btnWOByEmployee.Click
         ClearAll()
+        cboSelections.Items.Clear()
+        cboSelections.Text = ""
         grpNewWO.Visible = True
         If HelpMessages = True Then
-            MsgBox("Select Employee")
+            MsgBox("Select Employee and Press Get.")
         End If
         btnSaveWO.Visible = False
         btnGetByEmployee.Visible = True
@@ -395,10 +397,12 @@ Public Class frmWorkOrders
     End Sub
     Private Sub btnWOByVendor_Click(sender As Object, e As EventArgs) Handles btnWOByVendor.Click
         ClearAll()
+        cboSelections.Items.Clear()
+        cboSelections.Text = ""
         ByVendor = True
         grpNewWO.Visible = True
         If HelpMessages = True Then
-            MsgBox("Select Vendor")
+            MsgBox("Select Vendor and Press Get.")
         End If
         btnSaveWO.Visible = False
         btnGetByVendor.Visible = True
@@ -415,19 +419,23 @@ Public Class frmWorkOrders
     End Sub
     Private Sub ClearAll()
         'cboSelections.Items.Clear()
-        'cboSelections.Text = ""
+        cboSelections.Text = ""
         'cboEmployees.Items.Clear()
-        'cboEmployees.Text = ""
+        cboEmployees.Text = ""
         'cboProperties.Items.Clear()
-        'cboProperties.Text = ""
+        cboProperties.Text = ""
         'cboVendors.Items.Clear()
-        'cboVendors.Text = ""
+        cboVendors.Text = ""
         txtLabor.Text = ""
         txtParts.Text = ""
         txtDescription.Text = ""
         txtNotes.Text = ""
         txtOpenDate.Text = ""
         txtCloseDate.Text = ""
+        txtDateBilled.Text = ""
+        txtDatePaid.Text = ""
+        txtChargeNotes.Text = ""
+        chkPaid.Checked = False
         chkCompleted.Checked = False
         btnGetByEmployee.Visible = False
         btnGetByVendor.Visible = False
@@ -436,6 +444,7 @@ Public Class frmWorkOrders
         btnSaveNewWO.Visible = False
         btnAddCharges.Visible = False
         grpCharges.Visible = False
+        grpByNumber.Visible = False
         btnViewCharges.Visible = False
     End Sub
 
@@ -491,7 +500,7 @@ Public Class frmWorkOrders
                 End Try
             End Using
         End Using
-        grpCharges.Visible = False
+        ClearAll()
         If HelpMessages = True Then
             MsgBox("You should mark this work order completed if the problem is resolved.")
         End If
@@ -511,7 +520,7 @@ Public Class frmWorkOrders
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Dim result As MsgBoxResult = MsgBox("Are you sure you want to exit?", MsgBoxStyle.YesNo)
         If result = MsgBoxResult.Yes Then
-            Me.Close()
+            Application.Exit()
         End If
     End Sub
 
@@ -521,6 +530,8 @@ Public Class frmWorkOrders
 
     Private Sub btnWOByProperty_Click(sender As Object, e As EventArgs) Handles btnWOByProperty.Click
         ClearAll()
+        cboSelections.Items.Clear()
+        cboSelections.Text = ""
         grpNewWO.Visible = True
         If HelpMessages = True Then
             MsgBox("Select Property")
@@ -577,4 +588,46 @@ Public Class frmWorkOrders
         End Using
     End Sub
 
+    Private Sub btnWOByNumber_Click(sender As Object, e As EventArgs) Handles btnWOByNumber.Click
+        ClearAll()
+        grpByNumber.Visible = True
+        btnSaveWO.Visible = False
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        'Search for a work order by number using txtWOID using Like operator and fill cboSelections
+        cboSelections.Items.Clear()
+        cboSelections.Text = ""
+        Dim WOID As Integer = txtWOID.Text
+        Using connection As OleDbConnection = New OleDbConnection(connectionString)
+            Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE ID LIKE '%" & WOID & "%' ORDER BY ID"
+            Using cmd As OleDbCommand = New OleDbCommand(query, connection)
+                connection.Open()
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    Dim ID As Integer = reader.GetInt32(0)
+                    Dim description As String = "#" & reader.GetInt32(0).ToString & " " & reader.GetString(1)
+                    Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
+                    Using cmd2 As OleDbCommand = New OleDbCommand(query2, connection)
+                        Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
+                        While reader2.Read()
+                            Dim StreetNumber As String = reader2.GetString(0)
+                            Dim StreetName As String = reader2.GetString(1)
+                            description = description & " - " & StreetNumber & " " & StreetName
+                            Dim NextItem As New ComboBoxItem() With {.Text = description, .Value = ID}
+                            cboSelections.Items.Add(NextItem)
+                        End While
+                    End Using
+                End While
+            End Using
+        End Using
+        If cboSelections.Items.Count = 0 Then
+            MessageBox.Show("No Work Orders Found")
+        Else
+            cboSelections.SelectedIndex = 0
+        End If
+        grpNewWO.Visible = True
+        lblChoose.Visible = False
+        cboProperties.Visible = False
+    End Sub
 End Class

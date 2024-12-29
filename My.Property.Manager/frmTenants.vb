@@ -15,6 +15,9 @@ Public Class frmTenants
         PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
         PaymentTypesTableAdapter.Fill(Me.Property_ManagerDataSet.PaymentTypes)
         'PaymentsTableAdapter.Fill(Me.Property_ManagerDataSet.Payments)
+        If HelpMessages Then
+            MsgBox("Type Tenant's First or Last Name to search for Tenant, then select Tenant from dropdown list to view or edit Tenant information.")
+        End If
     End Sub
 
     Private Sub btnSaveNew_Click(sender As Object, e As EventArgs) Handles btnSaveNew.Click
@@ -61,7 +64,7 @@ Public Class frmTenants
         ' Validate DOB
         Dim dobValue As Date
         If Not Date.TryParse(txtDOB.Text, dobValue) Then
-            MessageBox.Show("Please enter a valid Date of Birth in the format MM/DD/YYYY.")
+            MessageBox.Show("Please enter a valid Date Of Birth In the format MM/DD/YYYY.")
             Return
         End If
 
@@ -110,7 +113,7 @@ Public Class frmTenants
                     If transaction.Connection IsNot Nothing Then
                         transaction.Rollback()
                     End If
-                    MessageBox.Show("An error occurred: " & ex.Message)
+                    MessageBox.Show("An Error occurred: " & ex.Message)
                 End Try
 
             Finally
@@ -224,6 +227,13 @@ Public Class frmTenants
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         Dim searchText As String = txtSearch.Text.Trim()
+        If searchText.Length = 0 Then
+            cboTenants.Items.Clear()
+            cboTenants.Text = "No tenants found"
+            lblNoneFound.Visible = False
+            btnDelete.Visible = False
+            Return
+        End If
         Dim filteredRows = Property_ManagerDataSet.Tenants.Select($"Fname LIKE '%{searchText}%' OR Lname LIKE '%{searchText}%'")
 
         cboTenants.Items.Clear()
@@ -235,6 +245,11 @@ Public Class frmTenants
         ' Show the first item if there are items in the combo box
         If cboTenants.Items.Count > 0 Then
             cboTenants.SelectedIndex = 0
+            lblNoneFound.Visible = False
+            btnDelete.Visible = True
+        Else
+            cboTenants.Text = "No tenants found"
+            lblNoneFound.Visible = True
         End If
     End Sub
 
@@ -521,5 +536,33 @@ Public Class frmTenants
             End Try
         End If
 
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this Tenant??", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.No Then
+            Return
+        End If
+
+        Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
+            Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
+        Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
+        If tenantRow IsNot Nothing Then
+            tenantRow.Delete()
+            Try
+                TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
+                Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
+                MessageBox.Show("Tenant deleted successfully.")
+                cboPickProperty.Visible = False
+                lblProperty.Visible = False
+                TenantsTableAdapter.ClearBeforeFill = True
+                TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
+                cboTenants.Text = "No tenants found"
+                txtSearch.Text = ""
+                ClearTextboxes()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred: " & ex.Message)
+            End Try
+        End If
     End Sub
 End Class

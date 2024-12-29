@@ -36,6 +36,7 @@ Partial Class frmWorkOrders
         Me.cboSelections = New System.Windows.Forms.ComboBox()
         Me.lblChoose = New System.Windows.Forms.Label()
         Me.grpNewWO = New System.Windows.Forms.GroupBox()
+        Me.btnGetByProperty = New System.Windows.Forms.Button()
         Me.btnViewCharges = New System.Windows.Forms.Button()
         Me.btnAddCharges = New System.Windows.Forms.Button()
         Me.btnSaveNewWO = New System.Windows.Forms.Button()
@@ -74,11 +75,14 @@ Partial Class frmWorkOrders
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnGetByProperty = New System.Windows.Forms.Button()
+        Me.grpByNumber = New System.Windows.Forms.GroupBox()
+        Me.txtWOID = New System.Windows.Forms.TextBox()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.grpStartHere.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpNewWO.SuspendLayout()
         Me.grpCharges.SuspendLayout()
+        Me.grpByNumber.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpStartHere
@@ -186,7 +190,7 @@ Partial Class frmWorkOrders
         Me.grpSearch.Controls.Add(Me.lblChoose)
         Me.grpSearch.Location = New System.Drawing.Point(166, 13)
         Me.grpSearch.Name = "grpSearch"
-        Me.grpSearch.Size = New System.Drawing.Size(417, 62)
+        Me.grpSearch.Size = New System.Drawing.Size(462, 62)
         Me.grpSearch.TabIndex = 1
         Me.grpSearch.TabStop = False
         Me.grpSearch.Text = "Make Selection"
@@ -236,15 +240,25 @@ Partial Class frmWorkOrders
         Me.grpNewWO.Controls.Add(Me.txtOpenDate)
         Me.grpNewWO.Location = New System.Drawing.Point(166, 81)
         Me.grpNewWO.Name = "grpNewWO"
-        Me.grpNewWO.Size = New System.Drawing.Size(417, 241)
+        Me.grpNewWO.Size = New System.Drawing.Size(462, 241)
         Me.grpNewWO.TabIndex = 2
         Me.grpNewWO.TabStop = False
         Me.grpNewWO.Text = "Work Order Details"
         Me.grpNewWO.Visible = False
         '
+        'btnGetByProperty
+        '
+        Me.btnGetByProperty.Location = New System.Drawing.Point(372, 44)
+        Me.btnGetByProperty.Name = "btnGetByProperty"
+        Me.btnGetByProperty.Size = New System.Drawing.Size(75, 23)
+        Me.btnGetByProperty.TabIndex = 23
+        Me.btnGetByProperty.Text = "Get WOs"
+        Me.btnGetByProperty.UseVisualStyleBackColor = True
+        Me.btnGetByProperty.Visible = False
+        '
         'btnViewCharges
         '
-        Me.btnViewCharges.Location = New System.Drawing.Point(314, 126)
+        Me.btnViewCharges.Location = New System.Drawing.Point(363, 124)
         Me.btnViewCharges.Name = "btnViewCharges"
         Me.btnViewCharges.Size = New System.Drawing.Size(84, 23)
         Me.btnViewCharges.TabIndex = 22
@@ -254,7 +268,7 @@ Partial Class frmWorkOrders
         '
         'btnAddCharges
         '
-        Me.btnAddCharges.Location = New System.Drawing.Point(228, 126)
+        Me.btnAddCharges.Location = New System.Drawing.Point(277, 124)
         Me.btnAddCharges.Name = "btnAddCharges"
         Me.btnAddCharges.Size = New System.Drawing.Size(84, 23)
         Me.btnAddCharges.TabIndex = 21
@@ -264,7 +278,7 @@ Partial Class frmWorkOrders
         '
         'btnSaveNewWO
         '
-        Me.btnSaveNewWO.Location = New System.Drawing.Point(228, 96)
+        Me.btnSaveNewWO.Location = New System.Drawing.Point(277, 94)
         Me.btnSaveNewWO.Name = "btnSaveNewWO"
         Me.btnSaveNewWO.Size = New System.Drawing.Size(75, 23)
         Me.btnSaveNewWO.TabIndex = 20
@@ -274,26 +288,26 @@ Partial Class frmWorkOrders
         '
         'btnGetByVendor
         '
-        Me.btnGetByVendor.Location = New System.Drawing.Point(258, 126)
+        Me.btnGetByVendor.Location = New System.Drawing.Point(38, 124)
         Me.btnGetByVendor.Name = "btnGetByVendor"
-        Me.btnGetByVendor.Size = New System.Drawing.Size(75, 23)
+        Me.btnGetByVendor.Size = New System.Drawing.Size(34, 23)
         Me.btnGetByVendor.TabIndex = 19
-        Me.btnGetByVendor.Text = "Get WOs"
+        Me.btnGetByVendor.Text = "Get"
         Me.btnGetByVendor.UseVisualStyleBackColor = True
         '
         'btnGetByEmployee
         '
-        Me.btnGetByEmployee.Location = New System.Drawing.Point(258, 95)
+        Me.btnGetByEmployee.Location = New System.Drawing.Point(16, 96)
         Me.btnGetByEmployee.Name = "btnGetByEmployee"
-        Me.btnGetByEmployee.Size = New System.Drawing.Size(75, 23)
+        Me.btnGetByEmployee.Size = New System.Drawing.Size(37, 23)
         Me.btnGetByEmployee.TabIndex = 18
-        Me.btnGetByEmployee.Text = "Get WOs"
+        Me.btnGetByEmployee.Text = "Get"
         Me.btnGetByEmployee.UseVisualStyleBackColor = True
         Me.btnGetByEmployee.Visible = False
         '
         'txtNotes
         '
-        Me.txtNotes.Location = New System.Drawing.Point(55, 186)
+        Me.txtNotes.Location = New System.Drawing.Point(104, 184)
         Me.txtNotes.Multiline = True
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.Size = New System.Drawing.Size(343, 49)
@@ -302,7 +316,7 @@ Partial Class frmWorkOrders
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 186)
+        Me.Label7.Location = New System.Drawing.Point(59, 184)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(38, 13)
         Me.Label7.TabIndex = 16
@@ -311,7 +325,7 @@ Partial Class frmWorkOrders
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(7, 159)
+        Me.Label6.Location = New System.Drawing.Point(56, 157)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(91, 13)
         Me.Label6.TabIndex = 15
@@ -319,14 +333,14 @@ Partial Class frmWorkOrders
         '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(104, 155)
+        Me.txtDescription.Location = New System.Drawing.Point(153, 153)
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(294, 20)
         Me.txtDescription.TabIndex = 14
         '
         'btnCancelWO
         '
-        Me.btnCancelWO.Location = New System.Drawing.Point(258, 126)
+        Me.btnCancelWO.Location = New System.Drawing.Point(307, 124)
         Me.btnCancelWO.Name = "btnCancelWO"
         Me.btnCancelWO.Size = New System.Drawing.Size(75, 23)
         Me.btnCancelWO.TabIndex = 13
@@ -335,7 +349,7 @@ Partial Class frmWorkOrders
         '
         'btnSaveWO
         '
-        Me.btnSaveWO.Location = New System.Drawing.Point(258, 95)
+        Me.btnSaveWO.Location = New System.Drawing.Point(307, 93)
         Me.btnSaveWO.Name = "btnSaveWO"
         Me.btnSaveWO.Size = New System.Drawing.Size(75, 23)
         Me.btnSaveWO.TabIndex = 12
@@ -345,7 +359,7 @@ Partial Class frmWorkOrders
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(31, 131)
+        Me.Label5.Location = New System.Drawing.Point(80, 129)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 11
@@ -354,7 +368,7 @@ Partial Class frmWorkOrders
         'cboVendors
         '
         Me.cboVendors.FormattingEnabled = True
-        Me.cboVendors.Location = New System.Drawing.Point(81, 128)
+        Me.cboVendors.Location = New System.Drawing.Point(130, 126)
         Me.cboVendors.Name = "cboVendors"
         Me.cboVendors.Size = New System.Drawing.Size(139, 21)
         Me.cboVendors.TabIndex = 10
@@ -362,7 +376,7 @@ Partial Class frmWorkOrders
         'cboEmployees
         '
         Me.cboEmployees.FormattingEnabled = True
-        Me.cboEmployees.Location = New System.Drawing.Point(81, 98)
+        Me.cboEmployees.Location = New System.Drawing.Point(130, 96)
         Me.cboEmployees.Name = "cboEmployees"
         Me.cboEmployees.Size = New System.Drawing.Size(139, 21)
         Me.cboEmployees.TabIndex = 9
@@ -370,7 +384,7 @@ Partial Class frmWorkOrders
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 102)
+        Me.Label4.Location = New System.Drawing.Point(55, 100)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(69, 13)
         Me.Label4.TabIndex = 8
@@ -379,7 +393,7 @@ Partial Class frmWorkOrders
         'chkCompleted
         '
         Me.chkCompleted.AutoSize = True
-        Me.chkCompleted.Location = New System.Drawing.Point(219, 48)
+        Me.chkCompleted.Location = New System.Drawing.Point(268, 46)
         Me.chkCompleted.Name = "chkCompleted"
         Me.chkCompleted.Size = New System.Drawing.Size(76, 17)
         Me.chkCompleted.TabIndex = 7
@@ -389,7 +403,7 @@ Partial Class frmWorkOrders
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(13, 75)
+        Me.Label3.Location = New System.Drawing.Point(62, 73)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(62, 13)
         Me.Label3.TabIndex = 6
@@ -398,7 +412,7 @@ Partial Class frmWorkOrders
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 49)
+        Me.Label2.Location = New System.Drawing.Point(62, 47)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(62, 13)
         Me.Label2.TabIndex = 5
@@ -407,7 +421,7 @@ Partial Class frmWorkOrders
         'lblProperties
         '
         Me.lblProperties.AutoSize = True
-        Me.lblProperties.Location = New System.Drawing.Point(18, 22)
+        Me.lblProperties.Location = New System.Drawing.Point(67, 20)
         Me.lblProperties.Name = "lblProperties"
         Me.lblProperties.Size = New System.Drawing.Size(88, 13)
         Me.lblProperties.TabIndex = 3
@@ -416,21 +430,21 @@ Partial Class frmWorkOrders
         'cboProperties
         '
         Me.cboProperties.FormattingEnabled = True
-        Me.cboProperties.Location = New System.Drawing.Point(112, 19)
+        Me.cboProperties.Location = New System.Drawing.Point(161, 17)
         Me.cboProperties.Name = "cboProperties"
         Me.cboProperties.Size = New System.Drawing.Size(286, 21)
         Me.cboProperties.TabIndex = 2
         '
         'txtCloseDate
         '
-        Me.txtCloseDate.Location = New System.Drawing.Point(81, 72)
+        Me.txtCloseDate.Location = New System.Drawing.Point(130, 70)
         Me.txtCloseDate.Name = "txtCloseDate"
         Me.txtCloseDate.Size = New System.Drawing.Size(100, 20)
         Me.txtCloseDate.TabIndex = 4
         '
         'txtOpenDate
         '
-        Me.txtOpenDate.Location = New System.Drawing.Point(81, 46)
+        Me.txtOpenDate.Location = New System.Drawing.Point(130, 44)
         Me.txtOpenDate.Name = "txtOpenDate"
         Me.txtOpenDate.Size = New System.Drawing.Size(100, 20)
         Me.txtOpenDate.TabIndex = 3
@@ -454,7 +468,7 @@ Partial Class frmWorkOrders
         Me.grpCharges.Controls.Add(Me.Label1)
         Me.grpCharges.Location = New System.Drawing.Point(166, 328)
         Me.grpCharges.Name = "grpCharges"
-        Me.grpCharges.Size = New System.Drawing.Size(417, 161)
+        Me.grpCharges.Size = New System.Drawing.Size(462, 161)
         Me.grpCharges.TabIndex = 3
         Me.grpCharges.TabStop = False
         Me.grpCharges.Text = "New Charge Information"
@@ -502,7 +516,7 @@ Partial Class frmWorkOrders
         Me.txtChargeNotes.Location = New System.Drawing.Point(168, 99)
         Me.txtChargeNotes.Multiline = True
         Me.txtChargeNotes.Name = "txtChargeNotes"
-        Me.txtChargeNotes.Size = New System.Drawing.Size(230, 56)
+        Me.txtChargeNotes.Size = New System.Drawing.Size(254, 56)
         Me.txtChargeNotes.TabIndex = 9
         '
         'txtDatePaid
@@ -590,22 +604,41 @@ Partial Class frmWorkOrders
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Parts:"
         '
-        'btnGetByProperty
+        'grpByNumber
         '
-        Me.btnGetByProperty.Location = New System.Drawing.Point(323, 46)
-        Me.btnGetByProperty.Name = "btnGetByProperty"
-        Me.btnGetByProperty.Size = New System.Drawing.Size(75, 23)
-        Me.btnGetByProperty.TabIndex = 23
-        Me.btnGetByProperty.Text = "Get WOs"
-        Me.btnGetByProperty.UseVisualStyleBackColor = True
-        Me.btnGetByProperty.Visible = False
+        Me.grpByNumber.Controls.Add(Me.btnSearch)
+        Me.grpByNumber.Controls.Add(Me.txtWOID)
+        Me.grpByNumber.Location = New System.Drawing.Point(13, 332)
+        Me.grpByNumber.Name = "grpByNumber"
+        Me.grpByNumber.Size = New System.Drawing.Size(146, 75)
+        Me.grpByNumber.TabIndex = 4
+        Me.grpByNumber.TabStop = False
+        Me.grpByNumber.Text = "Enter WO Number"
+        Me.grpByNumber.Visible = False
+        '
+        'txtWOID
+        '
+        Me.txtWOID.Location = New System.Drawing.Point(6, 19)
+        Me.txtWOID.Name = "txtWOID"
+        Me.txtWOID.Size = New System.Drawing.Size(100, 20)
+        Me.txtWOID.TabIndex = 0
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(7, 46)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 1
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'frmWorkOrders
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(598, 501)
+        Me.ClientSize = New System.Drawing.Size(665, 503)
         Me.ControlBox = False
+        Me.Controls.Add(Me.grpByNumber)
         Me.Controls.Add(Me.grpCharges)
         Me.Controls.Add(Me.grpNewWO)
         Me.Controls.Add(Me.grpSearch)
@@ -619,6 +652,8 @@ Partial Class frmWorkOrders
         Me.grpNewWO.PerformLayout()
         Me.grpCharges.ResumeLayout(False)
         Me.grpCharges.PerformLayout()
+        Me.grpByNumber.ResumeLayout(False)
+        Me.grpByNumber.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -676,4 +711,7 @@ Partial Class frmWorkOrders
     Friend WithEvents btnViewCharges As Button
     Friend WithEvents btnExit As Button
     Friend WithEvents btnGetByProperty As Button
+    Friend WithEvents grpByNumber As GroupBox
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents txtWOID As TextBox
 End Class
