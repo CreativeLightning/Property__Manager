@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DFE04E89-39E0-47AE-A252-BE5671632E2C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>My_Property_Manager.Form1</StartupObject>
+    <StartupObject>My_Property_Manager.frmWorkOrders</StartupObject>
     <RootNamespace>My_Property_Manager</RootNamespace>
     <AssemblyName>My_Property_Manager</AssemblyName>
     <FileAlignment>512</FileAlignment>

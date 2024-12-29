@@ -122,8 +122,6 @@ Public Class frmProperties
         Return selectedProperty
     End Function
 
-
-
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Get the values from the text boxes and combo boxes
         Dim streetNumber As String = txtStreetNumber.Text

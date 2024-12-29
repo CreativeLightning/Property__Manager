@@ -2,6 +2,7 @@
     Public User As Integer
     Public Login As Boolean = False
     Public Admin As Boolean = False
+    Public WOProperty As Integer
     Public connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Public UsersTableAdapter As New Property_ManagerDataSetTableAdapters.UsersTableAdapter()
     Public PropertiesTableAdapter As New Property_ManagerDataSetTableAdapters.PropertiesTableAdapter()
