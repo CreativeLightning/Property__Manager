@@ -23,6 +23,8 @@ Partial Class frmWorkOrders
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpStartHere = New System.Windows.Forms.GroupBox()
+        Me.btnExit = New System.Windows.Forms.Button()
+        Me.btnHome = New System.Windows.Forms.Button()
         Me.btnWOByNumber = New System.Windows.Forms.Button()
         Me.btnWOByVendor = New System.Windows.Forms.Button()
         Me.btnWOByEmployee = New System.Windows.Forms.Button()
@@ -34,6 +36,7 @@ Partial Class frmWorkOrders
         Me.cboSelections = New System.Windows.Forms.ComboBox()
         Me.lblChoose = New System.Windows.Forms.Label()
         Me.grpNewWO = New System.Windows.Forms.GroupBox()
+        Me.btnViewCharges = New System.Windows.Forms.Button()
         Me.btnAddCharges = New System.Windows.Forms.Button()
         Me.btnSaveNewWO = New System.Windows.Forms.Button()
         Me.btnGetByVendor = New System.Windows.Forms.Button()
@@ -56,21 +59,22 @@ Partial Class frmWorkOrders
         Me.txtCloseDate = New System.Windows.Forms.TextBox()
         Me.txtOpenDate = New System.Windows.Forms.TextBox()
         Me.grpCharges = New System.Windows.Forms.GroupBox()
+        Me.chkPaid = New System.Windows.Forms.CheckBox()
+        Me.btnCancelCharge = New System.Windows.Forms.Button()
+        Me.btnSaveCharge = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtChargeNotes = New System.Windows.Forms.TextBox()
+        Me.txtDatePaid = New System.Windows.Forms.TextBox()
+        Me.txtDateBilled = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.txtLabor = New System.Windows.Forms.TextBox()
         Me.txtParts = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtDateBilled = New System.Windows.Forms.TextBox()
-        Me.txtDatePaid = New System.Windows.Forms.TextBox()
-        Me.txtChargeNotes = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.btnSaveCharge = New System.Windows.Forms.Button()
-        Me.btnCancelCharge = New System.Windows.Forms.Button()
-        Me.chkPaid = New System.Windows.Forms.CheckBox()
+        Me.btnGetByProperty = New System.Windows.Forms.Button()
         Me.grpStartHere.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpNewWO.SuspendLayout()
@@ -79,6 +83,8 @@ Partial Class frmWorkOrders
         '
         'grpStartHere
         '
+        Me.grpStartHere.Controls.Add(Me.btnExit)
+        Me.grpStartHere.Controls.Add(Me.btnHome)
         Me.grpStartHere.Controls.Add(Me.btnWOByNumber)
         Me.grpStartHere.Controls.Add(Me.btnWOByVendor)
         Me.grpStartHere.Controls.Add(Me.btnWOByEmployee)
@@ -93,9 +99,27 @@ Partial Class frmWorkOrders
         Me.grpStartHere.TabStop = False
         Me.grpStartHere.Text = "Start Here"
         '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(7, 257)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(133, 23)
+        Me.btnExit.TabIndex = 8
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
+        '
+        'btnHome
+        '
+        Me.btnHome.Location = New System.Drawing.Point(7, 19)
+        Me.btnHome.Name = "btnHome"
+        Me.btnHome.Size = New System.Drawing.Size(133, 23)
+        Me.btnHome.TabIndex = 7
+        Me.btnHome.Text = "Home"
+        Me.btnHome.UseVisualStyleBackColor = True
+        '
         'btnWOByNumber
         '
-        Me.btnWOByNumber.Location = New System.Drawing.Point(7, 194)
+        Me.btnWOByNumber.Location = New System.Drawing.Point(7, 228)
         Me.btnWOByNumber.Name = "btnWOByNumber"
         Me.btnWOByNumber.Size = New System.Drawing.Size(133, 23)
         Me.btnWOByNumber.TabIndex = 6
@@ -104,7 +128,7 @@ Partial Class frmWorkOrders
         '
         'btnWOByVendor
         '
-        Me.btnWOByVendor.Location = New System.Drawing.Point(6, 165)
+        Me.btnWOByVendor.Location = New System.Drawing.Point(6, 199)
         Me.btnWOByVendor.Name = "btnWOByVendor"
         Me.btnWOByVendor.Size = New System.Drawing.Size(133, 23)
         Me.btnWOByVendor.TabIndex = 5
@@ -113,7 +137,7 @@ Partial Class frmWorkOrders
         '
         'btnWOByEmployee
         '
-        Me.btnWOByEmployee.Location = New System.Drawing.Point(6, 136)
+        Me.btnWOByEmployee.Location = New System.Drawing.Point(6, 170)
         Me.btnWOByEmployee.Name = "btnWOByEmployee"
         Me.btnWOByEmployee.Size = New System.Drawing.Size(133, 23)
         Me.btnWOByEmployee.TabIndex = 4
@@ -122,8 +146,7 @@ Partial Class frmWorkOrders
         '
         'btnWOByProperty
         '
-        Me.btnWOByProperty.Enabled = False
-        Me.btnWOByProperty.Location = New System.Drawing.Point(7, 107)
+        Me.btnWOByProperty.Location = New System.Drawing.Point(7, 141)
         Me.btnWOByProperty.Name = "btnWOByProperty"
         Me.btnWOByProperty.Size = New System.Drawing.Size(133, 23)
         Me.btnWOByProperty.TabIndex = 3
@@ -132,7 +155,7 @@ Partial Class frmWorkOrders
         '
         'btnClosedWO
         '
-        Me.btnClosedWO.Location = New System.Drawing.Point(6, 78)
+        Me.btnClosedWO.Location = New System.Drawing.Point(6, 112)
         Me.btnClosedWO.Name = "btnClosedWO"
         Me.btnClosedWO.Size = New System.Drawing.Size(133, 23)
         Me.btnClosedWO.TabIndex = 2
@@ -141,7 +164,7 @@ Partial Class frmWorkOrders
         '
         'btnOpenWO
         '
-        Me.btnOpenWO.Location = New System.Drawing.Point(6, 49)
+        Me.btnOpenWO.Location = New System.Drawing.Point(6, 83)
         Me.btnOpenWO.Name = "btnOpenWO"
         Me.btnOpenWO.Size = New System.Drawing.Size(133, 23)
         Me.btnOpenWO.TabIndex = 1
@@ -150,7 +173,7 @@ Partial Class frmWorkOrders
         '
         'btnNewWO
         '
-        Me.btnNewWO.Location = New System.Drawing.Point(7, 20)
+        Me.btnNewWO.Location = New System.Drawing.Point(7, 54)
         Me.btnNewWO.Name = "btnNewWO"
         Me.btnNewWO.Size = New System.Drawing.Size(133, 23)
         Me.btnNewWO.TabIndex = 0
@@ -188,6 +211,8 @@ Partial Class frmWorkOrders
         '
         'grpNewWO
         '
+        Me.grpNewWO.Controls.Add(Me.btnGetByProperty)
+        Me.grpNewWO.Controls.Add(Me.btnViewCharges)
         Me.grpNewWO.Controls.Add(Me.btnAddCharges)
         Me.grpNewWO.Controls.Add(Me.btnSaveNewWO)
         Me.grpNewWO.Controls.Add(Me.btnGetByVendor)
@@ -217,11 +242,21 @@ Partial Class frmWorkOrders
         Me.grpNewWO.Text = "Work Order Details"
         Me.grpNewWO.Visible = False
         '
+        'btnViewCharges
+        '
+        Me.btnViewCharges.Location = New System.Drawing.Point(314, 126)
+        Me.btnViewCharges.Name = "btnViewCharges"
+        Me.btnViewCharges.Size = New System.Drawing.Size(84, 23)
+        Me.btnViewCharges.TabIndex = 22
+        Me.btnViewCharges.Text = "Charges"
+        Me.btnViewCharges.UseVisualStyleBackColor = True
+        Me.btnViewCharges.Visible = False
+        '
         'btnAddCharges
         '
-        Me.btnAddCharges.Location = New System.Drawing.Point(258, 126)
+        Me.btnAddCharges.Location = New System.Drawing.Point(228, 126)
         Me.btnAddCharges.Name = "btnAddCharges"
-        Me.btnAddCharges.Size = New System.Drawing.Size(93, 23)
+        Me.btnAddCharges.Size = New System.Drawing.Size(84, 23)
         Me.btnAddCharges.TabIndex = 21
         Me.btnAddCharges.Text = "Add Charges"
         Me.btnAddCharges.UseVisualStyleBackColor = True
@@ -229,7 +264,7 @@ Partial Class frmWorkOrders
         '
         'btnSaveNewWO
         '
-        Me.btnSaveNewWO.Location = New System.Drawing.Point(258, 96)
+        Me.btnSaveNewWO.Location = New System.Drawing.Point(228, 96)
         Me.btnSaveNewWO.Name = "btnSaveNewWO"
         Me.btnSaveNewWO.Size = New System.Drawing.Size(75, 23)
         Me.btnSaveNewWO.TabIndex = 20
@@ -310,7 +345,7 @@ Partial Class frmWorkOrders
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(43, 131)
+        Me.Label5.Location = New System.Drawing.Point(31, 131)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 11
@@ -319,7 +354,7 @@ Partial Class frmWorkOrders
         'cboVendors
         '
         Me.cboVendors.FormattingEnabled = True
-        Me.cboVendors.Location = New System.Drawing.Point(93, 128)
+        Me.cboVendors.Location = New System.Drawing.Point(81, 128)
         Me.cboVendors.Name = "cboVendors"
         Me.cboVendors.Size = New System.Drawing.Size(139, 21)
         Me.cboVendors.TabIndex = 10
@@ -327,7 +362,7 @@ Partial Class frmWorkOrders
         'cboEmployees
         '
         Me.cboEmployees.FormattingEnabled = True
-        Me.cboEmployees.Location = New System.Drawing.Point(93, 98)
+        Me.cboEmployees.Location = New System.Drawing.Point(81, 98)
         Me.cboEmployees.Name = "cboEmployees"
         Me.cboEmployees.Size = New System.Drawing.Size(139, 21)
         Me.cboEmployees.TabIndex = 9
@@ -335,7 +370,7 @@ Partial Class frmWorkOrders
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(18, 102)
+        Me.Label4.Location = New System.Drawing.Point(6, 102)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(69, 13)
         Me.Label4.TabIndex = 8
@@ -344,7 +379,7 @@ Partial Class frmWorkOrders
         'chkCompleted
         '
         Me.chkCompleted.AutoSize = True
-        Me.chkCompleted.Location = New System.Drawing.Point(231, 48)
+        Me.chkCompleted.Location = New System.Drawing.Point(219, 48)
         Me.chkCompleted.Name = "chkCompleted"
         Me.chkCompleted.Size = New System.Drawing.Size(76, 17)
         Me.chkCompleted.TabIndex = 7
@@ -354,7 +389,7 @@ Partial Class frmWorkOrders
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(25, 75)
+        Me.Label3.Location = New System.Drawing.Point(13, 75)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(62, 13)
         Me.Label3.TabIndex = 6
@@ -363,7 +398,7 @@ Partial Class frmWorkOrders
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(25, 49)
+        Me.Label2.Location = New System.Drawing.Point(13, 49)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(62, 13)
         Me.Label2.TabIndex = 5
@@ -388,14 +423,14 @@ Partial Class frmWorkOrders
         '
         'txtCloseDate
         '
-        Me.txtCloseDate.Location = New System.Drawing.Point(93, 72)
+        Me.txtCloseDate.Location = New System.Drawing.Point(81, 72)
         Me.txtCloseDate.Name = "txtCloseDate"
         Me.txtCloseDate.Size = New System.Drawing.Size(100, 20)
         Me.txtCloseDate.TabIndex = 4
         '
         'txtOpenDate
         '
-        Me.txtOpenDate.Location = New System.Drawing.Point(93, 46)
+        Me.txtOpenDate.Location = New System.Drawing.Point(81, 46)
         Me.txtOpenDate.Name = "txtOpenDate"
         Me.txtOpenDate.Size = New System.Drawing.Size(100, 20)
         Me.txtOpenDate.TabIndex = 3
@@ -424,6 +459,83 @@ Partial Class frmWorkOrders
         Me.grpCharges.TabStop = False
         Me.grpCharges.Text = "New Charge Information"
         Me.grpCharges.Visible = False
+        '
+        'chkPaid
+        '
+        Me.chkPaid.AutoSize = True
+        Me.chkPaid.Location = New System.Drawing.Point(335, 22)
+        Me.chkPaid.Name = "chkPaid"
+        Me.chkPaid.Size = New System.Drawing.Size(47, 17)
+        Me.chkPaid.TabIndex = 13
+        Me.chkPaid.Text = "Paid"
+        Me.chkPaid.UseVisualStyleBackColor = True
+        '
+        'btnCancelCharge
+        '
+        Me.btnCancelCharge.Location = New System.Drawing.Point(28, 128)
+        Me.btnCancelCharge.Name = "btnCancelCharge"
+        Me.btnCancelCharge.Size = New System.Drawing.Size(102, 23)
+        Me.btnCancelCharge.TabIndex = 12
+        Me.btnCancelCharge.Text = "Cancel Charge"
+        Me.btnCancelCharge.UseVisualStyleBackColor = True
+        '
+        'btnSaveCharge
+        '
+        Me.btnSaveCharge.Location = New System.Drawing.Point(28, 99)
+        Me.btnSaveCharge.Name = "btnSaveCharge"
+        Me.btnSaveCharge.Size = New System.Drawing.Size(102, 23)
+        Me.btnSaveCharge.TabIndex = 11
+        Me.btnSaveCharge.Text = "Save Charge"
+        Me.btnSaveCharge.UseVisualStyleBackColor = True
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(168, 80)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(75, 13)
+        Me.Label12.TabIndex = 10
+        Me.Label12.Text = "Charge Notes:"
+        '
+        'txtChargeNotes
+        '
+        Me.txtChargeNotes.Location = New System.Drawing.Point(168, 99)
+        Me.txtChargeNotes.Multiline = True
+        Me.txtChargeNotes.Name = "txtChargeNotes"
+        Me.txtChargeNotes.Size = New System.Drawing.Size(230, 56)
+        Me.txtChargeNotes.TabIndex = 9
+        '
+        'txtDatePaid
+        '
+        Me.txtDatePaid.Location = New System.Drawing.Point(228, 46)
+        Me.txtDatePaid.Name = "txtDatePaid"
+        Me.txtDatePaid.Size = New System.Drawing.Size(100, 20)
+        Me.txtDatePaid.TabIndex = 8
+        '
+        'txtDateBilled
+        '
+        Me.txtDateBilled.Location = New System.Drawing.Point(228, 20)
+        Me.txtDateBilled.Name = "txtDateBilled"
+        Me.txtDateBilled.Size = New System.Drawing.Size(100, 20)
+        Me.txtDateBilled.TabIndex = 6
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(165, 49)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(57, 13)
+        Me.Label11.TabIndex = 7
+        Me.Label11.Text = "Date Paid:"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(161, 23)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(61, 13)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "Date Billed:"
         '
         'txtTotal
         '
@@ -478,88 +590,22 @@ Partial Class frmWorkOrders
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Parts:"
         '
-        'Label10
+        'btnGetByProperty
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(161, 23)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(61, 13)
-        Me.Label10.TabIndex = 6
-        Me.Label10.Text = "Date Billed:"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(165, 49)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(57, 13)
-        Me.Label11.TabIndex = 7
-        Me.Label11.Text = "Date Paid:"
-        '
-        'txtDateBilled
-        '
-        Me.txtDateBilled.Location = New System.Drawing.Point(228, 20)
-        Me.txtDateBilled.Name = "txtDateBilled"
-        Me.txtDateBilled.Size = New System.Drawing.Size(100, 20)
-        Me.txtDateBilled.TabIndex = 6
-        '
-        'txtDatePaid
-        '
-        Me.txtDatePaid.Location = New System.Drawing.Point(228, 46)
-        Me.txtDatePaid.Name = "txtDatePaid"
-        Me.txtDatePaid.Size = New System.Drawing.Size(100, 20)
-        Me.txtDatePaid.TabIndex = 8
-        '
-        'txtChargeNotes
-        '
-        Me.txtChargeNotes.Location = New System.Drawing.Point(168, 99)
-        Me.txtChargeNotes.Multiline = True
-        Me.txtChargeNotes.Name = "txtChargeNotes"
-        Me.txtChargeNotes.Size = New System.Drawing.Size(230, 56)
-        Me.txtChargeNotes.TabIndex = 9
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(168, 80)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(75, 13)
-        Me.Label12.TabIndex = 10
-        Me.Label12.Text = "Charge Notes:"
-        '
-        'btnSaveCharge
-        '
-        Me.btnSaveCharge.Location = New System.Drawing.Point(28, 99)
-        Me.btnSaveCharge.Name = "btnSaveCharge"
-        Me.btnSaveCharge.Size = New System.Drawing.Size(102, 23)
-        Me.btnSaveCharge.TabIndex = 11
-        Me.btnSaveCharge.Text = "Save Charge"
-        Me.btnSaveCharge.UseVisualStyleBackColor = True
-        '
-        'btnCancelCharge
-        '
-        Me.btnCancelCharge.Location = New System.Drawing.Point(28, 128)
-        Me.btnCancelCharge.Name = "btnCancelCharge"
-        Me.btnCancelCharge.Size = New System.Drawing.Size(102, 23)
-        Me.btnCancelCharge.TabIndex = 12
-        Me.btnCancelCharge.Text = "Cancel Charge"
-        Me.btnCancelCharge.UseVisualStyleBackColor = True
-        '
-        'chkPaid
-        '
-        Me.chkPaid.AutoSize = True
-        Me.chkPaid.Location = New System.Drawing.Point(335, 22)
-        Me.chkPaid.Name = "chkPaid"
-        Me.chkPaid.Size = New System.Drawing.Size(47, 17)
-        Me.chkPaid.TabIndex = 13
-        Me.chkPaid.Text = "Paid"
-        Me.chkPaid.UseVisualStyleBackColor = True
+        Me.btnGetByProperty.Location = New System.Drawing.Point(323, 46)
+        Me.btnGetByProperty.Name = "btnGetByProperty"
+        Me.btnGetByProperty.Size = New System.Drawing.Size(75, 23)
+        Me.btnGetByProperty.TabIndex = 23
+        Me.btnGetByProperty.Text = "Get WOs"
+        Me.btnGetByProperty.UseVisualStyleBackColor = True
+        Me.btnGetByProperty.Visible = False
         '
         'frmWorkOrders
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(598, 501)
+        Me.ControlBox = False
         Me.Controls.Add(Me.grpCharges)
         Me.Controls.Add(Me.grpNewWO)
         Me.Controls.Add(Me.grpSearch)
@@ -626,4 +672,8 @@ Partial Class frmWorkOrders
     Friend WithEvents btnCancelCharge As Button
     Friend WithEvents btnSaveCharge As Button
     Friend WithEvents chkPaid As CheckBox
+    Friend WithEvents btnHome As Button
+    Friend WithEvents btnViewCharges As Button
+    Friend WithEvents btnExit As Button
+    Friend WithEvents btnGetByProperty As Button
 End Class

@@ -2,6 +2,23 @@
 Imports My_Property_Manager.frmProperties
 
 Public Class frmWorkOrders
+    Public Class WorkOrder
+        Public Property ID As Integer
+        Public Property Description As String
+
+        Public Overrides Function ToString() As String
+            Return "#" & ID & " - " & Description
+        End Function
+    End Class
+    Public Class ComboBoxItem
+        Public Property Text As String
+        Public Property Value As Integer
+
+        Public Overrides Function ToString() As String
+            Return Text
+        End Function
+    End Class
+
     Private Sub btnNewWO_Click(sender As Object, e As EventArgs) Handles btnNewWO.Click
         ClearAll()
         btnSaveNewWO.Visible = True
@@ -99,7 +116,6 @@ Public Class frmWorkOrders
         Next
         cboProperties.SelectedIndex = 0
     End Sub
-
     Private Sub chkCompleted_CheckedChanged(sender As Object, e As EventArgs) Handles chkCompleted.CheckedChanged
         If False = chkCompleted.Checked Then
             txtCloseDate.Text = ""
@@ -107,14 +123,12 @@ Public Class frmWorkOrders
             txtCloseDate.Text = Date.Today
         End If
     End Sub
-
     Private Sub cboProperties_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProperties.SelectedIndexChanged
         WOProperty = cboProperties.SelectedItem.substring(0, cboProperties.SelectedItem.IndexOf(" "))
     End Sub
-
     Private Sub btnCancelWO_Click(sender As Object, e As EventArgs) Handles btnCancelWO.Click
         Dim msgboxresult = MsgBox("Do you want to cancel the Work Order?", MsgBoxStyle.YesNo)
-        If msgBoxResult.ToString = "Yes" Then
+        If msgboxresult.ToString = "Yes" Then
             grpNewWO.Visible = False
             cboVendors.Items.Clear()
             cboEmployees.Items.Clear()
@@ -122,7 +136,6 @@ Public Class frmWorkOrders
         End If
 
     End Sub
-
     Private Sub btnSaveNewWO_Click(sender As Object, e As EventArgs) Handles btnSaveNewWO.Click
         SaveWO()
     End Sub
@@ -193,7 +206,6 @@ Public Class frmWorkOrders
                 Try
                     cmd.ExecuteNonQuery()
                     MessageBox.Show("Work Order Updated")
-                    grpNewWO.Visible = False
                     cboVendors.Items.Clear()
                     cboEmployees.Items.Clear()
                     cboProperties.Items.Clear()
@@ -231,7 +243,9 @@ Public Class frmWorkOrders
                             While reader2.Read()
                                 Dim StreetNumber As String = reader2.GetString(0)
                                 Dim StreetName As String = reader2.GetString(1)
-                                cboSelections.Items.Add("#" & ID & " - " & StreetNumber & " " & StreetName & "-" & description)
+                                description = description & " - " & StreetNumber & " " & StreetName
+                                Dim NextItem As New ComboBoxItem() With {.Text = description, .Value = ID}
+                                cboSelections.Items.Add(NextItem)
                             End While
                         End Using
                     End While
@@ -257,7 +271,9 @@ Public Class frmWorkOrders
                             While reader2.Read()
                                 Dim StreetNumber As String = reader2.GetString(0)
                                 Dim StreetName As String = reader2.GetString(1)
-                                cboSelections.Items.Add("#" & ID & " - " & StreetNumber & " " & StreetName & "-" & description)
+                                description = description & " - " & StreetNumber & " " & StreetName
+                                Dim NextItem As New ComboBoxItem() With {.Text = description, .Value = ID}
+                                cboSelections.Items.Add(NextItem)
                             End While
                         End Using
                     End While
@@ -284,7 +300,9 @@ Public Class frmWorkOrders
                             While reader2.Read()
                                 Dim StreetNumber As String = reader2.GetString(0)
                                 Dim StreetName As String = reader2.GetString(1)
-                                cboSelections.Items.Add("#" & ID & " - " & StreetNumber & " " & StreetName & "-" & description)
+                                description = description & " - " & StreetNumber & " " & StreetName
+                                Dim NextItem As New ComboBoxItem() With {.Text = description, .Value = ID}
+                                cboSelections.Items.Add(NextItem)
                             End While
                         End Using
                     End While
@@ -310,7 +328,9 @@ Public Class frmWorkOrders
                             While reader2.Read()
                                 Dim StreetNumber As String = reader2.GetString(0)
                                 Dim StreetName As String = reader2.GetString(1)
-                                cboSelections.Items.Add("#" & ID & " - " & StreetNumber & " " & StreetName & "-" & description)
+                                description = description & " - " & StreetNumber & " " & StreetName
+                                Dim NextItem As New ComboBoxItem() With {.Text = description, .Value = ID}
+                                cboSelections.Items.Add(NextItem)
                             End While
                         End Using
                     End While
@@ -318,6 +338,36 @@ Public Class frmWorkOrders
             End Using
             If cboSelections.Items.Count = 0 Then
                 MessageBox.Show("No Work Orders for Vendor")
+            Else
+                cboSelections.SelectedIndex = 0
+            End If
+        ElseIf TheType = 5 Then 'Work Orders by Property ID
+            Using connection As New OleDbConnection(connectionString)
+                Dim query As String = "SELECT ID, Description, PropertyID FROM WorkOrders WHERE PropertyID = " & cboProperties.SelectedItem.substring(0, cboProperties.SelectedItem.IndexOf(" "))
+                PropertyID = cboProperties.SelectedItem.substring(0, cboProperties.SelectedItem.IndexOf(" "))
+                Using cmd As New OleDbCommand(query, connection)
+                    connection.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim ID As Integer = reader.GetInt32(0)
+                        Dim description As String = reader.GetString(1)
+                        Dim query2 As String = "SELECT StreetNumber, StreetName, AptSuiteNumber FROM Properties WHERE ID = " & reader.GetInt32(2)
+                        Using cmd2 As New OleDbCommand(query2, connection)
+                            Dim reader2 As OleDbDataReader = cmd2.ExecuteReader()
+                            While reader2.Read()
+                                Dim StreetNumber As String = reader2.GetString(0)
+                                Dim StreetName As String = reader2.GetString(1)
+                                description = description & " - " & StreetNumber & " " & StreetName
+                                Dim NextItem As New ComboBoxItem() With {.Text = description, .Value = ID}
+                                cboSelections.Items.Add(NextItem)
+
+                            End While
+                        End Using
+                    End While
+                End Using
+            End Using
+            If cboSelections.Items.Count = 0 Then
+                MessageBox.Show("No Work Orders for Property")
             Else
                 cboSelections.SelectedIndex = 0
             End If
@@ -329,7 +379,6 @@ Public Class frmWorkOrders
         'Select all closed work orders
         FillcboSelections(2)
     End Sub
-
     Private Sub btnWOByEmployee_Click(sender As Object, e As EventArgs) Handles btnWOByEmployee.Click
         ClearAll()
         grpNewWO.Visible = True
@@ -344,11 +393,9 @@ Public Class frmWorkOrders
         btnCancelWO.Visible = False
         FillCboEmployees()
     End Sub
-
     Private Sub btnGetByEmployee_Click(sender As Object, e As EventArgs) Handles btnGetByEmployee.Click
         FillcboSelections(3)
     End Sub
-
     Private Sub btnWOByVendor_Click(sender As Object, e As EventArgs) Handles btnWOByVendor.Click
         ClearAll()
         ByVendor = True
@@ -364,7 +411,6 @@ Public Class frmWorkOrders
         btnCancelWO.Visible = False
         FillcboVendors()
     End Sub
-
     Private Sub btnGetByVendor_Click(sender As Object, e As EventArgs) Handles btnGetByVendor.Click
         'Select all work orders by vendor
         FillcboSelections(4)
@@ -394,53 +440,17 @@ Public Class frmWorkOrders
         btnSaveNewWO.Visible = False
         btnAddCharges.Visible = False
         grpCharges.Visible = False
+        btnViewCharges.Visible = False
     End Sub
 
-    Private Sub cboSelections_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSelections.SelectedIndexChanged
-        'Get the ID of the selected work order
-        WOID = cboSelections.SelectedItem.substring(1, cboSelections.SelectedItem.IndexOf(" "))
-        Using connection As OleDbConnection = New OleDbConnection(connectionString)
-            Dim query As String = "SELECT OpenDate, CloseDate, PropertyID, AssignedTo, VendorID, Description, Completed, Notes FROM WorkOrders WHERE ID = " & WOID
-            Using cmd As OleDbCommand = New OleDbCommand(query, connection)
-                connection.Open()
-                Dim reader As OleDbDataReader = cmd.ExecuteReader()
-                While reader.Read()
-                    txtOpenDate.Text = reader.GetString(0)
-                    If reader.IsDBNull(1) Then
-                        txtCloseDate.Text = ""
-                    Else
-                        txtCloseDate.Text = reader.GetString(1)
-                    End If
-                    WOProperty = reader.GetInt32(2)
-                    cboEmployees.Items.Clear()
-                    cboVendors.Items.Clear()
-                    cboProperties.Items.Clear()
-                    FillcboProperties()
-                    FillCboEmployees()
-                    FillcboVendors()
-                    cboEmployees.SelectedIndex = cboEmployees.FindString(reader.GetInt32(3))
-                    cboVendors.SelectedIndex = cboVendors.FindString(reader.GetInt32(4))
-                    txtDescription.Text = reader.GetString(5)
-                    chkCompleted.Checked = reader.GetBoolean(6)
-                    txtNotes.Text = reader.GetString(7)
-                    btnSaveWO.Visible = True
-                    grpNewWO.Visible = True
-                    btnAddCharges.Visible = True
-                End While
-            End Using
-        End Using
-    End Sub
-
-    Private Sub btnAddCharges_Click(sender As Object, e As EventArgs) Handles btnAddCharges.Click
+    Public Sub btnAddCharges_Click(sender As Object, e As EventArgs) Handles btnAddCharges.Click
         'Open the charges form
         grpCharges.Visible = True
         txtDateBilled.Text = Date.Today
     End Sub
-
     Private Sub btnCancelCharge_Click(sender As Object, e As EventArgs) Handles btnCancelCharge.Click
         ClearAll()
     End Sub
-
     Private Sub cboVendors_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboVendors.SelectedIndexChanged
         'Get the ID of the selected vendor
         Dim WOVendor As Integer = cboVendors.SelectedItem.substring(0, cboVendors.SelectedItem.IndexOf(" "))
@@ -450,7 +460,6 @@ Public Class frmWorkOrders
             End If
         End If
     End Sub
-
     Private Sub btnSaveCharge_Click(sender As Object, e As EventArgs) Handles btnSaveCharge.Click
         'Save the charges entered on grpCharges
         If txtLabor.Text = "" Then
@@ -491,7 +500,6 @@ Public Class frmWorkOrders
             MsgBox("You should mark this work order completed if the problem is resolved.")
         End If
     End Sub
-
     Private Sub chkPaid_CheckedChanged(sender As Object, e As EventArgs) Handles chkPaid.CheckedChanged
         If chkPaid.Checked = True Then
             txtDatePaid.Text = Date.Today
@@ -499,4 +507,82 @@ Public Class frmWorkOrders
             txtDatePaid.Text = ""
         End If
     End Sub
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        Form1.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Dim result As MsgBoxResult = MsgBox("Are you sure you want to exit?", MsgBoxStyle.YesNo)
+        If result = MsgBoxResult.Yes Then
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub btnViewCharges_Click(sender As Object, e As EventArgs) Handles btnViewCharges.Click
+        frmCharges.Show()
+    End Sub
+
+    Private Sub btnWOByProperty_Click(sender As Object, e As EventArgs) Handles btnWOByProperty.Click
+        ClearAll()
+        grpNewWO.Visible = True
+        If HelpMessages = True Then
+            MsgBox("Select Property")
+        End If
+        btnSaveWO.Visible = False
+        btnGetByProperty.Visible = True
+        btnGetByEmployee.Visible = False
+        btnGetByVendor.Visible = False
+        lblProperties.Visible = True
+        cboProperties.Visible = True
+        btnCancelWO.Visible = False
+        FillcboProperties()
+
+    End Sub
+
+    Private Sub btnGetByProperty_Click(sender As Object, e As EventArgs) Handles btnGetByProperty.Click
+        FillcboSelections(5) 'Work Orders by Property
+    End Sub
+
+    Private Sub cboSelections_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSelections.SelectedIndexChanged
+        'Get the ID of the selected work order
+        If cboSelections.Items.Count = 0 Then
+            Exit Sub
+        End If
+        Dim selectedItem As ComboBoxItem = CType(cboSelections.SelectedItem, ComboBoxItem)
+        WOID = selectedItem.Value
+
+        Using connection As OleDbConnection = New OleDbConnection(connectionString)
+            Dim query As String = "SELECT OpenDate, CloseDate, PropertyID, AssignedTo, VendorID, Description, Completed, Notes FROM WorkOrders WHERE ID = " & WOID
+            Using cmd As OleDbCommand = New OleDbCommand(query, connection)
+                connection.Open()
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    txtOpenDate.Text = reader.GetString(0)
+                    If reader.IsDBNull(1) Then
+                        txtCloseDate.Text = ""
+                    Else
+                        txtCloseDate.Text = reader.GetString(1)
+                    End If
+                    WOProperty = reader.GetInt32(2)
+                    'cboEmployees.Items.Clear()
+                    'cboVendors.Items.Clear()
+                    'cboProperties.Items.Clear()
+                    'FillcboProperties()
+                    'FillCboEmployees()
+                    'FillcboVendors()
+                    cboEmployees.SelectedIndex = cboEmployees.FindString(reader.GetInt32(3).ToString())
+                    cboVendors.SelectedIndex = cboVendors.FindString(reader.GetInt32(4).ToString())
+                    txtDescription.Text = reader.GetString(5)
+                    chkCompleted.Checked = reader.GetBoolean(6)
+                    txtNotes.Text = reader.GetString(7)
+                    btnSaveWO.Visible = True
+                    grpNewWO.Visible = True
+                    btnAddCharges.Visible = True
+                    btnViewCharges.Visible = True
+                End While
+            End Using
+        End Using
+    End Sub
+
 End Class

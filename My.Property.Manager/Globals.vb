@@ -6,6 +6,7 @@
     Public WOProperty As Integer ' Work Order Property ID
     Public WOID As Integer ' Work Order ID
     Public ByVendor As Boolean = False ' Work Order By Vendor Search Flag
+    Public PropertyID As Integer ' Property ID
     Public connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Public UsersTableAdapter As New Property_ManagerDataSetTableAdapters.UsersTableAdapter()
     Public PropertiesTableAdapter As New Property_ManagerDataSetTableAdapters.PropertiesTableAdapter()

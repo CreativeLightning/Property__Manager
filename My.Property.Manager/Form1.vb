@@ -10,6 +10,7 @@
             btnVendors.Enabled = False
             btnPayments.Enabled = False
             btnProperties.Enabled = False
+            btnCharges.Enabled = False
         End If
     End Sub
 
@@ -44,5 +45,7 @@
         End If
     End Sub
 
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class
