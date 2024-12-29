@@ -206,9 +206,6 @@ Public Class frmWorkOrders
                 Try
                     cmd.ExecuteNonQuery()
                     MessageBox.Show("Work Order Updated")
-                    cboVendors.Items.Clear()
-                    cboEmployees.Items.Clear()
-                    cboProperties.Items.Clear()
                 Catch ex As Exception
                     MessageBox.Show("Error Updating Work Order")
                     End
@@ -417,14 +414,14 @@ Public Class frmWorkOrders
         ByVendor = False
     End Sub
     Private Sub ClearAll()
-        cboSelections.Items.Clear()
-        cboSelections.Text = ""
-        cboEmployees.Items.Clear()
-        cboEmployees.Text = ""
-        cboProperties.Items.Clear()
-        cboProperties.Text = ""
-        cboVendors.Items.Clear()
-        cboVendors.Text = ""
+        'cboSelections.Items.Clear()
+        'cboSelections.Text = ""
+        'cboEmployees.Items.Clear()
+        'cboEmployees.Text = ""
+        'cboProperties.Items.Clear()
+        'cboProperties.Text = ""
+        'cboVendors.Items.Clear()
+        'cboVendors.Text = ""
         txtLabor.Text = ""
         txtParts.Text = ""
         txtDescription.Text = ""
@@ -432,7 +429,6 @@ Public Class frmWorkOrders
         txtOpenDate.Text = ""
         txtCloseDate.Text = ""
         chkCompleted.Checked = False
-        grpNewWO.Visible = False
         btnGetByEmployee.Visible = False
         btnGetByVendor.Visible = False
         btnSaveWO.Visible = False
@@ -449,7 +445,7 @@ Public Class frmWorkOrders
         txtDateBilled.Text = Date.Today
     End Sub
     Private Sub btnCancelCharge_Click(sender As Object, e As EventArgs) Handles btnCancelCharge.Click
-        ClearAll()
+        grpCharges.Visible = False
     End Sub
     Private Sub cboVendors_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboVendors.SelectedIndexChanged
         'Get the ID of the selected vendor
@@ -565,12 +561,8 @@ Public Class frmWorkOrders
                         txtCloseDate.Text = reader.GetString(1)
                     End If
                     WOProperty = reader.GetInt32(2)
-                    'cboEmployees.Items.Clear()
-                    'cboVendors.Items.Clear()
-                    'cboProperties.Items.Clear()
-                    'FillcboProperties()
-                    'FillCboEmployees()
-                    'FillcboVendors()
+                    FillCboEmployees()
+                    FillcboVendors()
                     cboEmployees.SelectedIndex = cboEmployees.FindString(reader.GetInt32(3).ToString())
                     cboVendors.SelectedIndex = cboVendors.FindString(reader.GetInt32(4).ToString())
                     txtDescription.Text = reader.GetString(5)
