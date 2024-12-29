@@ -11,6 +11,9 @@
     Public PaymentTypesTableAdapter As New Property_ManagerDataSetTableAdapters.PaymentTypesTableAdapter()
     Public VendorsTableAdapter As New Property_ManagerDataSetTableAdapters.VendorsTableAdapter()
     Public WorkOrdersTableAdapter As New Property_ManagerDataSetTableAdapters.WorkOrdersTableAdapter()
+    Public EmployeesTableAdapter As New Property_ManagerDataSetTableAdapters.EmployeesTableAdapter()
+    Public ChargesTableAdapter As New Property_ManagerDataSetTableAdapters.ChargesTableAdapter()
+
 End Module
 
 

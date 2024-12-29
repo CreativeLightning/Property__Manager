@@ -25,6 +25,8 @@ Option Explicit On
 Partial Public Class Property_ManagerDataSet
     Inherits Global.System.Data.DataSet
     
+    Private tableCharges As ChargesDataTable
+    
     Private tableCompany As CompanyDataTable
     
     Private tableEmployees As EmployeesDataTable
@@ -76,6 +78,9 @@ Partial Public Class Property_ManagerDataSet
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
+            If (Not (ds.Tables("Charges")) Is Nothing) Then
+                MyBase.Tables.Add(New ChargesDataTable(ds.Tables("Charges")))
+            End If
             If (Not (ds.Tables("Company")) Is Nothing) Then
                 MyBase.Tables.Add(New CompanyDataTable(ds.Tables("Company")))
             End If
@@ -125,6 +130,16 @@ Partial Public Class Property_ManagerDataSet
         AddHandler MyBase.Tables.CollectionChanged, schemaChangedHandler
         AddHandler Me.Relations.CollectionChanged, schemaChangedHandler
     End Sub
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property Charges() As ChargesDataTable
+        Get
+            Return Me.tableCharges
+        End Get
+    End Property
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
@@ -303,6 +318,9 @@ Partial Public Class Property_ManagerDataSet
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
+            If (Not (ds.Tables("Charges")) Is Nothing) Then
+                MyBase.Tables.Add(New ChargesDataTable(ds.Tables("Charges")))
+            End If
             If (Not (ds.Tables("Company")) Is Nothing) Then
                 MyBase.Tables.Add(New CompanyDataTable(ds.Tables("Company")))
             End If
@@ -368,6 +386,12 @@ Partial Public Class Property_ManagerDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
+        Me.tableCharges = CType(MyBase.Tables("Charges"),ChargesDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableCharges) Is Nothing) Then
+                Me.tableCharges.InitVars
+            End If
+        End If
         Me.tableCompany = CType(MyBase.Tables("Company"),CompanyDataTable)
         If (initTable = true) Then
             If (Not (Me.tableCompany) Is Nothing) Then
@@ -444,6 +468,8 @@ Partial Public Class Property_ManagerDataSet
         Me.Namespace = "http://tempuri.org/Property_ManagerDataSet.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
+        Me.tableCharges = New ChargesDataTable()
+        MyBase.Tables.Add(Me.tableCharges)
         Me.tableCompany = New CompanyDataTable()
         MyBase.Tables.Add(Me.tableCompany)
         Me.tableEmployees = New EmployeesDataTable()
@@ -467,6 +493,12 @@ Partial Public Class Property_ManagerDataSet
         Me.tableWorkOrders = New WorkOrdersDataTable()
         MyBase.Tables.Add(Me.tableWorkOrders)
     End Sub
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+    Private Function ShouldSerializeCharges() As Boolean
+        Return false
+    End Function
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -593,6 +625,9 @@ Partial Public Class Property_ManagerDataSet
     End Function
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+    Public Delegate Sub ChargesRowChangeEventHandler(ByVal sender As Object, ByVal e As ChargesRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Public Delegate Sub CompanyRowChangeEventHandler(ByVal sender As Object, ByVal e As CompanyRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
@@ -624,6 +659,390 @@ Partial Public Class Property_ManagerDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
     Public Delegate Sub WorkOrdersRowChangeEventHandler(ByVal sender As Object, ByVal e As WorkOrdersRowChangeEvent)
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ChargesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ChargesRow)
+        
+        Private columnID As Global.System.Data.DataColumn
+        
+        Private columnPropertyID As Global.System.Data.DataColumn
+        
+        Private columnVendorID As Global.System.Data.DataColumn
+        
+        Private columnAmount As Global.System.Data.DataColumn
+        
+        Private columnPaid As Global.System.Data.DataColumn
+        
+        Private columnNotes As Global.System.Data.DataColumn
+        
+        Private columnUserID As Global.System.Data.DataColumn
+        
+        Private columnDateBilled As Global.System.Data.DataColumn
+        
+        Private columnDatePaid As Global.System.Data.DataColumn
+        
+        Private columnWOID As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Charges"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property PropertyIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPropertyID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property VendorIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVendorID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property AmountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAmount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property PaidColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPaid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property UserIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnUserID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property DateBilledColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateBilled
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property DatePaidColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDatePaid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property WOIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWOID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ChargesRow
+            Get
+                Return CType(Me.Rows(index),ChargesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event ChargesRowChanging As ChargesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event ChargesRowChanged As ChargesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event ChargesRowDeleting As ChargesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Event ChargesRowDeleted As ChargesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Overloads Sub AddChargesRow(ByVal row As ChargesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Overloads Function AddChargesRow(ByVal PropertyID As Integer, ByVal VendorID As Integer, ByVal Amount As Decimal, ByVal Paid As Boolean, ByVal Notes As String, ByVal UserID As Integer, ByVal DateBilled As String, ByVal DatePaid As String, ByVal WOID As Integer) As ChargesRow
+            Dim rowChargesRow As ChargesRow = CType(Me.NewRow,ChargesRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, PropertyID, VendorID, Amount, Paid, Notes, UserID, DateBilled, DatePaid, WOID}
+            rowChargesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowChargesRow)
+            Return rowChargesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function FindByID(ByVal ID As Integer) As ChargesRow
+            Return CType(Me.Rows.Find(New Object() {ID}),ChargesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ChargesDataTable = CType(MyBase.Clone,ChargesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ChargesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnID = MyBase.Columns("ID")
+            Me.columnPropertyID = MyBase.Columns("PropertyID")
+            Me.columnVendorID = MyBase.Columns("VendorID")
+            Me.columnAmount = MyBase.Columns("Amount")
+            Me.columnPaid = MyBase.Columns("Paid")
+            Me.columnNotes = MyBase.Columns("Notes")
+            Me.columnUserID = MyBase.Columns("UserID")
+            Me.columnDateBilled = MyBase.Columns("DateBilled")
+            Me.columnDatePaid = MyBase.Columns("DatePaid")
+            Me.columnWOID = MyBase.Columns("WOID")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID)
+            Me.columnPropertyID = New Global.System.Data.DataColumn("PropertyID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPropertyID)
+            Me.columnVendorID = New Global.System.Data.DataColumn("VendorID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnVendorID)
+            Me.columnAmount = New Global.System.Data.DataColumn("Amount", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAmount)
+            Me.columnPaid = New Global.System.Data.DataColumn("Paid", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPaid)
+            Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNotes)
+            Me.columnUserID = New Global.System.Data.DataColumn("UserID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnUserID)
+            Me.columnDateBilled = New Global.System.Data.DataColumn("DateBilled", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateBilled)
+            Me.columnDatePaid = New Global.System.Data.DataColumn("DatePaid", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDatePaid)
+            Me.columnWOID = New Global.System.Data.DataColumn("WOID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWOID)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
+            Me.columnID.AutoIncrement = true
+            Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
+            Me.columnID.AllowDBNull = false
+            Me.columnID.Unique = true
+            Me.columnNotes.MaxLength = 536870910
+            Me.columnDateBilled.MaxLength = 255
+            Me.columnDatePaid.MaxLength = 255
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function NewChargesRow() As ChargesRow
+            Return CType(Me.NewRow,ChargesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ChargesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ChargesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ChargesRowChangedEvent) Is Nothing) Then
+                RaiseEvent ChargesRowChanged(Me, New ChargesRowChangeEvent(CType(e.Row,ChargesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ChargesRowChangingEvent) Is Nothing) Then
+                RaiseEvent ChargesRowChanging(Me, New ChargesRowChangeEvent(CType(e.Row,ChargesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ChargesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ChargesRowDeleted(Me, New ChargesRowChangeEvent(CType(e.Row,ChargesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ChargesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ChargesRowDeleting(Me, New ChargesRowChangeEvent(CType(e.Row,ChargesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub RemoveChargesRow(ByVal row As ChargesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As Property_ManagerDataSet = New Property_ManagerDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ChargesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -3892,6 +4311,10 @@ Partial Public Class Property_ManagerDataSet
         
         Private columnNotes As Global.System.Data.DataColumn
         
+        Private columnTotalBilled As Global.System.Data.DataColumn
+        
+        Private columnTotalPaid As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -4000,6 +4423,22 @@ Partial Public Class Property_ManagerDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property TotalBilledColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTotalBilled
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property TotalPaidColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTotalPaid
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -4036,9 +4475,9 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddVendorsRow(ByVal VendorName As String, ByVal Address As String, ByVal Address2 As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal VendorType As String, ByVal Notes As String) As VendorsRow
+        Public Overloads Function AddVendorsRow(ByVal VendorName As String, ByVal Address As String, ByVal Address2 As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal VendorType As String, ByVal Notes As String, ByVal TotalBilled As Decimal, ByVal TotalPaid As Decimal) As VendorsRow
             Dim rowVendorsRow As VendorsRow = CType(Me.NewRow,VendorsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, VendorName, Address, Address2, City, State, Zip, VendorType, Notes}
+            Dim columnValuesArray() As Object = New Object() {Nothing, VendorName, Address, Address2, City, State, Zip, VendorType, Notes, TotalBilled, TotalPaid}
             rowVendorsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowVendorsRow)
             Return rowVendorsRow
@@ -4076,6 +4515,8 @@ Partial Public Class Property_ManagerDataSet
             Me.columnZip = MyBase.Columns("Zip")
             Me.columnVendorType = MyBase.Columns("VendorType")
             Me.columnNotes = MyBase.Columns("Notes")
+            Me.columnTotalBilled = MyBase.Columns("TotalBilled")
+            Me.columnTotalPaid = MyBase.Columns("TotalPaid")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4099,6 +4540,10 @@ Partial Public Class Property_ManagerDataSet
             MyBase.Columns.Add(Me.columnVendorType)
             Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNotes)
+            Me.columnTotalBilled = New Global.System.Data.DataColumn("TotalBilled", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTotalBilled)
+            Me.columnTotalPaid = New Global.System.Data.DataColumn("TotalPaid", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTotalPaid)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
@@ -4530,11 +4975,11 @@ Partial Public Class Property_ManagerDataSet
         
         Private columnID As Global.System.Data.DataColumn
         
-        Private columnOrderDate As Global.System.Data.DataColumn
+        Private columnOpenDate As Global.System.Data.DataColumn
         
         Private columnNotes As Global.System.Data.DataColumn
         
-        Private columnCompletedDate As Global.System.Data.DataColumn
+        Private columnCloseDate As Global.System.Data.DataColumn
         
         Private columnParts As Global.System.Data.DataColumn
         
@@ -4597,9 +5042,9 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property OrderDateColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property OpenDateColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnOrderDate
+                Return Me.columnOpenDate
             End Get
         End Property
         
@@ -4613,9 +5058,9 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property CompletedDateColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property CloseDateColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnCompletedDate
+                Return Me.columnCloseDate
             End Get
         End Property
         
@@ -4720,9 +5165,9 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddWorkOrdersRow(ByVal OrderDate As String, ByVal Notes As String, ByVal CompletedDate As String, ByVal Parts As String, ByVal Labor As String, ByVal Completed As String, ByVal PropertyID As String, ByVal UserID As String, ByVal AssignedTo As String, ByVal Vendor As String, ByVal OrderType As String) As WorkOrdersRow
+        Public Overloads Function AddWorkOrdersRow(ByVal OpenDate As String, ByVal Notes As String, ByVal CloseDate As String, ByVal Parts As Decimal, ByVal Labor As Decimal, ByVal Completed As Boolean, ByVal PropertyID As Integer, ByVal UserID As Integer, ByVal AssignedTo As Integer, ByVal Vendor As Integer, ByVal OrderType As Integer) As WorkOrdersRow
             Dim rowWorkOrdersRow As WorkOrdersRow = CType(Me.NewRow,WorkOrdersRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, OrderDate, Notes, CompletedDate, Parts, Labor, Completed, PropertyID, UserID, AssignedTo, Vendor, OrderType}
+            Dim columnValuesArray() As Object = New Object() {Nothing, OpenDate, Notes, CloseDate, Parts, Labor, Completed, PropertyID, UserID, AssignedTo, Vendor, OrderType}
             rowWorkOrdersRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowWorkOrdersRow)
             Return rowWorkOrdersRow
@@ -4752,9 +5197,9 @@ Partial Public Class Property_ManagerDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Friend Sub InitVars()
             Me.columnID = MyBase.Columns("ID")
-            Me.columnOrderDate = MyBase.Columns("OrderDate")
+            Me.columnOpenDate = MyBase.Columns("OpenDate")
             Me.columnNotes = MyBase.Columns("Notes")
-            Me.columnCompletedDate = MyBase.Columns("CompletedDate")
+            Me.columnCloseDate = MyBase.Columns("CloseDate")
             Me.columnParts = MyBase.Columns("Parts")
             Me.columnLabor = MyBase.Columns("Labor")
             Me.columnCompleted = MyBase.Columns("Completed")
@@ -4770,27 +5215,27 @@ Partial Public Class Property_ManagerDataSet
         Private Sub InitClass()
             Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnID)
-            Me.columnOrderDate = New Global.System.Data.DataColumn("OrderDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnOrderDate)
+            Me.columnOpenDate = New Global.System.Data.DataColumn("OpenDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnOpenDate)
             Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNotes)
-            Me.columnCompletedDate = New Global.System.Data.DataColumn("CompletedDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCompletedDate)
-            Me.columnParts = New Global.System.Data.DataColumn("Parts", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnCloseDate = New Global.System.Data.DataColumn("CloseDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCloseDate)
+            Me.columnParts = New Global.System.Data.DataColumn("Parts", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnParts)
-            Me.columnLabor = New Global.System.Data.DataColumn("Labor", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnLabor = New Global.System.Data.DataColumn("Labor", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnLabor)
-            Me.columnCompleted = New Global.System.Data.DataColumn("Completed", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnCompleted = New Global.System.Data.DataColumn("Completed", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCompleted)
-            Me.columnPropertyID = New Global.System.Data.DataColumn("PropertyID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnPropertyID = New Global.System.Data.DataColumn("PropertyID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPropertyID)
-            Me.columnUserID = New Global.System.Data.DataColumn("UserID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnUserID = New Global.System.Data.DataColumn("UserID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnUserID)
-            Me.columnAssignedTo = New Global.System.Data.DataColumn("AssignedTo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnAssignedTo = New Global.System.Data.DataColumn("AssignedTo", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAssignedTo)
-            Me.columnVendor = New Global.System.Data.DataColumn("Vendor", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnVendor = New Global.System.Data.DataColumn("Vendor", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnVendor)
-            Me.columnOrderType = New Global.System.Data.DataColumn("OrderType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnOrderType = New Global.System.Data.DataColumn("OrderType", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnOrderType)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
@@ -4798,17 +5243,9 @@ Partial Public Class Property_ManagerDataSet
             Me.columnID.AutoIncrementStep = -1
             Me.columnID.AllowDBNull = false
             Me.columnID.Unique = true
-            Me.columnOrderDate.MaxLength = 255
+            Me.columnOpenDate.MaxLength = 255
             Me.columnNotes.MaxLength = 536870910
-            Me.columnCompletedDate.MaxLength = 255
-            Me.columnParts.MaxLength = 255
-            Me.columnLabor.MaxLength = 255
-            Me.columnCompleted.MaxLength = 255
-            Me.columnPropertyID.MaxLength = 255
-            Me.columnUserID.MaxLength = 255
-            Me.columnAssignedTo.MaxLength = 255
-            Me.columnVendor.MaxLength = 255
-            Me.columnOrderType.MaxLength = 255
+            Me.columnCloseDate.MaxLength = 255
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4936,6 +5373,276 @@ Partial Public Class Property_ManagerDataSet
             xs.Add(dsSchema)
             Return type
         End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class ChargesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableCharges As ChargesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableCharges = CType(Me.Table,ChargesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ID() As Integer
+            Get
+                Return CType(Me(Me.tableCharges.IDColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableCharges.IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property PropertyID() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.PropertyIDColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PropertyID' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.PropertyIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property VendorID() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.VendorIDColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'VendorID' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.VendorIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Amount() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.AmountColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Amount' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.AmountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Paid() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.PaidColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Paid' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.PaidColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Notes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.NotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.NotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property UserID() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.UserIDColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'UserID' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.UserIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property DateBilled() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.DateBilledColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateBilled' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.DateBilledColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property DatePaid() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.DatePaidColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DatePaid' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.DatePaidColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property WOID() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableCharges.WOIDColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'WOID' in table 'Charges' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCharges.WOIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsPropertyIDNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.PropertyIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetPropertyIDNull()
+            Me(Me.tableCharges.PropertyIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsVendorIDNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.VendorIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetVendorIDNull()
+            Me(Me.tableCharges.VendorIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsAmountNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.AmountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetAmountNull()
+            Me(Me.tableCharges.AmountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsPaidNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.PaidColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetPaidNull()
+            Me(Me.tableCharges.PaidColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsNotesNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.NotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetNotesNull()
+            Me(Me.tableCharges.NotesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsUserIDNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.UserIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetUserIDNull()
+            Me(Me.tableCharges.UserIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsDateBilledNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.DateBilledColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetDateBilledNull()
+            Me(Me.tableCharges.DateBilledColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsDatePaidNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.DatePaidColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetDatePaidNull()
+            Me(Me.tableCharges.DatePaidColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsWOIDNull() As Boolean
+            Return Me.IsNull(Me.tableCharges.WOIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetWOIDNull()
+            Me(Me.tableCharges.WOIDColumn) = Global.System.Convert.DBNull
+        End Sub
     End Class
     
     '''<summary>
@@ -7462,6 +8169,36 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property TotalBilled() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableVendors.TotalBilledColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalBilled' in table 'Vendors' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableVendors.TotalBilledColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property TotalPaid() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableVendors.TotalPaidColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalPaid' in table 'Vendors' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableVendors.TotalPaidColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsVendorNameNull() As Boolean
             Return Me.IsNull(Me.tableVendors.VendorNameColumn)
         End Function
@@ -7555,6 +8292,30 @@ Partial Public Class Property_ManagerDataSet
         Public Sub SetNotesNull()
             Me(Me.tableVendors.NotesColumn) = Global.System.Convert.DBNull
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsTotalBilledNull() As Boolean
+            Return Me.IsNull(Me.tableVendors.TotalBilledColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetTotalBilledNull()
+            Me(Me.tableVendors.TotalBilledColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsTotalPaidNull() As Boolean
+            Return Me.IsNull(Me.tableVendors.TotalPaidColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetTotalPaidNull()
+            Me(Me.tableVendors.TotalPaidColumn) = Global.System.Convert.DBNull
+        End Sub
     End Class
     
     '''<summary>
@@ -7639,16 +8400,16 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property OrderDate() As String
+        Public Property OpenDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.OrderDateColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.OpenDateColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'OrderDate' in table 'WorkOrders' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'OpenDate' in table 'WorkOrders' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableWorkOrders.OrderDateColumn) = value
+                Me(Me.tableWorkOrders.OpenDateColumn) = value
             End Set
         End Property
         
@@ -7669,25 +8430,25 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property CompletedDate() As String
+        Public Property CloseDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.CompletedDateColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.CloseDateColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CompletedDate' in table 'WorkOrders' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CloseDate' in table 'WorkOrders' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableWorkOrders.CompletedDateColumn) = value
+                Me(Me.tableWorkOrders.CloseDateColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Parts() As String
+        Public Property Parts() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.PartsColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.PartsColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Parts' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7699,10 +8460,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Labor() As String
+        Public Property Labor() As Decimal
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.LaborColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.LaborColumn),Decimal)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Labor' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7714,10 +8475,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Completed() As String
+        Public Property Completed() As Boolean
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.CompletedColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.CompletedColumn),Boolean)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Completed' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7729,10 +8490,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property PropertyID() As String
+        Public Property PropertyID() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.PropertyIDColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.PropertyIDColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'PropertyID' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7744,10 +8505,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property UserID() As String
+        Public Property UserID() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.UserIDColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.UserIDColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'UserID' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7759,10 +8520,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property AssignedTo() As String
+        Public Property AssignedTo() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.AssignedToColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.AssignedToColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'AssignedTo' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7774,10 +8535,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Vendor() As String
+        Public Property Vendor() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.VendorColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.VendorColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Vendor' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7789,10 +8550,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property OrderType() As String
+        Public Property OrderType() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableWorkOrders.OrderTypeColumn),String)
+                    Return CType(Me(Me.tableWorkOrders.OrderTypeColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'OrderType' in table 'WorkOrders' is DBNull.", e)
                 End Try
@@ -7804,14 +8565,14 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsOrderDateNull() As Boolean
-            Return Me.IsNull(Me.tableWorkOrders.OrderDateColumn)
+        Public Function IsOpenDateNull() As Boolean
+            Return Me.IsNull(Me.tableWorkOrders.OpenDateColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetOrderDateNull()
-            Me(Me.tableWorkOrders.OrderDateColumn) = Global.System.Convert.DBNull
+        Public Sub SetOpenDateNull()
+            Me(Me.tableWorkOrders.OpenDateColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7828,14 +8589,14 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsCompletedDateNull() As Boolean
-            Return Me.IsNull(Me.tableWorkOrders.CompletedDateColumn)
+        Public Function IsCloseDateNull() As Boolean
+            Return Me.IsNull(Me.tableWorkOrders.CloseDateColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetCompletedDateNull()
-            Me(Me.tableWorkOrders.CompletedDateColumn) = Global.System.Convert.DBNull
+        Public Sub SetCloseDateNull()
+            Me(Me.tableWorkOrders.CloseDateColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7933,6 +8694,42 @@ Partial Public Class Property_ManagerDataSet
         Public Sub SetOrderTypeNull()
             Me(Me.tableWorkOrders.OrderTypeColumn) = Global.System.Convert.DBNull
         End Sub
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+    Public Class ChargesRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As ChargesRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub New(ByVal row As ChargesRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property Row() As ChargesRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
     End Class
     
     '''<summary>
@@ -8333,6 +9130,558 @@ Partial Public Class Property_ManagerDataSet
 End Class
 
 Namespace Property_ManagerDataSetTableAdapters
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class ChargesTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.OleDb.OleDbDataAdapter
+        
+        Private _connection As Global.System.Data.OleDb.OleDbConnection
+        
+        Private _transaction As Global.System.Data.OleDb.OleDbTransaction
+        
+        Private _commandCollection() As Global.System.Data.OleDb.OleDbCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.OleDb.OleDbDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.OleDb.OleDbConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.OleDb.OleDbCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.OleDb.OleDbTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.OleDb.OleDbCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.OleDb.OleDbDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "Charges"
+            tableMapping.ColumnMappings.Add("ID", "ID")
+            tableMapping.ColumnMappings.Add("PropertyID", "PropertyID")
+            tableMapping.ColumnMappings.Add("VendorID", "VendorID")
+            tableMapping.ColumnMappings.Add("Amount", "Amount")
+            tableMapping.ColumnMappings.Add("Paid", "Paid")
+            tableMapping.ColumnMappings.Add("Notes", "Notes")
+            tableMapping.ColumnMappings.Add("UserID", "UserID")
+            tableMapping.ColumnMappings.Add("DateBilled", "DateBilled")
+            tableMapping.ColumnMappings.Add("DatePaid", "DatePaid")
+            tableMapping.ColumnMappings.Add("WOID", "WOID")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `Charges` WHERE ((`ID` = ?) AND ((? = 1 AND `PropertyID` IS NULL) OR "& _ 
+                "(`PropertyID` = ?)) AND ((? = 1 AND `VendorID` IS NULL) OR (`VendorID` = ?)) AND"& _ 
+                " ((? = 1 AND `Amount` IS NULL) OR (`Amount` = ?)) AND ((? = 1 AND `Paid` IS NULL"& _ 
+                ") OR (`Paid` = ?)) AND ((? = 1 AND `UserID` IS NULL) OR (`UserID` = ?)) AND ((? "& _ 
+                "= 1 AND `DateBilled` IS NULL) OR (`DateBilled` = ?)) AND ((? = 1 AND `DatePaid` "& _ 
+                "IS NULL) OR (`DatePaid` = ?)) AND ((? = 1 AND `WOID` IS NULL) OR (`WOID` = ?)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_VendorID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_VendorID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Amount", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Amount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Paid", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Paid", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateBilled", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateBilled", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateBilled", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateBilled", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DatePaid", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DatePaid", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DatePaid", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DatePaid", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_WOID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WOID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_WOID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WOID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `Charges` (`PropertyID`, `VendorID`, `Amount`, `Paid`, `Notes`, `User"& _ 
+                "ID`, `DateBilled`, `DatePaid`, `WOID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("VendorID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Amount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Paid", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Notes", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateBilled", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateBilled", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DatePaid", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DatePaid", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("WOID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WOID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `Charges` SET `PropertyID` = ?, `VendorID` = ?, `Amount` = ?, `Paid` = ?, "& _ 
+                "`Notes` = ?, `UserID` = ?, `DateBilled` = ?, `DatePaid` = ?, `WOID` = ? WHERE (("& _ 
+                "`ID` = ?) AND ((? = 1 AND `PropertyID` IS NULL) OR (`PropertyID` = ?)) AND ((? ="& _ 
+                " 1 AND `VendorID` IS NULL) OR (`VendorID` = ?)) AND ((? = 1 AND `Amount` IS NULL"& _ 
+                ") OR (`Amount` = ?)) AND ((? = 1 AND `Paid` IS NULL) OR (`Paid` = ?)) AND ((? = "& _ 
+                "1 AND `UserID` IS NULL) OR (`UserID` = ?)) AND ((? = 1 AND `DateBilled` IS NULL)"& _ 
+                " OR (`DateBilled` = ?)) AND ((? = 1 AND `DatePaid` IS NULL) OR (`DatePaid` = ?))"& _ 
+                " AND ((? = 1 AND `WOID` IS NULL) OR (`WOID` = ?)))"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("VendorID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Amount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Paid", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Notes", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateBilled", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateBilled", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DatePaid", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DatePaid", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("WOID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WOID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_VendorID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_VendorID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Amount", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Amount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Paid", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Paid", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Paid", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateBilled", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateBilled", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateBilled", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateBilled", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DatePaid", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DatePaid", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DatePaid", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DatePaid", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_WOID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WOID", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_WOID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "WOID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.OleDb.OleDbConnection()
+            Me._connection.ConnectionString = Global.My_Property_Manager.My.MySettings.Default.Property_ManagerConnectionString1
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT ID, PropertyID, VendorID, Amount, Paid, Notes, UserID, DateBilled, DatePai"& _ 
+                "d, WOID FROM Charges"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As Property_ManagerDataSet.ChargesDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As Property_ManagerDataSet.ChargesDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As Property_ManagerDataSet.ChargesDataTable = New Property_ManagerDataSet.ChargesDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As Property_ManagerDataSet.ChargesDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As Property_ManagerDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "Charges")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_PropertyID As Global.System.Nullable(Of Integer), ByVal Original_VendorID As Global.System.Nullable(Of Integer), ByVal Original_Amount As Global.System.Nullable(Of Decimal), ByVal Original_Paid As Boolean, ByVal Original_UserID As Global.System.Nullable(Of Integer), ByVal Original_DateBilled As String, ByVal Original_DatePaid As String, ByVal Original_WOID As Global.System.Nullable(Of Integer)) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
+            If (Original_PropertyID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_PropertyID.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (Original_VendorID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_VendorID.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Amount.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Amount.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
+            Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Paid,Boolean)
+            If (Original_UserID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_UserID.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DateBilled Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_DateBilled,String)
+            End If
+            If (Original_DatePaid Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_DatePaid,String)
+            End If
+            If (Original_WOID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_WOID.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal PropertyID As Global.System.Nullable(Of Integer), ByVal VendorID As Global.System.Nullable(Of Integer), ByVal Amount As Global.System.Nullable(Of Decimal), ByVal Paid As Boolean, ByVal Notes As String, ByVal UserID As Global.System.Nullable(Of Integer), ByVal DateBilled As String, ByVal DatePaid As String, ByVal WOID As Global.System.Nullable(Of Integer)) As Integer
+            If (PropertyID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(PropertyID.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (VendorID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(VendorID.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Amount.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(Amount.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(Paid,Boolean)
+            If (Notes Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Notes,String)
+            End If
+            If (UserID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(UserID.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (DateBilled Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(DateBilled,String)
+            End If
+            If (DatePaid Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(DatePaid,String)
+            End If
+            If (WOID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(WOID.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal PropertyID As Global.System.Nullable(Of Integer),  _
+                    ByVal VendorID As Global.System.Nullable(Of Integer),  _
+                    ByVal Amount As Global.System.Nullable(Of Decimal),  _
+                    ByVal Paid As Boolean,  _
+                    ByVal Notes As String,  _
+                    ByVal UserID As Global.System.Nullable(Of Integer),  _
+                    ByVal DateBilled As String,  _
+                    ByVal DatePaid As String,  _
+                    ByVal WOID As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_ID As Integer,  _
+                    ByVal Original_PropertyID As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_VendorID As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_Amount As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_Paid As Boolean,  _
+                    ByVal Original_UserID As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_DateBilled As String,  _
+                    ByVal Original_DatePaid As String,  _
+                    ByVal Original_WOID As Global.System.Nullable(Of Integer)) As Integer
+            If (PropertyID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(PropertyID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (VendorID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(VendorID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (Amount.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Amount.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Paid,Boolean)
+            If (Notes Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Notes,String)
+            End If
+            If (UserID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(UserID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (DateBilled Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(DateBilled,String)
+            End If
+            If (DatePaid Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(DatePaid,String)
+            End If
+            If (WOID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(WOID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_ID,Integer)
+            If (Original_PropertyID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_PropertyID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+            End If
+            If (Original_VendorID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_VendorID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+            End If
+            If (Original_Amount.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Amount.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(0,Object)
+            Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_Paid,Boolean)
+            If (Original_UserID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_UserID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DateBilled Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_DateBilled,String)
+            End If
+            If (Original_DatePaid Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_DatePaid,String)
+            End If
+            If (Original_WOID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_WOID.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+    End Class
     
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
@@ -13330,6 +14679,8 @@ Namespace Property_ManagerDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Zip", "Zip")
             tableMapping.ColumnMappings.Add("VendorType", "VendorType")
             tableMapping.ColumnMappings.Add("Notes", "Notes")
+            tableMapping.ColumnMappings.Add("TotalBilled", "TotalBilled")
+            tableMapping.ColumnMappings.Add("TotalPaid", "TotalPaid")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -13338,7 +14689,8 @@ Namespace Property_ManagerDataSetTableAdapters
                 "(? = 1 AND `Address2` IS NULL) OR (`Address2` = ?)) AND ((? = 1 AND `City` IS NU"& _ 
                 "LL) OR (`City` = ?)) AND ((? = 1 AND `State` IS NULL) OR (`State` = ?)) AND ((? "& _ 
                 "= 1 AND `Zip` IS NULL) OR (`Zip` = ?)) AND ((? = 1 AND `VendorType` IS NULL) OR "& _ 
-                "(`VendorType` = ?)))"
+                "(`VendorType` = ?)) AND ((? = 1 AND `TotalBilled` IS NULL) OR (`TotalBilled` = ?"& _ 
+                ")) AND ((? = 1 AND `TotalPaid` IS NULL) OR (`TotalPaid` = ?)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_VendorName", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorName", Global.System.Data.DataRowVersion.Original, true, Nothing))
@@ -13355,10 +14707,15 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Zip", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Zip", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_VendorType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorType", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_VendorType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_TotalBilled", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalBilled", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_TotalBilled", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalBilled", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_TotalPaid", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalPaid", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_TotalPaid", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalPaid", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `Vendors` (`VendorName`, `Address`, `Address2`, `City`, `State`, `Zip"& _ 
-                "`, `VendorType`, `Notes`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                "`, `VendorType`, `Notes`, `TotalBilled`, `TotalPaid`) VALUES (?, ?, ?, ?, ?, ?, "& _ 
+                "?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("VendorName", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorName", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -13368,15 +14725,19 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Zip", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Zip", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("VendorType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorType", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Notes", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TotalBilled", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalBilled", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TotalPaid", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalPaid", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE `Vendors` SET `VendorName` = ?, `Address` = ?, `Address2` = ?, `City` = ?,"& _ 
-                " `State` = ?, `Zip` = ?, `VendorType` = ?, `Notes` = ? WHERE ((`ID` = ?) AND ((?"& _ 
-                " = 1 AND `VendorName` IS NULL) OR (`VendorName` = ?)) AND ((? = 1 AND `Address` "& _ 
-                "IS NULL) OR (`Address` = ?)) AND ((? = 1 AND `Address2` IS NULL) OR (`Address2` "& _ 
-                "= ?)) AND ((? = 1 AND `City` IS NULL) OR (`City` = ?)) AND ((? = 1 AND `State` I"& _ 
-                "S NULL) OR (`State` = ?)) AND ((? = 1 AND `Zip` IS NULL) OR (`Zip` = ?)) AND ((?"& _ 
-                " = 1 AND `VendorType` IS NULL) OR (`VendorType` = ?)))"
+                " `State` = ?, `Zip` = ?, `VendorType` = ?, `Notes` = ?, `TotalBilled` = ?, `Tota"& _ 
+                "lPaid` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `VendorName` IS NULL) OR (`VendorNa"& _ 
+                "me` = ?)) AND ((? = 1 AND `Address` IS NULL) OR (`Address` = ?)) AND ((? = 1 AND"& _ 
+                " `Address2` IS NULL) OR (`Address2` = ?)) AND ((? = 1 AND `City` IS NULL) OR (`C"& _ 
+                "ity` = ?)) AND ((? = 1 AND `State` IS NULL) OR (`State` = ?)) AND ((? = 1 AND `Z"& _ 
+                "ip` IS NULL) OR (`Zip` = ?)) AND ((? = 1 AND `VendorType` IS NULL) OR (`VendorTy"& _ 
+                "pe` = ?)) AND ((? = 1 AND `TotalBilled` IS NULL) OR (`TotalBilled` = ?)) AND ((?"& _ 
+                " = 1 AND `TotalPaid` IS NULL) OR (`TotalPaid` = ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("VendorName", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorName", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -13386,6 +14747,8 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Zip", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Zip", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("VendorType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorType", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Notes", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TotalBilled", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalBilled", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TotalPaid", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalPaid", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_VendorName", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorName", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_VendorName", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorName", Global.System.Data.DataRowVersion.Original, false, Nothing))
@@ -13401,6 +14764,10 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Zip", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Zip", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_VendorType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorType", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_VendorType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "VendorType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_TotalBilled", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalBilled", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_TotalBilled", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalBilled", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_TotalPaid", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalPaid", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_TotalPaid", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalPaid", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13416,8 +14783,8 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ID, VendorName, Address, Address2, City, State, Zip, VendorType, Notes FRO"& _ 
-                "M Vendors"
+            Me._commandCollection(0).CommandText = "SELECT ID, VendorName, Address, Address2, City, State, Zip, VendorType, Notes, To"& _ 
+                "talBilled, TotalPaid FROM Vendors"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -13477,7 +14844,7 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_VendorName As String, ByVal Original_Address As String, ByVal Original_Address2 As String, ByVal Original_City As String, ByVal Original_State As String, ByVal Original_Zip As String, ByVal Original_VendorType As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_VendorName As String, ByVal Original_Address As String, ByVal Original_Address2 As String, ByVal Original_City As String, ByVal Original_State As String, ByVal Original_Zip As String, ByVal Original_VendorType As String, ByVal Original_TotalBilled As Global.System.Nullable(Of Decimal), ByVal Original_TotalPaid As Global.System.Nullable(Of Decimal)) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
             If (Original_VendorName Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -13528,6 +14895,20 @@ Namespace Property_ManagerDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_VendorType,String)
             End If
+            If (Original_TotalBilled.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_TotalBilled.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
+            End If
+            If (Original_TotalPaid.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_TotalPaid.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -13547,7 +14928,7 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal VendorName As String, ByVal Address As String, ByVal Address2 As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal VendorType As String, ByVal Notes As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal VendorName As String, ByVal Address As String, ByVal Address2 As String, ByVal City As String, ByVal State As String, ByVal Zip As String, ByVal VendorType As String, ByVal Notes As String, ByVal TotalBilled As Global.System.Nullable(Of Decimal), ByVal TotalPaid As Global.System.Nullable(Of Decimal)) As Integer
             If (VendorName Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -13588,6 +14969,16 @@ Namespace Property_ManagerDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(7).Value = CType(Notes,String)
             End If
+            If (TotalBilled.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(TotalBilled.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (TotalPaid.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(TotalPaid.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -13616,6 +15007,8 @@ Namespace Property_ManagerDataSetTableAdapters
                     ByVal Zip As String,  _
                     ByVal VendorType As String,  _
                     ByVal Notes As String,  _
+                    ByVal TotalBilled As Global.System.Nullable(Of Decimal),  _
+                    ByVal TotalPaid As Global.System.Nullable(Of Decimal),  _
                     ByVal Original_ID As Integer,  _
                     ByVal Original_VendorName As String,  _
                     ByVal Original_Address As String,  _
@@ -13623,7 +15016,9 @@ Namespace Property_ManagerDataSetTableAdapters
                     ByVal Original_City As String,  _
                     ByVal Original_State As String,  _
                     ByVal Original_Zip As String,  _
-                    ByVal Original_VendorType As String) As Integer
+                    ByVal Original_VendorType As String,  _
+                    ByVal Original_TotalBilled As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_TotalPaid As Global.System.Nullable(Of Decimal)) As Integer
             If (VendorName Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -13664,55 +15059,79 @@ Namespace Property_ManagerDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Notes,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_ID,Integer)
-            If (Original_VendorName Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            If (TotalBilled.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(TotalBilled.Value,Decimal)
             Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_VendorName,String)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             End If
-            If (Original_Address Is Nothing) Then
+            If (TotalPaid.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(TotalPaid.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_ID,Integer)
+            If (Original_VendorName Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Address,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_VendorName,String)
             End If
-            If (Original_Address2 Is Nothing) Then
+            If (Original_Address Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_Address2,String)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_Address,String)
             End If
-            If (Original_City Is Nothing) Then
+            If (Original_Address2 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_City,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_Address2,String)
             End If
-            If (Original_State Is Nothing) Then
+            If (Original_City Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_State,String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_City,String)
             End If
-            If (Original_Zip Is Nothing) Then
+            If (Original_State Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_Zip,String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_State,String)
             End If
-            If (Original_VendorType Is Nothing) Then
+            If (Original_Zip Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_VendorType,String)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_Zip,String)
+            End If
+            If (Original_VendorType Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_VendorType,String)
+            End If
+            If (Original_TotalBilled.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_TotalBilled.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
+            End If
+            If (Original_TotalPaid.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_TotalPaid.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -14168,9 +15587,9 @@ Namespace Property_ManagerDataSetTableAdapters
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "WorkOrders"
             tableMapping.ColumnMappings.Add("ID", "ID")
-            tableMapping.ColumnMappings.Add("OrderDate", "OrderDate")
+            tableMapping.ColumnMappings.Add("OpenDate", "OpenDate")
             tableMapping.ColumnMappings.Add("Notes", "Notes")
-            tableMapping.ColumnMappings.Add("CompletedDate", "CompletedDate")
+            tableMapping.ColumnMappings.Add("CloseDate", "CloseDate")
             tableMapping.ColumnMappings.Add("Parts", "Parts")
             tableMapping.ColumnMappings.Add("Labor", "Labor")
             tableMapping.ColumnMappings.Add("Completed", "Completed")
@@ -14182,98 +15601,98 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `WorkOrders` WHERE ((`ID` = ?) AND ((? = 1 AND `OrderDate` IS NULL) O"& _ 
-                "R (`OrderDate` = ?)) AND ((? = 1 AND `CompletedDate` IS NULL) OR (`CompletedDate"& _ 
-                "` = ?)) AND ((? = 1 AND `Parts` IS NULL) OR (`Parts` = ?)) AND ((? = 1 AND `Labo"& _ 
-                "r` IS NULL) OR (`Labor` = ?)) AND ((? = 1 AND `Completed` IS NULL) OR (`Complete"& _ 
-                "d` = ?)) AND ((? = 1 AND `PropertyID` IS NULL) OR (`PropertyID` = ?)) AND ((? = "& _ 
-                "1 AND `UserID` IS NULL) OR (`UserID` = ?)) AND ((? = 1 AND `AssignedTo` IS NULL)"& _ 
-                " OR (`AssignedTo` = ?)) AND ((? = 1 AND `Vendor` IS NULL) OR (`Vendor` = ?)) AND"& _ 
-                " ((? = 1 AND `OrderType` IS NULL) OR (`OrderType` = ?)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `WorkOrders` WHERE ((`ID` = ?) AND ((? = 1 AND `OpenDate` IS NULL) OR"& _ 
+                " (`OpenDate` = ?)) AND ((? = 1 AND `CloseDate` IS NULL) OR (`CloseDate` = ?)) AN"& _ 
+                "D ((? = 1 AND `Parts` IS NULL) OR (`Parts` = ?)) AND ((? = 1 AND `Labor` IS NULL"& _ 
+                ") OR (`Labor` = ?)) AND ((? = 1 AND `Completed` IS NULL) OR (`Completed` = ?)) A"& _ 
+                "ND ((? = 1 AND `PropertyID` IS NULL) OR (`PropertyID` = ?)) AND ((? = 1 AND `Use"& _ 
+                "rID` IS NULL) OR (`UserID` = ?)) AND ((? = 1 AND `AssignedTo` IS NULL) OR (`Assi"& _ 
+                "gnedTo` = ?)) AND ((? = 1 AND `Vendor` IS NULL) OR (`Vendor` = ?)) AND ((? = 1 A"& _ 
+                "ND `OrderType` IS NULL) OR (`OrderType` = ?)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_OrderDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OrderDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_CompletedDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompletedDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CompletedDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompletedDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_OpenDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OpenDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OpenDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OpenDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_CloseDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CloseDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CloseDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CloseDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Parts", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Parts", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Parts", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Labor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Labor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Labor", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Completed", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Completed", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Completed", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_UserID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AssignedTo", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AssignedTo", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AssignedTo", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Vendor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Vendor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Vendor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_OrderType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OrderType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OrderType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO `WorkOrders` (`OrderDate`, `Notes`, `CompletedDate`, `Parts`, `Labor`"& _ 
-                ", `Completed`, `PropertyID`, `UserID`, `AssignedTo`, `Vendor`, `OrderType`) VALU"& _ 
-                "ES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `WorkOrders` (`OpenDate`, `Notes`, `CloseDate`, `Parts`, `Labor`, `Co"& _ 
+                "mpleted`, `PropertyID`, `UserID`, `AssignedTo`, `Vendor`, `OrderType`) VALUES (?"& _ 
+                ", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OrderDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OpenDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OpenDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Notes", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CompletedDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompletedDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Parts", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Labor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Completed", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("UserID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AssignedTo", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Vendor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OrderType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CloseDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CloseDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Parts", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Labor", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Completed", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AssignedTo", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Vendor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OrderType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE `WorkOrders` SET `OrderDate` = ?, `Notes` = ?, `CompletedDate` = ?, `Parts"& _ 
-                "` = ?, `Labor` = ?, `Completed` = ?, `PropertyID` = ?, `UserID` = ?, `AssignedTo"& _ 
-                "` = ?, `Vendor` = ?, `OrderType` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `OrderDat"& _ 
-                "e` IS NULL) OR (`OrderDate` = ?)) AND ((? = 1 AND `CompletedDate` IS NULL) OR (`"& _ 
-                "CompletedDate` = ?)) AND ((? = 1 AND `Parts` IS NULL) OR (`Parts` = ?)) AND ((? "& _ 
-                "= 1 AND `Labor` IS NULL) OR (`Labor` = ?)) AND ((? = 1 AND `Completed` IS NULL) "& _ 
-                "OR (`Completed` = ?)) AND ((? = 1 AND `PropertyID` IS NULL) OR (`PropertyID` = ?"& _ 
-                ")) AND ((? = 1 AND `UserID` IS NULL) OR (`UserID` = ?)) AND ((? = 1 AND `Assigne"& _ 
-                "dTo` IS NULL) OR (`AssignedTo` = ?)) AND ((? = 1 AND `Vendor` IS NULL) OR (`Vend"& _ 
-                "or` = ?)) AND ((? = 1 AND `OrderType` IS NULL) OR (`OrderType` = ?)))"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `WorkOrders` SET `OpenDate` = ?, `Notes` = ?, `CloseDate` = ?, `Parts` = ?"& _ 
+                ", `Labor` = ?, `Completed` = ?, `PropertyID` = ?, `UserID` = ?, `AssignedTo` = ?"& _ 
+                ", `Vendor` = ?, `OrderType` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `OpenDate` IS "& _ 
+                "NULL) OR (`OpenDate` = ?)) AND ((? = 1 AND `CloseDate` IS NULL) OR (`CloseDate` "& _ 
+                "= ?)) AND ((? = 1 AND `Parts` IS NULL) OR (`Parts` = ?)) AND ((? = 1 AND `Labor`"& _ 
+                " IS NULL) OR (`Labor` = ?)) AND ((? = 1 AND `Completed` IS NULL) OR (`Completed`"& _ 
+                " = ?)) AND ((? = 1 AND `PropertyID` IS NULL) OR (`PropertyID` = ?)) AND ((? = 1 "& _ 
+                "AND `UserID` IS NULL) OR (`UserID` = ?)) AND ((? = 1 AND `AssignedTo` IS NULL) O"& _ 
+                "R (`AssignedTo` = ?)) AND ((? = 1 AND `Vendor` IS NULL) OR (`Vendor` = ?)) AND ("& _ 
+                "(? = 1 AND `OrderType` IS NULL) OR (`OrderType` = ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OrderDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OpenDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OpenDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Notes", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Notes", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CompletedDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompletedDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Parts", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Labor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Completed", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("UserID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AssignedTo", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Vendor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OrderType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CloseDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CloseDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Parts", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Labor", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Completed", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AssignedTo", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Vendor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OrderType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_OrderDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OrderDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_CompletedDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompletedDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CompletedDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CompletedDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_OpenDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OpenDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OpenDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OpenDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_CloseDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CloseDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CloseDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CloseDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Parts", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Parts", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Parts", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Parts", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Labor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Labor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Labor", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Labor", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Completed", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Completed", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Completed", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Completed", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_UserID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_UserID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "UserID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AssignedTo", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AssignedTo", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AssignedTo", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AssignedTo", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Vendor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Vendor", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Vendor", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Vendor", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_OrderType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OrderType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_OrderType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OrderType", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -14289,8 +15708,8 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ID, OrderDate, Notes, CompletedDate, Parts, Labor, Completed, PropertyID, "& _ 
-                "UserID, AssignedTo, Vendor, OrderType FROM WorkOrders"
+            Me._commandCollection(0).CommandText = "SELECT ID, OpenDate, Notes, CloseDate, Parts, Labor, Completed, PropertyID, UserI"& _ 
+                "D, AssignedTo, Vendor, OrderType FROM WorkOrders"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -14350,77 +15769,72 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_OrderDate As String, ByVal Original_CompletedDate As String, ByVal Original_Parts As String, ByVal Original_Labor As String, ByVal Original_Completed As String, ByVal Original_PropertyID As String, ByVal Original_UserID As String, ByVal Original_AssignedTo As String, ByVal Original_Vendor As String, ByVal Original_OrderType As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_OpenDate As String, ByVal Original_CloseDate As String, ByVal Original_Parts As Global.System.Nullable(Of Decimal), ByVal Original_Labor As Global.System.Nullable(Of Decimal), ByVal Original_Completed As Boolean, ByVal Original_PropertyID As Global.System.Nullable(Of Integer), ByVal Original_UserID As Global.System.Nullable(Of Integer), ByVal Original_AssignedTo As Global.System.Nullable(Of Integer), ByVal Original_Vendor As Global.System.Nullable(Of Integer), ByVal Original_OrderType As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
-            If (Original_OrderDate Is Nothing) Then
+            If (Original_OpenDate Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_OrderDate,String)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_OpenDate,String)
             End If
-            If (Original_CompletedDate Is Nothing) Then
+            If (Original_CloseDate Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_CompletedDate,String)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_CloseDate,String)
             End If
-            If (Original_Parts Is Nothing) Then
+            If (Original_Parts.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Parts.Value,Decimal)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Parts,String)
             End If
-            If (Original_Labor Is Nothing) Then
+            If (Original_Labor.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Labor.Value,Decimal)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Labor,String)
             End If
-            If (Original_Completed Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
+            Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_Completed,Boolean)
+            If (Original_PropertyID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_PropertyID.Value,Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_Completed,String)
-            End If
-            If (Original_PropertyID Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_PropertyID,String)
             End If
-            If (Original_UserID Is Nothing) Then
+            If (Original_UserID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_UserID.Value,Integer)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_UserID,String)
             End If
-            If (Original_AssignedTo Is Nothing) Then
+            If (Original_AssignedTo.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_AssignedTo.Value,Integer)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_AssignedTo,String)
             End If
-            If (Original_Vendor Is Nothing) Then
+            If (Original_Vendor.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_Vendor.Value,Integer)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_Vendor,String)
             End If
-            If (Original_OrderType Is Nothing) Then
+            If (Original_OrderType.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_OrderType.Value,Integer)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_OrderType,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -14441,61 +15855,57 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal OrderDate As String, ByVal Notes As String, ByVal CompletedDate As String, ByVal Parts As String, ByVal Labor As String, ByVal Completed As String, ByVal PropertyID As String, ByVal UserID As String, ByVal AssignedTo As String, ByVal Vendor As String, ByVal OrderType As String) As Integer
-            If (OrderDate Is Nothing) Then
+        Public Overloads Overridable Function Insert(ByVal OpenDate As String, ByVal Notes As String, ByVal CloseDate As String, ByVal Parts As Global.System.Nullable(Of Decimal), ByVal Labor As Global.System.Nullable(Of Decimal), ByVal Completed As Boolean, ByVal PropertyID As Global.System.Nullable(Of Integer), ByVal UserID As Global.System.Nullable(Of Integer), ByVal AssignedTo As Global.System.Nullable(Of Integer), ByVal Vendor As Global.System.Nullable(Of Integer), ByVal OrderType As Global.System.Nullable(Of Integer)) As Integer
+            If (OpenDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(OrderDate,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(OpenDate,String)
             End If
             If (Notes Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(Notes,String)
             End If
-            If (CompletedDate Is Nothing) Then
+            If (CloseDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(CompletedDate,String)
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(CloseDate,String)
             End If
-            If (Parts Is Nothing) Then
+            If (Parts.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Parts.Value,Decimal)
+            Else
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Parts,String)
             End If
-            If (Labor Is Nothing) Then
+            If (Labor.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Labor.Value,Decimal)
+            Else
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(Labor,String)
             End If
-            If (Completed Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(Completed,Boolean)
+            If (PropertyID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(PropertyID.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(Completed,String)
-            End If
-            If (PropertyID Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(PropertyID,String)
             End If
-            If (UserID Is Nothing) Then
+            If (UserID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(UserID.Value,Integer)
+            Else
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(UserID,String)
             End If
-            If (AssignedTo Is Nothing) Then
+            If (AssignedTo.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(AssignedTo.Value,Integer)
+            Else
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(AssignedTo,String)
             End If
-            If (Vendor Is Nothing) Then
+            If (Vendor.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Vendor.Value,Integer)
+            Else
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Vendor,String)
             End If
-            If (OrderType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
+            If (OrderType.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(OrderType.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(OrderType,String)
+                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -14517,153 +15927,144 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
         Public Overloads Overridable Function Update( _
-                    ByVal OrderDate As String,  _
+                    ByVal OpenDate As String,  _
                     ByVal Notes As String,  _
-                    ByVal CompletedDate As String,  _
-                    ByVal Parts As String,  _
-                    ByVal Labor As String,  _
-                    ByVal Completed As String,  _
-                    ByVal PropertyID As String,  _
-                    ByVal UserID As String,  _
-                    ByVal AssignedTo As String,  _
-                    ByVal Vendor As String,  _
-                    ByVal OrderType As String,  _
+                    ByVal CloseDate As String,  _
+                    ByVal Parts As Global.System.Nullable(Of Decimal),  _
+                    ByVal Labor As Global.System.Nullable(Of Decimal),  _
+                    ByVal Completed As Boolean,  _
+                    ByVal PropertyID As Global.System.Nullable(Of Integer),  _
+                    ByVal UserID As Global.System.Nullable(Of Integer),  _
+                    ByVal AssignedTo As Global.System.Nullable(Of Integer),  _
+                    ByVal Vendor As Global.System.Nullable(Of Integer),  _
+                    ByVal OrderType As Global.System.Nullable(Of Integer),  _
                     ByVal Original_ID As Integer,  _
-                    ByVal Original_OrderDate As String,  _
-                    ByVal Original_CompletedDate As String,  _
-                    ByVal Original_Parts As String,  _
-                    ByVal Original_Labor As String,  _
-                    ByVal Original_Completed As String,  _
-                    ByVal Original_PropertyID As String,  _
-                    ByVal Original_UserID As String,  _
-                    ByVal Original_AssignedTo As String,  _
-                    ByVal Original_Vendor As String,  _
-                    ByVal Original_OrderType As String) As Integer
-            If (OrderDate Is Nothing) Then
+                    ByVal Original_OpenDate As String,  _
+                    ByVal Original_CloseDate As String,  _
+                    ByVal Original_Parts As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_Labor As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_Completed As Boolean,  _
+                    ByVal Original_PropertyID As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_UserID As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_AssignedTo As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_Vendor As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_OrderType As Global.System.Nullable(Of Integer)) As Integer
+            If (OpenDate Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(OrderDate,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(OpenDate,String)
             End If
             If (Notes Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Notes,String)
             End If
-            If (CompletedDate Is Nothing) Then
+            If (CloseDate Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(CompletedDate,String)
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(CloseDate,String)
             End If
-            If (Parts Is Nothing) Then
+            If (Parts.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Parts.Value,Decimal)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Parts,String)
             End If
-            If (Labor Is Nothing) Then
+            If (Labor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Labor.Value,Decimal)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Labor,String)
             End If
-            If (Completed Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Completed,Boolean)
+            If (PropertyID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(PropertyID.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Completed,String)
-            End If
-            If (PropertyID Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(PropertyID,String)
             End If
-            If (UserID Is Nothing) Then
+            If (UserID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(UserID.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(UserID,String)
             End If
-            If (AssignedTo Is Nothing) Then
+            If (AssignedTo.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(AssignedTo.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(AssignedTo,String)
             End If
-            If (Vendor Is Nothing) Then
+            If (Vendor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Vendor.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Vendor,String)
             End If
-            If (OrderType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            If (OrderType.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(OrderType.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(OrderType,String)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
             Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_ID,Integer)
-            If (Original_OrderDate Is Nothing) Then
+            If (Original_OpenDate Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(12).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_OrderDate,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_OpenDate,String)
             End If
-            If (Original_CompletedDate Is Nothing) Then
+            If (Original_CloseDate Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_CompletedDate,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_CloseDate,String)
             End If
-            If (Original_Parts Is Nothing) Then
+            If (Original_Parts.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_Parts.Value,Decimal)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(16).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_Parts,String)
             End If
-            If (Original_Labor Is Nothing) Then
+            If (Original_Labor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_Labor.Value,Decimal)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_Labor,String)
             End If
-            If (Original_Completed Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
+            Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_Completed,Boolean)
+            If (Original_PropertyID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_PropertyID.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_Completed,String)
-            End If
-            If (Original_PropertyID Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_PropertyID,String)
             End If
-            If (Original_UserID Is Nothing) Then
+            If (Original_UserID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_UserID.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_UserID,String)
             End If
-            If (Original_AssignedTo Is Nothing) Then
+            If (Original_AssignedTo.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_AssignedTo.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_AssignedTo,String)
             End If
-            If (Original_Vendor Is Nothing) Then
+            If (Original_Vendor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Vendor.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Vendor,String)
             End If
-            If (Original_OrderType Is Nothing) Then
+            If (Original_OrderType.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_OrderType.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_OrderType,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -14693,6 +16094,8 @@ Namespace Property_ManagerDataSetTableAdapters
         Inherits Global.System.ComponentModel.Component
         
         Private _updateOrder As UpdateOrderOption
+        
+        Private _chargesTableAdapter As ChargesTableAdapter
         
         Private _companyTableAdapter As CompanyTableAdapter
         
@@ -14728,6 +16131,20 @@ Namespace Property_ManagerDataSetTableAdapters
             End Get
             Set
                 Me._updateOrder = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property ChargesTableAdapter() As ChargesTableAdapter
+            Get
+                Return Me._chargesTableAdapter
+            End Get
+            Set
+                Me._chargesTableAdapter = value
             End Set
         End Property
         
@@ -14904,6 +16321,10 @@ Namespace Property_ManagerDataSetTableAdapters
                 If (Not (Me._connection) Is Nothing) Then
                     Return Me._connection
                 End If
+                If ((Not (Me._chargesTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._chargesTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._chargesTableAdapter.Connection
+                End If
                 If ((Not (Me._companyTableAdapter) Is Nothing)  _
                             AndAlso (Not (Me._companyTableAdapter.Connection) Is Nothing)) Then
                     Return Me._companyTableAdapter.Connection
@@ -14961,6 +16382,9 @@ Namespace Property_ManagerDataSetTableAdapters
         Public ReadOnly Property TableAdapterInstanceCount() As Integer
             Get
                 Dim count As Integer = 0
+                If (Not (Me._chargesTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
                 If (Not (Me._companyTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
@@ -15005,6 +16429,15 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Function UpdateUpdatedRows(ByVal dataSet As Property_ManagerDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._chargesTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Charges.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._chargesTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             If (Not (Me._companyTableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.Company.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
@@ -15114,6 +16547,14 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Function UpdateInsertedRows(ByVal dataSet As Property_ManagerDataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._chargesTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.Charges.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._chargesTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             If (Not (Me._companyTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.Company.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
@@ -15300,6 +16741,14 @@ Namespace Property_ManagerDataSetTableAdapters
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
+            If (Not (Me._chargesTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Charges.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._chargesTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
             Return result
         End Function
         
@@ -15340,6 +16789,11 @@ Namespace Property_ManagerDataSetTableAdapters
             End If
             If (dataSet.HasChanges = false) Then
                 Return 0
+            End If
+            If ((Not (Me._chargesTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._chargesTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
             End If
             If ((Not (Me._companyTableAdapter) Is Nothing)  _
                         AndAlso (Me.MatchTableAdapterConnection(Me._companyTableAdapter.Connection) = false)) Then
@@ -15428,6 +16882,15 @@ Namespace Property_ManagerDataSetTableAdapters
             Try 
                 '---- Prepare for update -----------
                 '
+                If (Not (Me._chargesTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._chargesTableAdapter, Me._chargesTableAdapter.Connection)
+                    Me._chargesTableAdapter.Connection = CType(workConnection,Global.System.Data.OleDb.OleDbConnection)
+                    Me._chargesTableAdapter.Transaction = CType(workTransaction,Global.System.Data.OleDb.OleDbTransaction)
+                    If Me._chargesTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._chargesTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._chargesTableAdapter.Adapter)
+                    End If
+                End If
                 If (Not (Me._companyTableAdapter) Is Nothing) Then
                     revertConnections.Add(Me._companyTableAdapter, Me._companyTableAdapter.Connection)
                     Me._companyTableAdapter.Connection = CType(workConnection,Global.System.Data.OleDb.OleDbConnection)
@@ -15586,6 +17049,10 @@ Namespace Property_ManagerDataSetTableAdapters
             Finally
                 If workConnOpened Then
                     workConnection.Close
+                End If
+                If (Not (Me._chargesTableAdapter) Is Nothing) Then
+                    Me._chargesTableAdapter.Connection = CType(revertConnections(Me._chargesTableAdapter),Global.System.Data.OleDb.OleDbConnection)
+                    Me._chargesTableAdapter.Transaction = Nothing
                 End If
                 If (Not (Me._companyTableAdapter) Is Nothing) Then
                     Me._companyTableAdapter.Connection = CType(revertConnections(Me._companyTableAdapter),Global.System.Data.OleDb.OleDbConnection)

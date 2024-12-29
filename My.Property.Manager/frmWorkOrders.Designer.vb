@@ -33,7 +33,7 @@ Partial Class frmWorkOrders
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.cboSelections = New System.Windows.Forms.ComboBox()
         Me.lblChoose = New System.Windows.Forms.Label()
-        Me.grpWOInfo = New System.Windows.Forms.GroupBox()
+        Me.grpNewWO = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cboVendors = New System.Windows.Forms.ComboBox()
         Me.cboEmployees = New System.Windows.Forms.ComboBox()
@@ -45,9 +45,15 @@ Partial Class frmWorkOrders
         Me.cboProperties = New System.Windows.Forms.ComboBox()
         Me.txtCloseDate = New System.Windows.Forms.TextBox()
         Me.txtOpenDate = New System.Windows.Forms.TextBox()
+        Me.btnSaveWO = New System.Windows.Forms.Button()
+        Me.btnCancelWO = New System.Windows.Forms.Button()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtNotes = New System.Windows.Forms.TextBox()
         Me.grpStartHere.SuspendLayout()
         Me.grpSearch.SuspendLayout()
-        Me.grpWOInfo.SuspendLayout()
+        Me.grpNewWO.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpStartHere
@@ -158,25 +164,32 @@ Partial Class frmWorkOrders
         Me.lblChoose.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblChoose.Visible = False
         '
-        'grpWOInfo
+        'grpNewWO
         '
-        Me.grpWOInfo.Controls.Add(Me.Label5)
-        Me.grpWOInfo.Controls.Add(Me.cboVendors)
-        Me.grpWOInfo.Controls.Add(Me.cboEmployees)
-        Me.grpWOInfo.Controls.Add(Me.Label4)
-        Me.grpWOInfo.Controls.Add(Me.chkCompleted)
-        Me.grpWOInfo.Controls.Add(Me.Label3)
-        Me.grpWOInfo.Controls.Add(Me.Label2)
-        Me.grpWOInfo.Controls.Add(Me.Label1)
-        Me.grpWOInfo.Controls.Add(Me.cboProperties)
-        Me.grpWOInfo.Controls.Add(Me.txtCloseDate)
-        Me.grpWOInfo.Controls.Add(Me.txtOpenDate)
-        Me.grpWOInfo.Location = New System.Drawing.Point(166, 81)
-        Me.grpWOInfo.Name = "grpWOInfo"
-        Me.grpWOInfo.Size = New System.Drawing.Size(417, 241)
-        Me.grpWOInfo.TabIndex = 2
-        Me.grpWOInfo.TabStop = False
-        Me.grpWOInfo.Text = "Work Order Details"
+        Me.grpNewWO.Controls.Add(Me.txtNotes)
+        Me.grpNewWO.Controls.Add(Me.Label7)
+        Me.grpNewWO.Controls.Add(Me.Label6)
+        Me.grpNewWO.Controls.Add(Me.txtDescription)
+        Me.grpNewWO.Controls.Add(Me.btnCancelWO)
+        Me.grpNewWO.Controls.Add(Me.btnSaveWO)
+        Me.grpNewWO.Controls.Add(Me.Label5)
+        Me.grpNewWO.Controls.Add(Me.cboVendors)
+        Me.grpNewWO.Controls.Add(Me.cboEmployees)
+        Me.grpNewWO.Controls.Add(Me.Label4)
+        Me.grpNewWO.Controls.Add(Me.chkCompleted)
+        Me.grpNewWO.Controls.Add(Me.Label3)
+        Me.grpNewWO.Controls.Add(Me.Label2)
+        Me.grpNewWO.Controls.Add(Me.Label1)
+        Me.grpNewWO.Controls.Add(Me.cboProperties)
+        Me.grpNewWO.Controls.Add(Me.txtCloseDate)
+        Me.grpNewWO.Controls.Add(Me.txtOpenDate)
+        Me.grpNewWO.Location = New System.Drawing.Point(166, 81)
+        Me.grpNewWO.Name = "grpNewWO"
+        Me.grpNewWO.Size = New System.Drawing.Size(417, 241)
+        Me.grpNewWO.TabIndex = 2
+        Me.grpNewWO.TabStop = False
+        Me.grpNewWO.Text = "Work Order Details"
+        Me.grpNewWO.Visible = False
         '
         'Label5
         '
@@ -271,12 +284,63 @@ Partial Class frmWorkOrders
         Me.txtOpenDate.Size = New System.Drawing.Size(100, 20)
         Me.txtOpenDate.TabIndex = 3
         '
+        'btnSaveWO
+        '
+        Me.btnSaveWO.Location = New System.Drawing.Point(258, 95)
+        Me.btnSaveWO.Name = "btnSaveWO"
+        Me.btnSaveWO.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveWO.TabIndex = 12
+        Me.btnSaveWO.Text = "Save WO"
+        Me.btnSaveWO.UseVisualStyleBackColor = True
+        '
+        'btnCancelWO
+        '
+        Me.btnCancelWO.Location = New System.Drawing.Point(258, 126)
+        Me.btnCancelWO.Name = "btnCancelWO"
+        Me.btnCancelWO.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancelWO.TabIndex = 13
+        Me.btnCancelWO.Text = "Cancel WO"
+        Me.btnCancelWO.UseVisualStyleBackColor = True
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(104, 155)
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(128, 20)
+        Me.txtDescription.TabIndex = 14
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(7, 159)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(91, 13)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Short Description:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(10, 186)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(38, 13)
+        Me.Label7.TabIndex = 16
+        Me.Label7.Text = "Notes:"
+        '
+        'txtNotes
+        '
+        Me.txtNotes.Location = New System.Drawing.Point(55, 186)
+        Me.txtNotes.Multiline = True
+        Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.Size = New System.Drawing.Size(343, 49)
+        Me.txtNotes.TabIndex = 17
+        '
         'frmWorkOrders
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(598, 438)
-        Me.Controls.Add(Me.grpWOInfo)
+        Me.Controls.Add(Me.grpNewWO)
         Me.Controls.Add(Me.grpSearch)
         Me.Controls.Add(Me.grpStartHere)
         Me.Name = "frmWorkOrders"
@@ -284,8 +348,8 @@ Partial Class frmWorkOrders
         Me.Text = "Work Order Management"
         Me.grpStartHere.ResumeLayout(False)
         Me.grpSearch.ResumeLayout(False)
-        Me.grpWOInfo.ResumeLayout(False)
-        Me.grpWOInfo.PerformLayout()
+        Me.grpNewWO.ResumeLayout(False)
+        Me.grpNewWO.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -301,7 +365,7 @@ Partial Class frmWorkOrders
     Friend WithEvents grpSearch As GroupBox
     Friend WithEvents cboSelections As ComboBox
     Friend WithEvents lblChoose As Label
-    Friend WithEvents grpWOInfo As GroupBox
+    Friend WithEvents grpNewWO As GroupBox
     Friend WithEvents txtOpenDate As TextBox
     Friend WithEvents txtCloseDate As TextBox
     Friend WithEvents Label2 As Label
@@ -313,4 +377,10 @@ Partial Class frmWorkOrders
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents cboVendors As ComboBox
+    Friend WithEvents btnCancelWO As Button
+    Friend WithEvents btnSaveWO As Button
+    Friend WithEvents txtNotes As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtDescription As TextBox
 End Class
