@@ -21,6 +21,7 @@ Public Class frmWorkOrders
 
     Private Sub btnNewWO_Click(sender As Object, e As EventArgs) Handles btnNewWO.Click
         ClearAll()
+        MsgBox("After you save the Work Order, you can add charges. Create Work Orders for Internal Charges to allow for easy expense tracking and filing taxes.")
         btnSaveNewWO.Visible = True
         btnCancelWO.Visible = True
         txtOpenDate.Text = Date.Today
@@ -534,7 +535,7 @@ Public Class frmWorkOrders
         cboSelections.Text = ""
         grpNewWO.Visible = True
         If HelpMessages = True Then
-            MsgBox("Select Property")
+            MsgBox("Select Property the Press Get Wos")
         End If
         btnSaveWO.Visible = False
         btnGetByProperty.Visible = True

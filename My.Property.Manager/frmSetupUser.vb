@@ -28,8 +28,8 @@ Public Class frmSetupUser
             Property_ManagerDataSet.Users.AddUsersRow(newRow)
             UsersTableAdapter.Update(Property_ManagerDataSet.Users)
             MsgBox("Please login with your new credentials.")
-            Me.Close()
             frmLogin.Show()
+            Me.Close()
         Catch ex As Exception
             MessageBox.Show("Error inserting user: " & ex.Message)
         End Try

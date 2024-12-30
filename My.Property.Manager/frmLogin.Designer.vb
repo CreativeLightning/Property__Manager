@@ -38,6 +38,7 @@ Partial Class frmLogin
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.OK = New System.Windows.Forms.Button()
         Me.Cancel = New System.Windows.Forms.Button()
+        Me.lblForgotPassword = New System.Windows.Forms.Label()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -100,6 +101,16 @@ Partial Class frmLogin
         Me.Cancel.TabIndex = 5
         Me.Cancel.Text = "&Cancel"
         '
+        'lblForgotPassword
+        '
+        Me.lblForgotPassword.AutoSize = True
+        Me.lblForgotPassword.Location = New System.Drawing.Point(194, 134)
+        Me.lblForgotPassword.Name = "lblForgotPassword"
+        Me.lblForgotPassword.Size = New System.Drawing.Size(185, 13)
+        Me.lblForgotPassword.TabIndex = 6
+        Me.lblForgotPassword.Text = "Forgot Password? Text 501-489-1840"
+        Me.lblForgotPassword.Visible = False
+        '
         'frmLogin
         '
         Me.AcceptButton = Me.OK
@@ -108,6 +119,7 @@ Partial Class frmLogin
         Me.CancelButton = Me.Cancel
         Me.ClientSize = New System.Drawing.Size(401, 192)
         Me.ControlBox = False
+        Me.Controls.Add(Me.lblForgotPassword)
         Me.Controls.Add(Me.Cancel)
         Me.Controls.Add(Me.OK)
         Me.Controls.Add(Me.txtPassword)
@@ -128,4 +140,5 @@ Partial Class frmLogin
 
     End Sub
 
+    Friend WithEvents lblForgotPassword As Label
 End Class

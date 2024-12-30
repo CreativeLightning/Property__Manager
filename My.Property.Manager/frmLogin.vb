@@ -42,6 +42,7 @@ Public Class frmLogin
             Me.Hide()
         Else
             MessageBox.Show("Invalid username or password.")
+            lblForgotPassword.Visible = True
         End If
     End Sub
 

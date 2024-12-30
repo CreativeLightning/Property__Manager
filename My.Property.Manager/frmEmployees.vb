@@ -31,6 +31,16 @@
 
     Private Sub cboEmployees_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmployees.SelectedIndexChanged
         btnSave.Visible = True
+        If cboEmployees.SelectedIndex = 0 Then
+            btnDelete.Enabled = False
+        Else
+            btnDelete.Enabled = True
+        End If
+        If cboEmployees.SelectedIndex = 0 Then
+            btnSave.Enabled = False
+        Else
+            btnSave.Enabled = True
+        End If
         ' Create a connection object
         Using connection As New OleDb.OleDbConnection(connectionString)
             connection.Open()
