@@ -5,6 +5,10 @@ Public Class frmCompany
     Private PropertyDataSet As New DataSet()
 
     Private Sub frmCompany_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If HelpMessages Then
+            ' Show a message box
+            MessageBox.Show("This form allows you to edit the company information.  Click the Save button to save changes. THIS INFORMATION WILL DISPLAY ON RECEIPTS AND REPORTS.", "Company Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
         Dim connection As New OleDbConnection(connectionString)
         Dim command As New OleDbCommand("SELECT * FROM Company", connection)
         CompanyTableAdapter.SelectCommand = command
@@ -85,5 +89,36 @@ Public Class frmCompany
             MessageBox.Show("Company information saved.", "Save Company", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         Me.Close()
+    End Sub
+
+    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
+        'format phone number as (xxx) xxx-xxxx
+        Dim numericText As String = New String(txtPhone.Text.Where(AddressOf Char.IsDigit).ToArray())
+        Dim formattedText As String = txtPhone.Text
+
+        If numericText.Length >= 4 Then
+            formattedText = "(" & numericText.Substring(0, 3) & ") " & numericText.Substring(3)
+        End If
+
+        If numericText.Length >= 7 Then
+            formattedText = formattedText.Substring(0, 9) & "-" & numericText.Substring(6)
+        End If
+
+        txtPhone.Text = formattedText
+        txtPhone.SelectionStart = txtPhone.Text.Length
+    End Sub
+
+    Private Sub txtFax_TextChanged(sender As Object, e As EventArgs) Handles txtFax.TextChanged
+        'format phone number as (xxx) xxx-xxxx
+        Dim numericText As String = New String(txtFax.Text.Where(AddressOf Char.IsDigit).ToArray())
+        Dim formattedText As String = txtFax.Text
+        If numericText.Length >= 4 Then
+            formattedText = "(" & numericText.Substring(0, 3) & ") " & numericText.Substring(3)
+        End If
+        If numericText.Length >= 7 Then
+            formattedText = formattedText.Substring(0, 9) & "-" & numericText.Substring(6)
+        End If
+        txtFax.Text = formattedText
+        txtFax.SelectionStart = txtFax.Text.Length
     End Sub
 End Class

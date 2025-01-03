@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCompany = New System.Windows.Forms.Button()
         Me.btnUsers = New System.Windows.Forms.Button()
         Me.chkHelpMessages = New System.Windows.Forms.CheckBox()
         Me.btnCharges = New System.Windows.Forms.Button()
@@ -33,7 +34,6 @@ Partial Class Form1
         Me.btnTenants = New System.Windows.Forms.Button()
         Me.btnPayments = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.btnCompany = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,6 +55,15 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Begin Here"
+        '
+        'btnCompany
+        '
+        Me.btnCompany.Location = New System.Drawing.Point(7, 137)
+        Me.btnCompany.Name = "btnCompany"
+        Me.btnCompany.Size = New System.Drawing.Size(75, 23)
+        Me.btnCompany.TabIndex = 11
+        Me.btnCompany.Text = "Company"
+        Me.btnCompany.UseVisualStyleBackColor = True
         '
         'btnUsers
         '
@@ -134,7 +143,6 @@ Partial Class Form1
         '
         'btnPayments
         '
-        Me.btnPayments.Enabled = False
         Me.btnPayments.Location = New System.Drawing.Point(7, 50)
         Me.btnPayments.Name = "btnPayments"
         Me.btnPayments.Size = New System.Drawing.Size(75, 23)
@@ -150,15 +158,6 @@ Partial Class Form1
         Me.btnExit.TabIndex = 9
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
-        '
-        'btnCompany
-        '
-        Me.btnCompany.Location = New System.Drawing.Point(7, 137)
-        Me.btnCompany.Name = "btnCompany"
-        Me.btnCompany.Size = New System.Drawing.Size(75, 23)
-        Me.btnCompany.TabIndex = 11
-        Me.btnCompany.Text = "Company"
-        Me.btnCompany.UseVisualStyleBackColor = True
         '
         'Form1
         '

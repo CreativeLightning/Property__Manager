@@ -628,7 +628,8 @@ Public Class frmTenants
                 chkDepositPaid.Visible = False
                 btnTakePayment.Visible = False
                 lblProperty.Text = ""
-
+                txtSearch.Text = ""
+                cboTenants.Text = "No tenants found"
                 ClearTextboxes()
                 lblProperty.Text = $"{cboPickProperty.SelectedItem.ToString()}"
             Catch ex As Exception

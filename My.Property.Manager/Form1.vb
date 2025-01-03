@@ -22,7 +22,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnPayments_Click(sender As Object, e As EventArgs) Handles btnPayments.Click
-        frmPayments.Show()
+        frmPaymentHistory.Show()
     End Sub
 
     Private Sub btnWorkOrders_Click(sender As Object, e As EventArgs) Handles btnWorkOrders.Click
@@ -74,5 +74,9 @@ Public Class Form1
 
     Private Sub btnCompany_Click(sender As Object, e As EventArgs) Handles btnCompany.Click
         frmCompany.Show()
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
