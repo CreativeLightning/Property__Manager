@@ -5,6 +5,16 @@ Public Class frmProperties
         ClearFields()
         FillBathrooms()
         FillBedrooms()
+        If HelpMessages = True Then
+            MsgBox("Begin by adding a new property or searching for an existing property.")
+        End If
+        If cboPropertyAddress.Items.Count = 0 Then
+            btnSave.Visible = False
+            btnAdd_Click(sender, e)
+        ElseIf cboPropertyAddress.Items.Count > 0 Then
+            btnSave.Visible = True
+            grpSearch.Visible = True
+        End If
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         Me.Close()
@@ -179,6 +189,8 @@ Public Class frmProperties
         btnCancel.Visible = True
         btnSave.Visible = False
         grpSearch.Visible = False
+        txtStreetNumber.Focus()
+        'grpSearch.Visible = False
         ClearFields()
     End Sub
 
@@ -197,9 +209,16 @@ Public Class frmProperties
         Dim purchasePrice As String = txtPurchasePrice.Text
         Dim homeShortName As String = txtHomeShortName.Text
         Dim notes As String = txtNotes.Text
+        If cboBathrooms.SelectedIndex = -1 Then
+            MsgBox("Please select a number of bathrooms.")
+            Return
+        End If
+        If cboBedrooms.SelectedIndex = -1 Then
+            MsgBox("Please select a number of bedrooms.")
+            Return
+        End If
         Dim bathrooms As Decimal = Convert.ToDecimal(cboBathrooms.SelectedIndex)
         Dim bedrooms As Integer = Convert.ToDecimal(cboBedrooms.SelectedIndex)
-
         ' Insert the new property into the database
         Using connection As New OleDbConnection(connectionString)
             Dim query As String = "INSERT INTO Properties (StreetNumber, StreetName, AptSuiteNumber, City, State, Zip, Rent, Deposit, Parcel, PurchaseDate, PurchasePrice, HomeShortName, Notes, Bathrooms, Bedrooms) VALUES (@StreetNumber, @StreetName, @AptSuiteNumber, @City, @State, @Zip, @Rent, @Deposit, @Parcel, @PurchaseDate, @PurchasePrice, @HomeShortName, @Notes, @Bathrooms, @Bedrooms)"
@@ -298,5 +317,25 @@ Public Class frmProperties
                 chkVacant.Checked = selectedProperty.Vacant
             End If
         End If
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
+
+    Private Sub txtPurchaseDate_TextChanged(sender As Object, e As EventArgs) Handles txtPurchaseDate.TextChanged
+        'use the same method as frmtenants txtDOB_TextChanged to validate the date as text is entered
+        Dim input As String = txtPurchaseDate.Text.Replace("/", "")
+        If input.Length > 2 Then
+            input = input.Insert(2, "/")
+        End If
+        If input.Length > 5 Then
+            input = input.Insert(5, "/")
+        End If
+        txtPurchaseDate.Text = input
+        txtPurchaseDate.SelectionStart = txtPurchaseDate.Text.Length
     End Sub
 End Class

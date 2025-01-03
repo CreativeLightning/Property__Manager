@@ -43,11 +43,13 @@ Partial Class frmUsers
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cboUsers = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnExit)
         Me.GroupBox1.Controls.Add(Me.btnSaveNew)
         Me.GroupBox1.Controls.Add(Me.btnSave)
         Me.GroupBox1.Controls.Add(Me.btnDelete)
@@ -109,7 +111,7 @@ Partial Class frmUsers
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 10
-        Me.btnAdd.Text = "Add"
+        Me.btnAdd.Text = "Add New"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'btnHome
@@ -246,11 +248,21 @@ Partial Class frmUsers
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Select User:"
         '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(213, 199)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(75, 23)
+        Me.btnExit.TabIndex = 14
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
+        '
         'frmUsers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(332, 267)
+        Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmUsers"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -282,4 +294,5 @@ Partial Class frmUsers
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents btnSaveNew As Button
+    Friend WithEvents btnExit As Button
 End Class

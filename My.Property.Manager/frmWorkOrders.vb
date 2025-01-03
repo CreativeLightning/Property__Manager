@@ -115,7 +115,11 @@ Public Class frmWorkOrders
             Dim ID As Integer = dr.Item("ID")
             cboProperties.Items.Add(ID & " - " & address)
         Next
-        cboProperties.SelectedIndex = 0
+        If cboProperties.Items.Count = 0 Then
+            MessageBox.Show("No Properties Found")
+        Else
+            cboProperties.SelectedIndex = 0
+        End If
     End Sub
     Private Sub chkCompleted_CheckedChanged(sender As Object, e As EventArgs) Handles chkCompleted.CheckedChanged
         If False = chkCompleted.Checked Then
@@ -170,7 +174,11 @@ Public Class frmWorkOrders
                 connection.Open()
                 Try
                     cmd.ExecuteNonQuery()
-                    MessageBox.Show("Work Order Saved")
+                    If HelpMessages = True Then
+                        MsgBox("You can now add charges to this Work Order.")
+                    End If
+                    cboProperties.Items.Clear()
+                    cboProperties.Text = ""
                     ClearAll()
                 Catch ex As Exception
                     MessageBox.Show("Error Saving Work Order")
@@ -514,7 +522,6 @@ Public Class frmWorkOrders
         End If
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-        Form1.Show()
         Me.Close()
     End Sub
 

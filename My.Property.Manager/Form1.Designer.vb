@@ -23,6 +23,8 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnUsers = New System.Windows.Forms.Button()
+        Me.chkHelpMessages = New System.Windows.Forms.CheckBox()
         Me.btnCharges = New System.Windows.Forms.Button()
         Me.btnVendors = New System.Windows.Forms.Button()
         Me.btnEmployees = New System.Windows.Forms.Button()
@@ -31,13 +33,13 @@ Partial Class Form1
         Me.btnTenants = New System.Windows.Forms.Button()
         Me.btnPayments = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.chkHelpMessages = New System.Windows.Forms.CheckBox()
-        Me.btnUsers = New System.Windows.Forms.Button()
+        Me.btnCompany = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnCompany)
         Me.GroupBox1.Controls.Add(Me.btnUsers)
         Me.GroupBox1.Controls.Add(Me.chkHelpMessages)
         Me.GroupBox1.Controls.Add(Me.btnCharges)
@@ -49,10 +51,31 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.btnPayments)
         Me.GroupBox1.Location = New System.Drawing.Point(13, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(172, 165)
+        Me.GroupBox1.Size = New System.Drawing.Size(172, 199)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Begin Here"
+        '
+        'btnUsers
+        '
+        Me.btnUsers.Location = New System.Drawing.Point(87, 50)
+        Me.btnUsers.Name = "btnUsers"
+        Me.btnUsers.Size = New System.Drawing.Size(75, 23)
+        Me.btnUsers.TabIndex = 10
+        Me.btnUsers.Text = "Users"
+        Me.btnUsers.UseVisualStyleBackColor = True
+        '
+        'chkHelpMessages
+        '
+        Me.chkHelpMessages.AutoSize = True
+        Me.chkHelpMessages.Checked = True
+        Me.chkHelpMessages.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkHelpMessages.Location = New System.Drawing.Point(16, 176)
+        Me.chkHelpMessages.Name = "chkHelpMessages"
+        Me.chkHelpMessages.Size = New System.Drawing.Size(135, 17)
+        Me.chkHelpMessages.TabIndex = 9
+        Me.chkHelpMessages.Text = "Enable Help Messages"
+        Me.chkHelpMessages.UseVisualStyleBackColor = True
         '
         'btnCharges
         '
@@ -121,39 +144,27 @@ Partial Class Form1
         '
         'btnExit
         '
-        Me.btnExit.Location = New System.Drawing.Point(60, 184)
+        Me.btnExit.Location = New System.Drawing.Point(57, 218)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
         Me.btnExit.TabIndex = 9
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
-        'chkHelpMessages
+        'btnCompany
         '
-        Me.chkHelpMessages.AutoSize = True
-        Me.chkHelpMessages.Checked = True
-        Me.chkHelpMessages.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkHelpMessages.Location = New System.Drawing.Point(16, 137)
-        Me.chkHelpMessages.Name = "chkHelpMessages"
-        Me.chkHelpMessages.Size = New System.Drawing.Size(135, 17)
-        Me.chkHelpMessages.TabIndex = 9
-        Me.chkHelpMessages.Text = "Enable Help Messages"
-        Me.chkHelpMessages.UseVisualStyleBackColor = True
-        '
-        'btnUsers
-        '
-        Me.btnUsers.Location = New System.Drawing.Point(87, 50)
-        Me.btnUsers.Name = "btnUsers"
-        Me.btnUsers.Size = New System.Drawing.Size(75, 23)
-        Me.btnUsers.TabIndex = 10
-        Me.btnUsers.Text = "Users"
-        Me.btnUsers.UseVisualStyleBackColor = True
+        Me.btnCompany.Location = New System.Drawing.Point(7, 137)
+        Me.btnCompany.Name = "btnCompany"
+        Me.btnCompany.Size = New System.Drawing.Size(75, 23)
+        Me.btnCompany.TabIndex = 11
+        Me.btnCompany.Text = "Company"
+        Me.btnCompany.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(201, 219)
+        Me.ClientSize = New System.Drawing.Size(201, 253)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.GroupBox1)
@@ -177,4 +188,5 @@ Partial Class Form1
     Friend WithEvents btnCharges As Button
     Friend WithEvents chkHelpMessages As CheckBox
     Friend WithEvents btnUsers As Button
+    Friend WithEvents btnCompany As Button
 End Class

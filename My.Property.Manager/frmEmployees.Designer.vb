@@ -63,6 +63,7 @@ Partial Class frmEmployees
         Me.Property_ManagerDataSet = New My_Property_Manager.Property_ManagerDataSet()
         Me.EmployeesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.EmployeesTableAdapter = New My_Property_Manager.Property_ManagerDataSetTableAdapters.EmployeesTableAdapter()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.Property_ManagerDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,6 +72,7 @@ Partial Class frmEmployees
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnExit)
         Me.GroupBox1.Controls.Add(Me.btnDelete)
         Me.GroupBox1.Controls.Add(Me.btnHome)
         Me.GroupBox1.Controls.Add(Me.btnAddEmployee)
@@ -435,11 +437,21 @@ Partial Class frmEmployees
         '
         Me.EmployeesTableAdapter.ClearBeforeFill = True
         '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(7, 106)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(85, 23)
+        Me.btnExit.TabIndex = 15
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
+        '
         'frmEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(499, 395)
+        Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmEmployees"
@@ -494,4 +506,5 @@ Partial Class frmEmployees
     Friend WithEvents lblInvalidSSN As Label
     Friend WithEvents lblInvalidPhone As Label
     Friend WithEvents lblInvalidDate As Label
+    Friend WithEvents btnExit As Button
 End Class

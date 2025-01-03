@@ -23,6 +23,7 @@ Partial Class frmProperties
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnHome = New System.Windows.Forms.Button()
         Me.txtHomeShortName = New System.Windows.Forms.TextBox()
@@ -73,6 +74,7 @@ Partial Class frmProperties
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnExit)
         Me.GroupBox1.Controls.Add(Me.btnAdd)
         Me.GroupBox1.Controls.Add(Me.btnHome)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 3)
@@ -81,6 +83,15 @@ Partial Class frmProperties
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Options"
+        '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(6, 78)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(98, 23)
+        Me.btnExit.TabIndex = 2
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
@@ -374,7 +385,7 @@ Partial Class frmProperties
         Me.btnSaveNew.Name = "btnSaveNew"
         Me.btnSaveNew.Size = New System.Drawing.Size(89, 23)
         Me.btnSaveNew.TabIndex = 38
-        Me.btnSaveNew.Text = "Save Property"
+        Me.btnSaveNew.Text = "Save New"
         Me.btnSaveNew.UseVisualStyleBackColor = True
         Me.btnSaveNew.Visible = False
         '
@@ -556,4 +567,5 @@ Partial Class frmProperties
     Friend WithEvents Label17 As Label
     Friend WithEvents cboPropertyAddress As ComboBox
     Friend WithEvents chkVacant As CheckBox
+    Friend WithEvents btnExit As Button
 End Class

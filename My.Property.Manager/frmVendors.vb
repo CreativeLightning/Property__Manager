@@ -2,7 +2,6 @@
 
 Public Class frmVendors
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-        Form1.Show()
         Me.Close()
     End Sub
 

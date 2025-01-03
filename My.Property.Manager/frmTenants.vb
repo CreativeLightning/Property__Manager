@@ -1,4 +1,7 @@
 ﻿Imports System.Windows.Forms
+Imports System.Drawing.Printing
+Imports My_Property_Manager.Property_ManagerDataSetTableAdapters
+Imports System.Data.OleDb
 
 Public Class frmTenants
     Private Property_ManagerDataSet As New Property_ManagerDataSet()
@@ -14,6 +17,9 @@ Public Class frmTenants
         TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
         PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
         PaymentTypesTableAdapter.Fill(Me.Property_ManagerDataSet.PaymentTypes)
+        'hide tenant info group box
+        grpTenantInfo.Visible = False
+
         'PaymentsTableAdapter.Fill(Me.Property_ManagerDataSet.Payments)
         If HelpMessages Then
             MsgBox("Type Tenant's First or Last Name to search for Tenant, then select Tenant from dropdown list to view or edit Tenant information.")
@@ -24,12 +30,14 @@ Public Class frmTenants
         ' Validate Fname
         If String.IsNullOrEmpty(txtFName.Text) Then
             MessageBox.Show("Please enter a valid First Name.")
+            txtFName.Focus()
             Return
         End If
 
         ' Validate Lname
         If String.IsNullOrEmpty(txtLName.Text) Then
             MessageBox.Show("Please enter a valid Last Name.")
+            txtLName.Focus()
             Return
         End If
 
@@ -37,6 +45,7 @@ Public Class frmTenants
         Dim ssnValue As String = RemoveNonNumeric(txtSSN.Text)
         If String.IsNullOrEmpty(ssnValue) OrElse Not IsNumeric(ssnValue) Then
             MessageBox.Show("Please enter a valid SSN.")
+            txtSSN.Focus()
             Return
         End If
 
@@ -44,6 +53,7 @@ Public Class frmTenants
         Dim phoneValue As String = RemoveNonNumeric(txtPhone.Text)
         If Not String.IsNullOrEmpty(phoneValue) AndAlso Not IsNumeric(phoneValue) Then
             MessageBox.Show("Please enter a valid Phone number.")
+            txtPhone.Focus()
             Return
         End If
 
@@ -65,14 +75,15 @@ Public Class frmTenants
         Dim dobValue As Date
         If Not Date.TryParse(txtDOB.Text, dobValue) Then
             MessageBox.Show("Please enter a valid Date Of Birth In the format MM/DD/YYYY.")
+            txtDOB.Focus()
             Return
         End If
 
         ' Set additional fields
         Dim notesValue As String = txtNotes.Text
         Dim activeValue As String = "y"
-        Dim propertyIDValue As String = "1" ' or some default value
-        Dim userIDValue As String = "1" ' or some default value
+        Dim propertyIDValue As String = "0" ' or some default value
+        Dim userIDValue As String = User 'global variable
 
         ' Define the connection string
 
@@ -108,6 +119,11 @@ Public Class frmTenants
                     TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
                     Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
                     MessageBox.Show("Tenant added successfully.")
+                    btnSaveNew.Visible = False
+                    btnCancel.Visible = False
+                    btnSave.Visible = True
+                    TenantsTableAdapter.ClearBeforeFill = True
+                    TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
                 Catch ex As Exception
                     ' Handle any errors that may have occurred
                     If transaction.Connection IsNot Nothing Then
@@ -142,6 +158,7 @@ Public Class frmTenants
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        grpTenantInfo.Visible = True
         btnSaveNew.Visible = True
         btnCancel.Visible = True
         grpSearch.Visible = False
@@ -154,6 +171,9 @@ Public Class frmTenants
         txtPhone3.Text = ""
         txtDOB.Text = ""
         txtNotes.Text = ""
+        lblRentAmount.Visible = False
+        txtRentAmount.Visible = False
+        txtRentAmount.Text = ""
     End Sub
 
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
@@ -232,8 +252,11 @@ Public Class frmTenants
             cboTenants.Text = "No tenants found"
             lblNoneFound.Visible = False
             btnDelete.Visible = False
+            btnSave.Visible = False
             Return
         End If
+        btnSave.Visible = True
+        PropertiesTableAdapter.Fill(Me.Property_ManagerDataSet.Properties)
         Dim filteredRows = Property_ManagerDataSet.Tenants.Select($"Fname LIKE '%{searchText}%' OR Lname LIKE '%{searchText}%'")
 
         cboTenants.Items.Clear()
@@ -247,18 +270,25 @@ Public Class frmTenants
             cboTenants.SelectedIndex = 0
             lblNoneFound.Visible = False
             btnDelete.Visible = True
+            'show the tenant info group box
+            grpTenantInfo.Visible = True
+
         Else
             cboTenants.Text = "No tenants found"
             lblNoneFound.Visible = True
+            btnDelete.Visible = False
+            'hide tenant info group box
+            grpTenantInfo.Visible = False
         End If
     End Sub
+
 
     Private Sub txtDOB_TextChanged(sender As Object, e As EventArgs) Handles txtDOB.TextChanged
         Dim text As String = txtDOB.Text
         lblInvalidDOB.Visible = text.Length <> 10
-        If text.Length = 2 OrElse text.Length = 5 Then
+        If text.Length = 3 OrElse text.Length = 6 Then
             If Not text.EndsWith("/") Then
-                txtDOB.Text = text & "/"
+                txtDOB.Text = text.Insert(text.Length - 1, "/")
                 txtDOB.SelectionStart = txtDOB.Text.Length
             End If
         End If
@@ -277,7 +307,17 @@ Public Class frmTenants
             txtPhone3.Text = tenantRow("Phone3").ToString()
             txtDOB.Text = tenantRow("DOB").ToString()
             txtNotes.Text = tenantRow("Notes").ToString()
-
+            Rent = tenantRow("Rent").ToString()
+            If Rent > 0 Then
+                lblRentAmount.Visible = True
+                txtRentAmount.Visible = True
+                txtRentAmount.Text = Rent
+            Else
+                lblRentAmount.Visible = False
+                txtRentAmount.Visible = False
+            End If
+            txtRentAmount.Text = Rent
+            DueDate = tenantRow("RentDue").ToString()
             ' Collect the PropertyID value from the Properties table
             Dim propertyid As Integer = tenantRow("PropertyID")
             Dim propertyRows As DataRow() = Property_ManagerDataSet.Properties.Select($"ID = {propertyid}")
@@ -285,16 +325,30 @@ Public Class frmTenants
                 Dim propertyRow As DataRow = propertyRows(0)
                 Dim streetNumber As String = propertyRow("StreetNumber").ToString()
                 Dim streetName As String = propertyRow("StreetName").ToString()
-                lblProperty.Text = $"{streetNumber} {streetName}"
+                lblProperty.Text = $"{streetNumber} {streetName} - Rent Due: {Date.Parse(DueDate).ToString("MM/dd/yyyy")} Amount: {Decimal.Parse(Rent).ToString("C")}"
                 btnTakePayment.Visible = True
                 cboPickProperty.Visible = False
                 btnAssign.Visible = False
+                lblRentDue.Visible = False
+                txtRentDue.Visible = False
+                txtDeposit.Visible = False
+                txtRent.Visible = False
+                lblRent.Visible = False
+                lblDeposit.Visible = False
+                chkDepositPaid.Visible = False
             Else
                 lblProperty.Text = "Choose Property"
                 btnTakePayment.Visible = False
                 FillcboPickProperty()
                 cboPickProperty.Visible = True
                 btnAssign.Visible = True
+                lblRentDue.Visible = True
+                txtRentDue.Visible = True
+                txtDeposit.Visible = True
+                txtRent.Visible = True
+                lblRent.Visible = True
+                lblDeposit.Visible = True
+                chkDepositPaid.Visible = True
             End If
         End If
     End Sub
@@ -311,55 +365,60 @@ Public Class frmTenants
     End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Validate Fname
-        If String.IsNullOrEmpty(txtFName.Text) Then
-            MessageBox.Show("Please enter a valid First Name.")
-            Return
-        End If
+        If HelpMessages = True Then
+            If String.IsNullOrEmpty(txtFName.Text) Then
+                MessageBox.Show("Please enter a valid First Name.")
+                Return
+            End If
 
-        ' Validate Lname
-        If String.IsNullOrEmpty(txtLName.Text) Then
-            MessageBox.Show("Please enter a valid Last Name.")
-            Return
-        End If
+            ' Validate Lname
+            If String.IsNullOrEmpty(txtLName.Text) Then
+                MessageBox.Show("Please enter a valid Last Name.")
+                Return
+            End If
 
-        ' Validate SSN
-        Dim ssnValue As String = RemoveNonNumeric(txtSSN.Text)
-        If String.IsNullOrEmpty(ssnValue) OrElse Not IsNumeric(ssnValue) Then
-            MessageBox.Show("Please enter a valid SSN.")
-            Return
-        End If
+            ' Validate SSN
+            Dim ssnValue As String = RemoveNonNumeric(txtSSN.Text)
+            If String.IsNullOrEmpty(ssnValue) OrElse Not IsNumeric(ssnValue) Then
+                MessageBox.Show("Please enter a valid SSN.")
+                Return
+            End If
 
-        ' Validate Phone
-        Dim phoneValue As String = RemoveNonNumeric(txtPhone.Text)
-        If Not String.IsNullOrEmpty(phoneValue) AndAlso Not IsNumeric(phoneValue) Then
-            MessageBox.Show("Please enter a valid Phone number.")
-            Return
-        End If
+            ' Validate Phone
+            Dim phoneValue As String = RemoveNonNumeric(txtPhone.Text)
+            If Not String.IsNullOrEmpty(phoneValue) AndAlso Not IsNumeric(phoneValue) Then
+                MessageBox.Show("Please enter a valid Phone number.")
+                Return
+            End If
 
-        ' Validate Phone2
-        Dim phone2Value As String = RemoveNonNumeric(txtPhone2.Text)
-        If Not String.IsNullOrEmpty(phone2Value) AndAlso Not IsNumeric(phone2Value) Then
-            MessageBox.Show("Please enter a valid Phone2 number.")
-            Return
-        End If
+            ' Validate Phone2
+            Dim phone2Value As String = RemoveNonNumeric(txtPhone2.Text)
+            If Not String.IsNullOrEmpty(phone2Value) AndAlso Not IsNumeric(phone2Value) Then
+                MessageBox.Show("Please enter a valid Phone2 number.")
+                Return
+            End If
 
-        ' Validate Phone3
-        Dim phone3Value As String = RemoveNonNumeric(txtPhone3.Text)
-        If Not String.IsNullOrEmpty(phone3Value) AndAlso Not IsNumeric(phone3Value) Then
-            MessageBox.Show("Please enter a valid Phone3 number.")
-            Return
-        End If
+            ' Validate Phone3
+            Dim phone3Value As String = RemoveNonNumeric(txtPhone3.Text)
+            If Not String.IsNullOrEmpty(phone3Value) AndAlso Not IsNumeric(phone3Value) Then
+                MessageBox.Show("Please enter a valid Phone3 number.")
+                Return
+            End If
 
-        ' Validate DOB
-        Dim dobValue As Date
-        If Not Date.TryParse(txtDOB.Text, dobValue) Then
-            MessageBox.Show("Please enter a valid Date of Birth in the format MM/DD/YYYY.")
-            Return
+            ' Validate DOB
+            Dim dobValue As Date
+            If Not Date.TryParse(txtDOB.Text, dobValue) Then
+                MessageBox.Show("Please enter a valid Date of Birth in the format MM/DD/YYYY.")
+                Return
+            End If
         End If
-
         ' Get the selected tenant ID
         Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
         Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
+        MsgBox(tenantID).ToString()
+        ' Get the selected property ID
+        Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
+        Dim propertyID As Integer = Integer.Parse(tenantRow("PropertyID").ToString())
 
         ' Define the connection string
         Using connection As New OleDb.OleDbConnection(connectionString)
@@ -368,7 +427,8 @@ Public Class frmTenants
 
             Try
                 ' Create a command object
-                Dim command As New OleDb.OleDbCommand("UPDATE Tenants SET Fname = ?, Lname = ?, SSN = ?, Phone = ?, Phone2 = ?, Phone3 = ?, DOB = ?, Notes = ? WHERE ID = ?", connection, transaction)
+                ' using command object, update the tenants table where the ID = tenantID
+                Dim command As New OleDb.OleDbCommand("UPDATE Tenants SET Fname = ?, Lname = ?, SSN = ?, Phone = ?, Phone2 = ?, Phone3 = ?, DOB = ?, Notes = ?, Rent = ? WHERE ID = ?", connection, transaction)
 
                 ' Add parameters to the command
                 command.Parameters.Add(New OleDb.OleDbParameter("Fname", txtFName.Text))
@@ -379,6 +439,7 @@ Public Class frmTenants
                 command.Parameters.Add(New OleDb.OleDbParameter("Phone3", txtPhone3.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("DOB", txtDOB.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("Notes", txtNotes.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Rent", txtRentAmount.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("ID", tenantID))
 
                 Try
@@ -387,7 +448,9 @@ Public Class frmTenants
                     transaction.Commit()
                     TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
                     Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
-                    MessageBox.Show("Tenant updated successfully.")
+                    If HelpMessages = True Then
+                        MessageBox.Show("Tenant updated successfully.")
+                    End If
                     TenantsTableAdapter.ClearBeforeFill = True
                     TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
                 Catch ex As Exception
@@ -403,7 +466,10 @@ Public Class frmTenants
                 connection.Close()
             End Try
         End Using
-
+        cboTenants.Text = "No tenants found"
+        txtSearch.Text = ""
+        cboTenants.Items.Clear()
+        lblProperty.Text = ""
         ClearTextboxes()
     End Sub
 
@@ -413,6 +479,7 @@ Public Class frmTenants
         grpPayment.Visible = True
         grpPayment.Location = New Point(111, 92)
         btnTakePayment.Visible = False
+        txtAmount.Text = Rent
         txtNotes.Text = ""
         txtPaymentDate.Text = Date.Today.ToString("MM/dd/yyyy")
         lblTenantName.Text = "Tenant Name: " & cboTenants.SelectedItem.ToString()
@@ -455,6 +522,17 @@ Public Class frmTenants
         ' Get the selected property ID
         Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
         Dim propertyID As Integer = Integer.Parse(tenantRow("PropertyID").ToString())
+
+        'Add one month to the DueDate value and store it back in the tenants table
+        Dim DueDate As Date = Date.Parse(tenantRow("RentDue").ToString())
+        Dim NewDueDate As Date = DueDate.AddMonths(1)
+        tenantRow("RentDue") = NewDueDate.ToString("MM/dd/yyyy")
+        Try
+            TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
+            Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
+        Catch ex As Exception
+            MessageBox.Show("An error occurred: " & ex.Message)
+        End Try
 
         ' Define the connection string
         Using connection As New OleDb.OleDbConnection(connectionString)
@@ -515,27 +593,48 @@ Public Class frmTenants
         AssignProperty()
     End Sub
     Private Sub AssignProperty()
+        If txtRentDue.Text.Length <> 10 Then
+            MessageBox.Show("Please enter a valid Rent Due date for their next rent.")
+            Return
+        End If
         Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
         Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
         Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
         If tenantRow IsNot Nothing Then
             Dim propertyIndex As Integer = cboPickProperty.SelectedIndex
             tenantRow("PropertyID") = propertyIndex + 1
+            tenantRow("RentDue") = txtRentDue.Text
+            tenantRow("Deposit") = txtDeposit.Text
+            tenantRow("Rent") = txtRent.Text
+            tenantRow("DepositPaid") = chkDepositPaid.Checked
             Try
                 TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
                 Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
-                MessageBox.Show("Property assigned successfully.")
+                MessageBox.Show("Property and Amounts assigned successfully.")
                 TenantsTableAdapter.ClearBeforeFill = True
                 TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
                 btnAssign.Visible = False
                 cboPickProperty.Visible = False
                 btnTakePayment.Visible = True
+                lblRentDue.Visible = False
+                txtRentDue.Visible = False
+
+                txtRent.Text = ""
+                txtDeposit.Text = ""
+                txtDeposit.Visible = False
+                txtRent.Visible = False
+                lblRent.Visible = False
+                lblDeposit.Visible = False
+                chkDepositPaid.Visible = False
+                btnTakePayment.Visible = False
+                lblProperty.Text = ""
+
+                ClearTextboxes()
                 lblProperty.Text = $"{cboPickProperty.SelectedItem.ToString()}"
             Catch ex As Exception
                 MessageBox.Show("An error occurred: " & ex.Message)
             End Try
         End If
-
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -545,7 +644,7 @@ Public Class frmTenants
         End If
 
         Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
-            Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
+        Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
         Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
         If tenantRow IsNot Nothing Then
             tenantRow.Delete()
@@ -565,4 +664,174 @@ Public Class frmTenants
             End Try
         End If
     End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
+
+    Private Sub txtRentDue_TextChanged(sender As Object, e As EventArgs) Handles txtRentDue.TextChanged
+        'format the rent due text box as date 00/00/0000
+        Dim text As String = txtRentDue.Text
+        lblInvalidRentDue.Visible = text.Length <> 10
+        If text.Length = 3 OrElse text.Length = 6 Then
+            If Not text.EndsWith("/") Then
+                txtRentDue.Text = text.Insert(text.Length - 1, "/")
+                txtRentDue.SelectionStart = txtRentDue.Text.Length
+            End If
+        End If
+    End Sub
+
+    Private Sub cboPickProperty_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPickProperty.SelectedIndexChanged
+        'collect the rent due value from the selected property as well as the deposit amount from the properties table
+        'put these values in the txtRent and txtDeposit text boxes, respectively.
+        Dim propertyIndex As Integer = cboPickProperty.SelectedIndex
+        Dim propertyRow As DataRow = Property_ManagerDataSet.Properties.Rows(propertyIndex)
+        txtRent.Text = propertyRow("Rent").ToString()
+        txtDeposit.Text = propertyRow("Deposit").ToString()
+
+    End Sub
+
+
+    Private Sub btnRecordPaymentPrintReceipt_Click(sender As Object, e As EventArgs) Handles btnRecordPaymentPrintReceipt.Click
+        'same code as btnRecordPayment_Click, but add code to print a receipt
+        ' Validate Amount
+        Dim AmountPaid As Integer
+        If Not Integer.TryParse(txtAmount.Text, AmountPaid) Then
+            MessageBox.Show("Please enter a valid amount.")
+            Return
+        End If
+        ' Validate Payment Type
+        If cboPaymentType.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a payment type.")
+            Return
+        End If
+        ' Get the selected tenant ID
+        Dim selectedTenant As String = cboTenants.SelectedItem.ToString()
+        Dim tenantID As Integer = Integer.Parse(selectedTenant.Split(":")(0).Trim())
+        ' Get the selected property ID
+        Dim tenantRow As DataRow = Property_ManagerDataSet.Tenants.Select($"ID = {tenantID}").FirstOrDefault()
+        Dim propertyID As Integer = Integer.Parse(tenantRow("PropertyID").ToString())
+        'Add one month to the DueDate value and store it back in the tenants table
+        Dim DueDate As Date = Date.Parse(tenantRow("RentDue").ToString())
+        Dim NewDueDate As Date = DueDate.AddMonths(1)
+        tenantRow("RentDue") = NewDueDate.ToString("MM/dd/yyyy")
+        Try
+            TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
+            Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
+        Catch ex As Exception
+            MessageBox.Show("An error occurred: " & ex.Message)
+        End Try
+        ' Define the connection string
+        Using connection As New OleDb.OleDbConnection(connectionString)
+            connection.Open()
+            Dim transaction As OleDb.OleDbTransaction = connection.BeginTransaction()
+            Try
+                ' Create a command object
+                Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
+                ' Add parameters to the command
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", txtPaymentDate.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.SelectedValue))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", txtPaymentIDNumber.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Amount", AmountPaid))
+                command.Parameters.Add(New OleDb.OleDbParameter("Tenant", tenantID))
+                command.Parameters.Add(New OleDb.OleDbParameter("Property", propertyID))
+                command.Parameters.Add(New OleDb.OleDbParameter("TakenBy", User))
+                command.Parameters.Add(New OleDb.OleDbParameter("Notes", txtNotes.Text))
+                Try
+                    ' Execute the command
+                    command.ExecuteNonQuery()
+                    transaction.Commit()
+                    PaymentsTableAdapter.Update(Property_ManagerDataSet.Payments)
+                    Property_ManagerDataSet.Tables("Payments").AcceptChanges()
+                    MessageBox.Show("Payment recorded successfully.")
+                Catch ex As Exception
+                    ' Handle any errors that may have occurred
+                    If transaction.Connection IsNot Nothing Then
+                        transaction.Rollback()
+                    End If
+                    MessageBox.Show("An error occurred: " & ex.Message)
+                End Try
+            Finally
+                ' Ensure the connection is closed
+                'collect the max payment id from the payments table and assign it to PaymentID
+
+                Dim command As New OleDb.OleDbCommand("SELECT MAX(ID) FROM Payments", connection)
+                Dim adapter As New OleDb.OleDbDataAdapter(command)
+                Try
+                    paymentID = command.ExecuteScalar()
+                Catch ex As Exception
+                    MessageBox.Show("An error occurred: " & ex.Message)
+                End Try
+
+                connection.Close()
+            End Try
+        End Using
+
+        ' Create a PrintDocument object and handle its PrintPage event
+        Dim printDocument As New Printing.PrintDocument()
+        AddHandler printDocument.PrintPage, AddressOf PrintReceipt
+
+        ' Create a PrintPreviewDialog object and set its Document property
+        Dim printPreviewDialog As New PrintPreviewDialog()
+        printPreviewDialog.Document = printDocument
+
+        ' Show the print preview dialog
+        printPreviewDialog.ShowDialog()
+
+        Me.Close()
+    End Sub
+
+    Private Sub PrintReceipt(sender As Object, e As Printing.PrintPageEventArgs)
+        ' Ensure the dataset is filled with data
+        Dim connection As New OleDbConnection(connectionString)
+        connection.Open()
+        Dim command As New OleDbCommand("SELECT * FROM Company WHERE ID = 1", connection)
+        Dim adapter As New OleDbDataAdapter(command)
+        Dim companyTable As New DataTable()
+        adapter.Fill(companyTable)
+        connection.Close()
+
+        ' Get company details from the company table
+        Dim companyRow As DataRow = companyTable.Rows(0)
+        Dim companyName As String = companyRow("Company").ToString().ToUpper()
+        Dim address As String = companyRow("Address").ToString()
+        Dim address2 As String = companyRow("Address2").ToString()
+        Dim city As String = companyRow("City").ToString()
+        Dim state As String = companyRow("State").ToString()
+        Dim zip As String = companyRow("Zip").ToString()
+        Dim phone As String = companyRow("Phone").ToString()
+        Dim fax As String = companyRow("Fax").ToString()
+
+        ' Print the company details at the top of the receipt
+        Dim companyDetails As String = $"{companyName}" & Environment.NewLine &
+                                       $"{address} {address2}" & Environment.NewLine &
+                                       $"{city}, {state} {zip}" & Environment.NewLine &
+                                       $"Phone: {phone} Fax: {fax}" & Environment.NewLine & Environment.NewLine &
+        "Receipt No: 1001" & PaymentID
+        ' Print the receipt with Tenant Name, Payment Date, Payment Type, Amount Paid, and Notes
+        Dim tenantName As String = txtFName.Text & " " & txtLName.Text
+        Dim paymentDate As String = txtPaymentDate.Text
+        Dim paymentType As String = cboPaymentType.Text
+        Dim amountPaid As String = Convert.ToDecimal(txtAmount.Text).ToString("C")
+        Dim notes As String = txtNotes.Text
+
+        Dim receipt As String = $"Tenant Name: {tenantName}" & Environment.NewLine &
+                                $"Payment Date: {paymentDate}" & Environment.NewLine &
+                                $"Payment Type: {paymentType}" & Environment.NewLine &
+                                $"Amount Paid: {amountPaid}" & Environment.NewLine &
+                                $"Notes: {notes}"
+
+        ' Draw the company details and receipt on the print document
+        e.Graphics.DrawString(companyDetails, New Font("Arial", 12, FontStyle.Bold), Brushes.Black, New PointF(100, 50))
+        e.Graphics.DrawString(receipt, New Font("Arial", 12), Brushes.Black, New PointF(100, 250))
+
+        ' Draw the signature line at the bottom of the receipt
+        e.Graphics.DrawString("Signature: _______________________", New Font("Arial", 12), Brushes.Black, New PointF(100, 500))
+    End Sub
+
+
+
 End Class

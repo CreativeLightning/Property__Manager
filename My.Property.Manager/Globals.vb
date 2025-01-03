@@ -8,6 +8,10 @@
     Public VendorID As Integer ' Vendor ID
     Public ByVendor As Boolean = False ' Work Order By Vendor Search Flag
     Public PropertyID As Integer ' Property ID
+    Public PaymentID As Integer ' Payment ID
+    Public Rent As String
+    Public DueDate As String
+    Public CompanyID As Integer = 1
     Public connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Public UsersTableAdapter As New Property_ManagerDataSetTableAdapters.UsersTableAdapter()
     Public PropertiesTableAdapter As New Property_ManagerDataSetTableAdapters.PropertiesTableAdapter()

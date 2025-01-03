@@ -1,4 +1,6 @@
 Imports System.Windows.Forms
+Imports My_Property_Manager.Property_ManagerDataSet
+Imports My_Property_Manager.Property_ManagerDataSetTableAdapters
 
 Public Class frmLogin
     Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
@@ -38,8 +40,19 @@ Public Class frmLogin
             Admin = userRow.Admin
             Dim form1 As New Form1()
             Login = True
-            form1.Show()
-            Me.Hide()
+            'If company field is empty in the first record of the company table, show company form
+            Dim companyAdapter As New CompanyTableAdapter()
+            Dim companyTable As New CompanyDataTable()
+            companyAdapter.Fill(companyTable)
+            If companyTable.Rows.Count > 0 AndAlso String.IsNullOrEmpty(companyTable.Rows(0)("Company").ToString()) Then
+                form1.Show()
+                frmCompany.Show()
+                Me.Hide()
+            Else
+                form1.Show()
+                Me.Hide()
+            End If
+
         Else
             MessageBox.Show("Invalid username or password.")
             lblForgotPassword.Visible = True
@@ -50,5 +63,7 @@ Public Class frmLogin
         Application.Exit()
     End Sub
 
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

@@ -181,7 +181,7 @@
         End If
         If txtStartDate.Text = "" Then
             MessageBox.Show("Start Date is required")
-            txtStartDate.Text = Date.Today
+            txtStartDate.Text = Date.Today.ToString("MM/dd/yyyy")
             Exit Sub
         End If
 
@@ -372,5 +372,13 @@
 
     Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
 
+    End Sub
+
+    Private Sub btnExit_Click_1(sender As Object, e As EventArgs) Handles btnExit.Click
+        Dim response As MsgBoxResult
+        response = MsgBox("Are you sure you want to exit?", MsgBoxStyle.YesNo, "Exit")
+        If response = MsgBoxResult.Yes Then
+            Application.Exit()
+        End If
     End Sub
 End Class

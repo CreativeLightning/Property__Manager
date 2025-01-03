@@ -1,5 +1,4 @@
 Public Class frmSetupUser
-    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\db\Property_Manager.accdb"
     Private UsersTableAdapter As New Property_ManagerDataSetTableAdapters.UsersTableAdapter()
     Public Property Property_ManagerDataSet As New Property_ManagerDataSet()
     Private Sub frmSetupUser_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
