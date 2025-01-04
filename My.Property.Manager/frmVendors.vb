@@ -198,43 +198,44 @@ Public Class frmVendors
         End Using
         cboVendors.SelectedIndex = 0
         If HelpMessages = True Then
-            MsgBox("The new Vendor has been added.")
+            MsgBox("The new Vendor has been added. If you added this Vendor to create a New Work Order, Click on New Work Order again.")
         End If
+    End Sub
+
+    Private Sub FormatPhoneNumber(textBox As TextBox)
+        ' Remove any non-numeric characters
+        Dim digitsOnly As String = New String(textBox.Text.Where(Function(c) Char.IsDigit(c)).ToArray())
+
+
+        ' Format the phone number with parentheses and a hyphen
+        Dim formattedPhoneNumber As String = ""
+        If digitsOnly.Length > 0 Then
+            formattedPhoneNumber = "(" & digitsOnly.Substring(0, Math.Min(3, digitsOnly.Length))
+        End If
+        If digitsOnly.Length > 3 Then
+            formattedPhoneNumber &= ") " & digitsOnly.Substring(3, Math.Min(3, digitsOnly.Length - 3))
+        End If
+        If digitsOnly.Length > 6 Then
+            formattedPhoneNumber &= "-" & digitsOnly.Substring(6, Math.Min(4, digitsOnly.Length - 6))
+        End If
+        If digitsOnly.Length > 10 Then
+            formattedPhoneNumber &= " " & digitsOnly.Substring(10)
+        End If
+
+        ' Update the text box with the formatted phone number
+        textBox.Text = formattedPhoneNumber
+        textBox.SelectionStart = textBox.Text.Length ' Set the cursor to the end of the text
     End Sub
 
     Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
-        'Format the Phone Number as (###) ###-####
-        If txtPhone.Text.Length = 3 Then
-            txtPhone.Text = "(" & txtPhone.Text & ") "
-            txtPhone.SelectionStart = txtPhone.Text.Length
-        ElseIf txtPhone.Text.Length = 9 Then
-            txtPhone.Text = txtPhone.Text & "-"
-            txtPhone.SelectionStart = txtPhone.Text.Length
-        End If
+        FormatPhoneNumber(txtPhone)
     End Sub
 
     Private Sub txtPhone2_TextChanged(sender As Object, e As EventArgs) Handles txtPhone2.TextChanged
-        'Format the Phone Number as (###) ###-####
-        If txtPhone2.Text.Length = 3 Then
-            txtPhone2.Text = "(" & txtPhone2.Text & ") "
-            txtPhone2.SelectionStart = txtPhone2.Text.Length
-        ElseIf txtPhone2.Text.Length = 9 Then
-            txtPhone2.Text = txtPhone2.Text & "-"
-            txtPhone2.SelectionStart = txtPhone2.Text.Length
-        End If
+        FormatPhoneNumber(txtPhone2)
     End Sub
 
     Private Sub txtFax_TextChanged(sender As Object, e As EventArgs) Handles txtFax.TextChanged
-        'Format the Fax Number as (###) ###-####
-        If txtFax.Text.Length = 3 Then
-            txtFax.Text = "(" & txtFax.Text & ") "
-            txtFax.SelectionStart = txtFax.Text.Length
-        ElseIf txtFax.Text.Length = 9 Then
-            txtFax.Text = txtFax.Text & "-"
-            txtFax.SelectionStart = txtFax.Text.Length
-        End If
-        If txtPhone.Text.Length = 14 Then
-            txtPhone2.Focus()
-        End If
+        FormatPhoneNumber(txtFax)
     End Sub
 End Class

@@ -17,6 +17,7 @@ Public Class Form1
             btnCharges.Enabled = False
             btnUsers.Enabled = False
             btnCompany.Enabled = False
+            btnExpense.Enabled = False
         End If
 
     End Sub

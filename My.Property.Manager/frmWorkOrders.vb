@@ -638,4 +638,8 @@ Public Class frmWorkOrders
         lblChoose.Visible = False
         cboProperties.Visible = False
     End Sub
+
+    Private Sub btnVendors_Click(sender As Object, e As EventArgs) Handles btnVendors.Click
+        frmVendors.Show()
+    End Sub
 End Class

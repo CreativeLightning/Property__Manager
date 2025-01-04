@@ -485,8 +485,7 @@ Public Class frmTenants
         lblTenantName.Text = "Tenant Name: " & cboTenants.SelectedItem.ToString()
         ' Fill cboPaymentType with data from PaymentTypesTableAdapter
         cboPaymentType.DataSource = Me.Property_ManagerDataSet.PaymentTypes
-        cboPaymentType.DisplayMember = "PaymentType"
-        cboPaymentType.ValueMember = "ID"
+        cboPaymentType.DisplayMember = "Type"
 
     End Sub
 
@@ -545,7 +544,7 @@ Public Class frmTenants
 
                 ' Add parameters to the command
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", txtPaymentDate.Text))
-                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.SelectedValue))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", txtPaymentIDNumber.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("Amount", amountValue))
                 command.Parameters.Add(New OleDb.OleDbParameter("Tenant", tenantID))
@@ -734,7 +733,7 @@ Public Class frmTenants
                 Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
                 ' Add parameters to the command
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", txtPaymentDate.Text))
-                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.SelectedValue))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", txtPaymentIDNumber.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("Amount", AmountPaid))
                 command.Parameters.Add(New OleDb.OleDbParameter("Tenant", tenantID))

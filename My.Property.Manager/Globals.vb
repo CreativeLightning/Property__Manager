@@ -9,6 +9,9 @@
     Public ByVendor As Boolean = False ' Work Order By Vendor Search Flag
     Public PropertyID As Integer ' Property ID
     Public PaymentID As Integer ' Payment ID
+    Public TenantID As Integer ' Tenant ID
+    Public TenantName As String ' Tenant Name
+    Public TenantTotalPaid As Decimal ' Tenant Total Paid
     Public Rent As String
     Public DueDate As String
     Public CompanyID As Integer = 1

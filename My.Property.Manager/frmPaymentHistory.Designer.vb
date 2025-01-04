@@ -36,7 +36,9 @@ Partial Class frmPaymentHistory
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnHome = New System.Windows.Forms.Button()
+        Me.btnAllTenantPayments = New System.Windows.Forms.Button()
         Me.gboxPaymentInformation.SuspendLayout()
+        Me.grpTenantPayments.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -58,7 +60,6 @@ Partial Class frmPaymentHistory
         Me.gboxPaymentInformation.TabIndex = 2
         Me.gboxPaymentInformation.TabStop = False
         Me.gboxPaymentInformation.Text = "Payment Information"
-        Me.gboxPaymentInformation.Visible = False
         '
         'grpPropertyPayments
         '
@@ -68,15 +69,18 @@ Partial Class frmPaymentHistory
         Me.grpPropertyPayments.TabIndex = 9
         Me.grpPropertyPayments.TabStop = False
         Me.grpPropertyPayments.Text = "Payments by Property"
+        Me.grpPropertyPayments.Visible = False
         '
         'grpTenantPayments
         '
+        Me.grpTenantPayments.Controls.Add(Me.btnAllTenantPayments)
         Me.grpTenantPayments.Location = New System.Drawing.Point(28, 99)
         Me.grpTenantPayments.Name = "grpTenantPayments"
         Me.grpTenantPayments.Size = New System.Drawing.Size(241, 238)
         Me.grpTenantPayments.TabIndex = 8
         Me.grpTenantPayments.TabStop = False
         Me.grpTenantPayments.Text = "Payments by Tenant"
+        Me.grpTenantPayments.Visible = False
         '
         'Label3
         '
@@ -173,11 +177,20 @@ Partial Class frmPaymentHistory
         Me.btnHome.Text = "Home"
         Me.btnHome.UseVisualStyleBackColor = True
         '
+        'btnAllTenantPayments
+        '
+        Me.btnAllTenantPayments.Location = New System.Drawing.Point(6, 19)
+        Me.btnAllTenantPayments.Name = "btnAllTenantPayments"
+        Me.btnAllTenantPayments.Size = New System.Drawing.Size(229, 23)
+        Me.btnAllTenantPayments.TabIndex = 0
+        Me.btnAllTenantPayments.Text = "Print All Payment History"
+        Me.btnAllTenantPayments.UseVisualStyleBackColor = True
+        '
         'frmPaymentHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(705, 444)
         Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.gboxPaymentInformation)
@@ -186,6 +199,7 @@ Partial Class frmPaymentHistory
         Me.Text = "Payment History"
         Me.gboxPaymentInformation.ResumeLayout(False)
         Me.gboxPaymentInformation.PerformLayout()
+        Me.grpTenantPayments.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -205,4 +219,5 @@ Partial Class frmPaymentHistory
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents btnExit As Button
     Friend WithEvents btnHome As Button
+    Friend WithEvents btnAllTenantPayments As Button
 End Class

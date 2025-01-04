@@ -34,11 +34,13 @@ Partial Class Form1
         Me.btnTenants = New System.Windows.Forms.Button()
         Me.btnPayments = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
+        Me.btnExpense = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnExpense)
         Me.GroupBox1.Controls.Add(Me.btnCompany)
         Me.GroupBox1.Controls.Add(Me.btnUsers)
         Me.GroupBox1.Controls.Add(Me.chkHelpMessages)
@@ -58,7 +60,7 @@ Partial Class Form1
         '
         'btnCompany
         '
-        Me.btnCompany.Location = New System.Drawing.Point(7, 137)
+        Me.btnCompany.Location = New System.Drawing.Point(6, 79)
         Me.btnCompany.Name = "btnCompany"
         Me.btnCompany.Size = New System.Drawing.Size(75, 23)
         Me.btnCompany.TabIndex = 11
@@ -89,7 +91,7 @@ Partial Class Form1
         'btnCharges
         '
         Me.btnCharges.Enabled = False
-        Me.btnCharges.Location = New System.Drawing.Point(6, 79)
+        Me.btnCharges.Location = New System.Drawing.Point(87, 137)
         Me.btnCharges.Name = "btnCharges"
         Me.btnCharges.Size = New System.Drawing.Size(75, 23)
         Me.btnCharges.TabIndex = 5
@@ -107,7 +109,7 @@ Partial Class Form1
         '
         'btnEmployees
         '
-        Me.btnEmployees.Location = New System.Drawing.Point(6, 108)
+        Me.btnEmployees.Location = New System.Drawing.Point(7, 108)
         Me.btnEmployees.Name = "btnEmployees"
         Me.btnEmployees.Size = New System.Drawing.Size(75, 23)
         Me.btnEmployees.TabIndex = 7
@@ -147,7 +149,7 @@ Partial Class Form1
         Me.btnPayments.Name = "btnPayments"
         Me.btnPayments.Size = New System.Drawing.Size(75, 23)
         Me.btnPayments.TabIndex = 3
-        Me.btnPayments.Text = "Payments"
+        Me.btnPayments.Text = "Pay History"
         Me.btnPayments.UseVisualStyleBackColor = True
         '
         'btnExit
@@ -158,6 +160,15 @@ Partial Class Form1
         Me.btnExit.TabIndex = 9
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
+        '
+        'btnExpense
+        '
+        Me.btnExpense.Location = New System.Drawing.Point(7, 136)
+        Me.btnExpense.Name = "btnExpense"
+        Me.btnExpense.Size = New System.Drawing.Size(75, 23)
+        Me.btnExpense.TabIndex = 12
+        Me.btnExpense.Text = "Expenses"
+        Me.btnExpense.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -188,4 +199,5 @@ Partial Class Form1
     Friend WithEvents chkHelpMessages As CheckBox
     Friend WithEvents btnUsers As Button
     Friend WithEvents btnCompany As Button
+    Friend WithEvents btnExpense As Button
 End Class

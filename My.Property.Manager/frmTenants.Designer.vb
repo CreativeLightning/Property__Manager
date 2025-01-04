@@ -61,6 +61,7 @@ Partial Class frmTenants
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.grpPayment = New System.Windows.Forms.GroupBox()
+        Me.btnRecordPaymentPrintReceipt = New System.Windows.Forms.Button()
         Me.txtPaymentDate = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.Button()
@@ -82,7 +83,6 @@ Partial Class frmTenants
         Me.txtRent = New System.Windows.Forms.TextBox()
         Me.txtDeposit = New System.Windows.Forms.TextBox()
         Me.chkDepositPaid = New System.Windows.Forms.CheckBox()
-        Me.btnRecordPaymentPrintReceipt = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpTenantInfo.SuspendLayout()
@@ -475,6 +475,15 @@ Partial Class frmTenants
         Me.grpPayment.TabStop = False
         Me.grpPayment.Text = "Payment Information"
         '
+        'btnRecordPaymentPrintReceipt
+        '
+        Me.btnRecordPaymentPrintReceipt.Location = New System.Drawing.Point(87, 181)
+        Me.btnRecordPaymentPrintReceipt.Name = "btnRecordPaymentPrintReceipt"
+        Me.btnRecordPaymentPrintReceipt.Size = New System.Drawing.Size(192, 23)
+        Me.btnRecordPaymentPrintReceipt.TabIndex = 63
+        Me.btnRecordPaymentPrintReceipt.Text = "Record Payment and Print Receipt"
+        Me.btnRecordPaymentPrintReceipt.UseVisualStyleBackColor = True
+        '
         'txtPaymentDate
         '
         Me.txtPaymentDate.Location = New System.Drawing.Point(84, 46)
@@ -669,18 +678,9 @@ Partial Class frmTenants
         Me.chkDepositPaid.UseVisualStyleBackColor = True
         Me.chkDepositPaid.Visible = False
         '
-        'btnRecordPaymentPrintReceipt
-        '
-        Me.btnRecordPaymentPrintReceipt.Location = New System.Drawing.Point(87, 181)
-        Me.btnRecordPaymentPrintReceipt.Name = "btnRecordPaymentPrintReceipt"
-        Me.btnRecordPaymentPrintReceipt.Size = New System.Drawing.Size(192, 23)
-        Me.btnRecordPaymentPrintReceipt.TabIndex = 63
-        Me.btnRecordPaymentPrintReceipt.Text = "Record Payment and Print Receipt"
-        Me.btnRecordPaymentPrintReceipt.UseVisualStyleBackColor = True
-        '
         'frmTenants
         '
-        Me.ClientSize = New System.Drawing.Size(458, 458)
+        Me.ClientSize = New System.Drawing.Size(458, 454)
         Me.ControlBox = False
         Me.Controls.Add(Me.chkDepositPaid)
         Me.Controls.Add(Me.txtDeposit)

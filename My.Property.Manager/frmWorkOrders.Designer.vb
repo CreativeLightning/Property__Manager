@@ -76,8 +76,9 @@ Partial Class frmWorkOrders
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpByNumber = New System.Windows.Forms.GroupBox()
-        Me.txtWOID = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.txtWOID = New System.Windows.Forms.TextBox()
+        Me.btnVendors = New System.Windows.Forms.Button()
         Me.grpStartHere.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpNewWO.SuspendLayout()
@@ -215,6 +216,7 @@ Partial Class frmWorkOrders
         '
         'grpNewWO
         '
+        Me.grpNewWO.Controls.Add(Me.btnVendors)
         Me.grpNewWO.Controls.Add(Me.btnGetByProperty)
         Me.grpNewWO.Controls.Add(Me.btnViewCharges)
         Me.grpNewWO.Controls.Add(Me.btnAddCharges)
@@ -616,13 +618,6 @@ Partial Class frmWorkOrders
         Me.grpByNumber.Text = "Enter WO Number"
         Me.grpByNumber.Visible = False
         '
-        'txtWOID
-        '
-        Me.txtWOID.Location = New System.Drawing.Point(6, 19)
-        Me.txtWOID.Name = "txtWOID"
-        Me.txtWOID.Size = New System.Drawing.Size(100, 20)
-        Me.txtWOID.TabIndex = 0
-        '
         'btnSearch
         '
         Me.btnSearch.Location = New System.Drawing.Point(7, 46)
@@ -631,6 +626,22 @@ Partial Class frmWorkOrders
         Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
+        '
+        'txtWOID
+        '
+        Me.txtWOID.Location = New System.Drawing.Point(6, 19)
+        Me.txtWOID.Name = "txtWOID"
+        Me.txtWOID.Size = New System.Drawing.Size(100, 20)
+        Me.txtWOID.TabIndex = 0
+        '
+        'btnVendors
+        '
+        Me.btnVendors.Location = New System.Drawing.Point(372, 70)
+        Me.btnVendors.Name = "btnVendors"
+        Me.btnVendors.Size = New System.Drawing.Size(75, 23)
+        Me.btnVendors.TabIndex = 24
+        Me.btnVendors.Text = "Vendors"
+        Me.btnVendors.UseVisualStyleBackColor = True
         '
         'frmWorkOrders
         '
@@ -714,4 +725,5 @@ Partial Class frmWorkOrders
     Friend WithEvents grpByNumber As GroupBox
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtWOID As TextBox
+    Friend WithEvents btnVendors As Button
 End Class

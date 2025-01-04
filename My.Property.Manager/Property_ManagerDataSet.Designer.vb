@@ -4569,7 +4569,7 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddPaymentsRow(ByVal PaymentDate As String, ByVal PaymentType As Integer, ByVal PaymentIDNumber As String, ByVal Amount As Decimal, ByVal Tenant As String, ByVal _Property As String, ByVal TakenBy As Integer, ByVal DeletedReason As String, ByVal DeletedBy As Integer, ByVal Notes As String, ByVal Deleted As Boolean) As PaymentsRow
+        Public Overloads Function AddPaymentsRow(ByVal PaymentDate As String, ByVal PaymentType As String, ByVal PaymentIDNumber As String, ByVal Amount As Decimal, ByVal Tenant As String, ByVal _Property As String, ByVal TakenBy As Integer, ByVal DeletedReason As String, ByVal DeletedBy As Integer, ByVal Notes As String, ByVal Deleted As Boolean) As PaymentsRow
             Dim rowPaymentsRow As PaymentsRow = CType(Me.NewRow,PaymentsRow)
             Dim columnValuesArray() As Object = New Object() {Nothing, PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, _Property, TakenBy, DeletedReason, DeletedBy, Notes, Deleted}
             rowPaymentsRow.ItemArray = columnValuesArray
@@ -4621,7 +4621,7 @@ Partial Public Class Property_ManagerDataSet
             MyBase.Columns.Add(Me.columnID)
             Me.columnPaymentDate = New Global.System.Data.DataColumn("PaymentDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPaymentDate)
-            Me.columnPaymentType = New Global.System.Data.DataColumn("PaymentType", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnPaymentType = New Global.System.Data.DataColumn("PaymentType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPaymentType)
             Me.columnPaymentIDNumber = New Global.System.Data.DataColumn("PaymentIDNumber", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPaymentIDNumber)
@@ -4651,6 +4651,7 @@ Partial Public Class Property_ManagerDataSet
             Me.columnID.AllowDBNull = false
             Me.columnID.Unique = true
             Me.columnPaymentDate.MaxLength = 255
+            Me.columnPaymentType.MaxLength = 255
             Me.columnPaymentIDNumber.MaxLength = 255
             Me.columnTenant.MaxLength = 255
             Me.columnProperty.MaxLength = 255
@@ -4797,6 +4798,8 @@ Partial Public Class Property_ManagerDataSet
         
         Private columnPaymentType As Global.System.Data.DataColumn
         
+        Private columnType As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -4849,6 +4852,14 @@ Partial Public Class Property_ManagerDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -4885,9 +4896,9 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddPaymentTypesRow(ByVal PaymentType As String) As PaymentTypesRow
+        Public Overloads Function AddPaymentTypesRow(ByVal PaymentType As String, ByVal Type As String) As PaymentTypesRow
             Dim rowPaymentTypesRow As PaymentTypesRow = CType(Me.NewRow,PaymentTypesRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, PaymentType}
+            Dim columnValuesArray() As Object = New Object() {Nothing, PaymentType, Type}
             rowPaymentTypesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPaymentTypesRow)
             Return rowPaymentTypesRow
@@ -4918,6 +4929,7 @@ Partial Public Class Property_ManagerDataSet
         Friend Sub InitVars()
             Me.columnID = MyBase.Columns("ID")
             Me.columnPaymentType = MyBase.Columns("PaymentType")
+            Me.columnType = MyBase.Columns("Type")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4927,6 +4939,8 @@ Partial Public Class Property_ManagerDataSet
             MyBase.Columns.Add(Me.columnID)
             Me.columnPaymentType = New Global.System.Data.DataColumn("PaymentType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPaymentType)
+            Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnType)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
@@ -4934,6 +4948,7 @@ Partial Public Class Property_ManagerDataSet
             Me.columnID.AllowDBNull = false
             Me.columnID.Unique = true
             Me.columnPaymentType.MaxLength = 255
+            Me.columnType.MaxLength = 255
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10876,10 +10891,10 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property PaymentType() As Integer
+        Public Property PaymentType() As String
             Get
                 Try 
-                    Return CType(Me(Me.tablePayments.PaymentTypeColumn),Integer)
+                    Return CType(Me(Me.tablePayments.PaymentTypeColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'PaymentType' in table 'Payments' is DBNull.", e)
                 End Try
@@ -11200,6 +11215,21 @@ Partial Public Class Property_ManagerDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property Type() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePaymentTypes.TypeColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Type' in table 'PaymentTypes' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePaymentTypes.TypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Function IsPaymentTypeNull() As Boolean
             Return Me.IsNull(Me.tablePaymentTypes.PaymentTypeColumn)
         End Function
@@ -11208,6 +11238,18 @@ Partial Public Class Property_ManagerDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetPaymentTypeNull()
             Me(Me.tablePaymentTypes.PaymentTypeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function IsTypeNull() As Boolean
+            Return Me.IsNull(Me.tablePaymentTypes.TypeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub SetTypeNull()
+            Me(Me.tablePaymentTypes.TypeColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -19933,7 +19975,7 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentIDNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentIDNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentIDNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentIDNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Amount", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Original, true, Nothing))
@@ -19955,7 +19997,7 @@ Namespace Property_ManagerDataSetTableAdapters
                 "ed`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentIDNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentIDNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Amount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Tenant", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Tenant", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -19979,7 +20021,7 @@ Namespace Property_ManagerDataSetTableAdapters
                 "ed` IS NULL) OR (`Deleted` = ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentIDNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentIDNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Amount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Tenant", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Tenant", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -19993,7 +20035,7 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentDate", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentDate", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentDate", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentDate", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentIDNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentIDNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentIDNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentIDNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Amount", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Amount", Global.System.Data.DataRowVersion.Original, true, Nothing))
@@ -20084,7 +20126,7 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_PaymentDate As String, ByVal Original_PaymentType As Global.System.Nullable(Of Integer), ByVal Original_PaymentIDNumber As String, ByVal Original_Amount As Global.System.Nullable(Of Decimal), ByVal Original_Tenant As String, ByVal Original_Property As String, ByVal Original_TakenBy As Global.System.Nullable(Of Integer), ByVal Original_DeletedBy As Global.System.Nullable(Of Integer), ByVal Original_Deleted As Boolean) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_PaymentDate As String, ByVal Original_PaymentType As String, ByVal Original_PaymentIDNumber As String, ByVal Original_Amount As Global.System.Nullable(Of Decimal), ByVal Original_Tenant As String, ByVal Original_Property As String, ByVal Original_TakenBy As Global.System.Nullable(Of Integer), ByVal Original_DeletedBy As Global.System.Nullable(Of Integer), ByVal Original_Deleted As Boolean) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
             If (Original_PaymentDate Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -20093,12 +20135,12 @@ Namespace Property_ManagerDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_PaymentDate,String)
             End If
-            If (Original_PaymentType.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_PaymentType.Value,Integer)
-            Else
+            If (Original_PaymentType Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_PaymentType,String)
             End If
             If (Original_PaymentIDNumber Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
@@ -20163,16 +20205,16 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal PaymentDate As String, ByVal PaymentType As Global.System.Nullable(Of Integer), ByVal PaymentIDNumber As String, ByVal Amount As Global.System.Nullable(Of Decimal), ByVal Tenant As String, ByVal _Property As String, ByVal TakenBy As Global.System.Nullable(Of Integer), ByVal DeletedReason As String, ByVal DeletedBy As Global.System.Nullable(Of Integer), ByVal Notes As String, ByVal Deleted As Boolean) As Integer
+        Public Overloads Overridable Function Insert(ByVal PaymentDate As String, ByVal PaymentType As String, ByVal PaymentIDNumber As String, ByVal Amount As Global.System.Nullable(Of Decimal), ByVal Tenant As String, ByVal _Property As String, ByVal TakenBy As Global.System.Nullable(Of Integer), ByVal DeletedReason As String, ByVal DeletedBy As Global.System.Nullable(Of Integer), ByVal Notes As String, ByVal Deleted As Boolean) As Integer
             If (PaymentDate Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(PaymentDate,String)
             End If
-            If (PaymentType.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(PaymentType.Value,Integer)
-            Else
+            If (PaymentType Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(PaymentType,String)
             End If
             If (PaymentIDNumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
@@ -20236,7 +20278,7 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
         Public Overloads Overridable Function Update( _
                     ByVal PaymentDate As String,  _
-                    ByVal PaymentType As Global.System.Nullable(Of Integer),  _
+                    ByVal PaymentType As String,  _
                     ByVal PaymentIDNumber As String,  _
                     ByVal Amount As Global.System.Nullable(Of Decimal),  _
                     ByVal Tenant As String,  _
@@ -20248,7 +20290,7 @@ Namespace Property_ManagerDataSetTableAdapters
                     ByVal Deleted As Boolean,  _
                     ByVal Original_ID As Integer,  _
                     ByVal Original_PaymentDate As String,  _
-                    ByVal Original_PaymentType As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_PaymentType As String,  _
                     ByVal Original_PaymentIDNumber As String,  _
                     ByVal Original_Amount As Global.System.Nullable(Of Decimal),  _
                     ByVal Original_Tenant As String,  _
@@ -20261,10 +20303,10 @@ Namespace Property_ManagerDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(0).Value = CType(PaymentDate,String)
             End If
-            If (PaymentType.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(PaymentType.Value,Integer)
-            Else
+            If (PaymentType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(PaymentType,String)
             End If
             If (PaymentIDNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
@@ -20315,12 +20357,12 @@ Namespace Property_ManagerDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(12).Value = CType(0,Object)
                 Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_PaymentDate,String)
             End If
-            If (Original_PaymentType.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_PaymentType.Value,Integer)
-            Else
+            If (Original_PaymentType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_PaymentType,String)
             End If
             If (Original_PaymentIDNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(16).Value = CType(1,Object)
@@ -20511,29 +20553,37 @@ Namespace Property_ManagerDataSetTableAdapters
             tableMapping.DataSetTable = "PaymentTypes"
             tableMapping.ColumnMappings.Add("ID", "ID")
             tableMapping.ColumnMappings.Add("PaymentType", "PaymentType")
+            tableMapping.ColumnMappings.Add("Type", "Type")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM `PaymentTypes` WHERE ((`ID` = ?) AND ((? = 1 AND `PaymentType` IS NUL"& _ 
-                "L) OR (`PaymentType` = ?)))"
+                "L) OR (`PaymentType` = ?)) AND ((? = 1 AND `Type` IS NULL) OR (`Type` = ?)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Type", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO `PaymentTypes` (`PaymentType`) VALUES (?)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO `PaymentTypes` (`PaymentType`, `Type`) VALUES (?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE `PaymentTypes` SET `PaymentType` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `Pa"& _ 
-                "ymentType` IS NULL) OR (`PaymentType` = ?)))"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE `PaymentTypes` SET `PaymentType` = ?, `Type` = ? WHERE ((`ID` = ?) AND ((?"& _ 
+                " = 1 AND `PaymentType` IS NULL) OR (`PaymentType` = ?)) AND ((? = 1 AND `Type` I"& _ 
+                "S NULL) OR (`Type` = ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PaymentType", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PaymentType", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PaymentType", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Type", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Type", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Type", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -20549,7 +20599,7 @@ Namespace Property_ManagerDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ID, PaymentType FROM PaymentTypes"
+            Me._commandCollection(0).CommandText = "SELECT ID, PaymentType, Type FROM PaymentTypes"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -20609,7 +20659,7 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_PaymentType As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_PaymentType As String, ByVal Original_Type As String) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
             If (Original_PaymentType Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -20617,6 +20667,13 @@ Namespace Property_ManagerDataSetTableAdapters
             Else
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
                 Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_PaymentType,String)
+            End If
+            If (Original_Type Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Type,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -20637,11 +20694,16 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal PaymentType As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal PaymentType As String, ByVal Type As String) As Integer
             If (PaymentType Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(PaymentType,String)
+            End If
+            If (Type Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(Type,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -20662,19 +20724,31 @@ Namespace Property_ManagerDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal PaymentType As String, ByVal Original_ID As Integer, ByVal Original_PaymentType As String) As Integer
+        Public Overloads Overridable Function Update(ByVal PaymentType As String, ByVal Type As String, ByVal Original_ID As Integer, ByVal Original_PaymentType As String, ByVal Original_Type As String) As Integer
             If (PaymentType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(0).Value = CType(PaymentType,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Original_ID,Integer)
-            If (Original_PaymentType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            If (Type Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_PaymentType,String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Type,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Original_ID,Integer)
+            If (Original_PaymentType Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_PaymentType,String)
+            End If
+            If (Original_Type Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_Type,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
