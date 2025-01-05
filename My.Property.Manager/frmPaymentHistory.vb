@@ -27,6 +27,12 @@ Public Class frmPaymentHistory
         'search the database for the tenant name entered from the tenants table either fname or lname = txtSearchByTenant
         'connection string is defined in the module as ConnectionString
         'with results we fill cboTenants with fname and lname and ID from tenants table
+        'If txtSearchByTenant is empty exit the sub and clear cboTenants
+        If txtSearchByTenant.Text = "" Then
+            cboTenants.Items.Clear()
+            cboTenants.Text = ""
+            Exit Sub
+        End If
         'code is as follows
         con.ConnectionString = connectionString
         con.Open()
@@ -179,6 +185,45 @@ Public Class frmPaymentHistory
         e.Graphics.DrawString(paymentsDetails, New Font("Arial", 12), Brushes.Black, New PointF(100, 200))
         ' Print the total paid by the tenant
         e.Graphics.DrawString($"Total Paid: {TenantTotalPaid.ToString("C")}", New Font("Arial", 12, FontStyle.Bold), Brushes.Black, New PointF(100, 400))
+
+    End Sub
+
+    Private Sub txtSearchByStreet_TextChanged(sender As Object, e As EventArgs) Handles txtSearchByStreet.TextChanged
+        'search the database for Properties from the properties table where StreetName like txtSearchByStreet
+        'connection string is defined in the module as ConnectionString
+        'with results we fill cboProperties with ID, StreetNumber and StreetName from properties table
+        'If txtSearchByStreet is empty exit the sub and clear cboProperties
+        If txtSearchByStreet.Text = "" Then
+            cboProperties.Items.Clear()
+            cboProperties.Text = ""
+            Exit Sub
+        End If
+        'code is as follows
+        con.ConnectionString = connectionString
+        con.Open()
+        cmd.Connection = con
+        cmd.CommandText = "SELECT * FROM Properties WHERE StreetName LIKE '%" & txtSearchByStreet.Text & "%'"
+        'run the query
+        da.SelectCommand = cmd
+        Dim dt As New DataTable
+        da.Fill(dt)
+        'if there are no results, clear the combobox and display a message No Properties Found hide the groupbox
+        If dt.Rows.Count = 0 Then
+            cboProperties.Items.Clear()
+            cboProperties.Text = "No Properties Found"
+            grpPropertyPayments.Visible = False
+            con.Close()
+            Exit Sub
+        End If
+        'clear the combobox
+        cboProperties.Items.Clear()
+        'loop through the results and add them to the combobox as ID, StreetNumber, StreetName
+        For i As Integer = 0 To dt.Rows.Count - 1
+            Dim propertyInfo As String = dt.Rows(i).Item("ID") & " " & dt.Rows(i).Item("StreetNumber") & " " & dt.Rows(i).Item("StreetName")
+            cboProperties.Items.Add(propertyInfo)
+        Next
+        con.Close()
+        cboProperties.SelectedIndex = 0
 
     End Sub
 End Class
