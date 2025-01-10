@@ -23,6 +23,7 @@ Partial Class frmUsers
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.btnSaveNew = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -43,7 +44,6 @@ Partial Class frmUsers
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cboUsers = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnExit = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -76,6 +76,15 @@ Partial Class frmUsers
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "User Information"
+        '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(213, 199)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(75, 23)
+        Me.btnExit.TabIndex = 14
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
         '
         'btnSaveNew
         '
@@ -247,15 +256,6 @@ Partial Class frmUsers
         Me.Label1.Size = New System.Drawing.Size(65, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Select User:"
-        '
-        'btnExit
-        '
-        Me.btnExit.Location = New System.Drawing.Point(213, 199)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(75, 23)
-        Me.btnExit.TabIndex = 14
-        Me.btnExit.Text = "Exit"
-        Me.btnExit.UseVisualStyleBackColor = True
         '
         'frmUsers
         '

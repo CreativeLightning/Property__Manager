@@ -286,4 +286,8 @@ Public Class frmUsers
             Application.Exit()
         End If
     End Sub
+
+    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
+
+    End Sub
 End Class

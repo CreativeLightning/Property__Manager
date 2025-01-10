@@ -124,6 +124,8 @@ Public Class frmTenants
                     btnSave.Visible = True
                     TenantsTableAdapter.ClearBeforeFill = True
                     TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
+                    cboTenants.Items.Clear()
+                    cboTenants.Text = "No tenants found"
                 Catch ex As Exception
                     ' Handle any errors that may have occurred
                     If transaction.Connection IsNot Nothing Then
@@ -163,17 +165,8 @@ Public Class frmTenants
         btnCancel.Visible = True
         grpSearch.Visible = False
         btnSave.Visible = False
-        txtFName.Text = ""
-        txtLName.Text = ""
-        txtSSN.Text = ""
-        txtPhone.Text = ""
-        txtPhone2.Text = ""
-        txtPhone3.Text = ""
-        txtDOB.Text = ""
-        txtNotes.Text = ""
-        lblRentAmount.Visible = False
-        txtRentAmount.Visible = False
-        txtRentAmount.Text = ""
+        ClearTextboxes()
+        grpRentInfo.Visible = False
     End Sub
 
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
@@ -309,12 +302,10 @@ Public Class frmTenants
             txtNotes.Text = tenantRow("Notes").ToString()
             Rent = tenantRow("Rent").ToString()
             If Rent > 0 Then
-                lblRentAmount.Visible = True
-                txtRentAmount.Visible = True
+                grpRentInfo.Visible = True
                 txtRentAmount.Text = Rent
             Else
-                lblRentAmount.Visible = False
-                txtRentAmount.Visible = False
+                grpRentInfo.Visible = False
             End If
             txtRentAmount.Text = Rent
             DueDate = tenantRow("RentDue").ToString()
@@ -328,27 +319,13 @@ Public Class frmTenants
                 lblProperty.Text = $"{streetNumber} {streetName} - Rent Due: {Date.Parse(DueDate).ToString("MM/dd/yyyy")} Amount: {Decimal.Parse(Rent).ToString("C")}"
                 btnTakePayment.Visible = True
                 cboPickProperty.Visible = False
-                btnAssign.Visible = False
-                lblRentDue.Visible = False
-                txtRentDue.Visible = False
-                txtDeposit.Visible = False
-                txtRent.Visible = False
-                lblRent.Visible = False
-                lblDeposit.Visible = False
-                chkDepositPaid.Visible = False
+                grpRentInfo.Visible = False
             Else
                 lblProperty.Text = "Choose Property"
                 btnTakePayment.Visible = False
                 FillcboPickProperty()
                 cboPickProperty.Visible = True
-                btnAssign.Visible = True
-                lblRentDue.Visible = True
-                txtRentDue.Visible = True
-                txtDeposit.Visible = True
-                txtRent.Visible = True
-                lblRent.Visible = True
-                lblDeposit.Visible = True
-                chkDepositPaid.Visible = True
+                grpRentInfo.Visible = True
             End If
         End If
     End Sub
@@ -610,30 +587,84 @@ Public Class frmTenants
                 TenantsTableAdapter.Update(Property_ManagerDataSet.Tenants)
                 Property_ManagerDataSet.Tables("Tenants").AcceptChanges()
                 MessageBox.Show("Property and Amounts assigned successfully.")
-                TenantsTableAdapter.ClearBeforeFill = True
-                TenantsTableAdapter.Fill(Me.Property_ManagerDataSet.Tenants)
-                btnAssign.Visible = False
                 cboPickProperty.Visible = False
                 btnTakePayment.Visible = True
-                lblRentDue.Visible = False
-                txtRentDue.Visible = False
-
-                txtRent.Text = ""
-                txtDeposit.Text = ""
-                txtDeposit.Visible = False
-                txtRent.Visible = False
-                lblRent.Visible = False
-                lblDeposit.Visible = False
-                chkDepositPaid.Visible = False
+                grpRentInfo.Visible = False
                 btnTakePayment.Visible = False
                 lblProperty.Text = ""
                 txtSearch.Text = ""
                 cboTenants.Text = "No tenants found"
                 ClearTextboxes()
                 lblProperty.Text = $"{cboPickProperty.SelectedItem.ToString()}"
+                'Record a payment in the payments table for the rent amount
+                ' Define the connection string
+                Using connection As New OleDb.OleDbConnection(connectionString)
+                    connection.Open()
+                    Dim transaction As OleDb.OleDbTransaction = connection.BeginTransaction()
+                    ' Create a command object
+                    Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
+                    ' Add parameters to the command
+                    command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", Date.Today.ToString("MM/dd/yyyy")))
+                    command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", "Rent"))
+                    command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", "0"))
+                    command.Parameters.Add(New OleDb.OleDbParameter("Amount", txtRent.Text))
+                    command.Parameters.Add(New OleDb.OleDbParameter("Tenant", tenantID))
+                    command.Parameters.Add(New OleDb.OleDbParameter("Property", propertyIndex + 1))
+                    command.Parameters.Add(New OleDb.OleDbParameter("TakenBy", User))
+                    command.Parameters.Add(New OleDb.OleDbParameter("Notes", "Rent Payment"))
+                    Try
+                        ' Execute the command
+                        command.ExecuteNonQuery()
+                        transaction.Commit()
+                        PaymentsTableAdapter.Update(Property_ManagerDataSet.Payments)
+                        Property_ManagerDataSet.Tables("Payments").AcceptChanges()
+                        If HelpMessages Then
+                            MessageBox.Show("Rent Payment recorded successfully.")
+                        End If
+                    Catch ex As Exception
+                        ' Handle any errors that may have occurred
+                        If transaction.Connection IsNot Nothing Then
+                            transaction.Rollback()
+                        End If
+                        MessageBox.Show("An error occurred: " & ex.Message)
+                    End Try
+                End Using
             Catch ex As Exception
                 MessageBox.Show("An error occurred: " & ex.Message)
             End Try
+            'Record a payment in the payments table for the deposit amount
+            ' Define the connection string
+            Using connection As New OleDb.OleDbConnection(connectionString)
+                connection.Open()
+                Dim transaction As OleDb.OleDbTransaction = connection.BeginTransaction()
+                ' Create a command object
+                Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
+                ' Add parameters to the command
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", Date.Today.ToString("MM/dd/yyyy")))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", "Deposit"))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", "0"))
+                command.Parameters.Add(New OleDb.OleDbParameter("Amount", txtDeposit.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("Tenant", tenantID))
+                command.Parameters.Add(New OleDb.OleDbParameter("Property", propertyIndex + 1))
+                command.Parameters.Add(New OleDb.OleDbParameter("TakenBy", User))
+                command.Parameters.Add(New OleDb.OleDbParameter("Notes", "Deposit Payment"))
+                Try
+                    ' Execute the command
+                    command.ExecuteNonQuery()
+                    transaction.Commit()
+                    PaymentsTableAdapter.Update(Property_ManagerDataSet.Payments)
+                    Property_ManagerDataSet.Tables("Payments").AcceptChanges()
+                    If HelpMessages Then
+                        MessageBox.Show("Deposit Payment recorded successfully.")
+                    End If
+                Catch ex As Exception
+                    ' Handle any errors that may have occurred
+                    If transaction.Connection IsNot Nothing Then
+                        transaction.Rollback()
+                    End If
+                    MessageBox.Show("An error occurred: " & ex.Message)
+                End Try
+            End Using
         End If
     End Sub
 
@@ -672,7 +703,7 @@ Public Class frmTenants
         End If
     End Sub
 
-    Private Sub txtRentDue_TextChanged(sender As Object, e As EventArgs) Handles txtRentDue.TextChanged
+    Private Sub txtRentDue_TextChanged(sender As Object, e As EventArgs)
         'format the rent due text box as date 00/00/0000
         Dim text As String = txtRentDue.Text
         lblInvalidRentDue.Visible = text.Length <> 10
@@ -691,7 +722,7 @@ Public Class frmTenants
         Dim propertyRow As DataRow = Property_ManagerDataSet.Properties.Rows(propertyIndex)
         txtRent.Text = propertyRow("Rent").ToString()
         txtDeposit.Text = propertyRow("Deposit").ToString()
-
+        txtRentDue.Text = Date.Today.AddMonths(1).ToString("MM/dd/yyyy")
     End Sub
 
 
@@ -831,7 +862,5 @@ Public Class frmTenants
         ' Draw the signature line at the bottom of the receipt
         e.Graphics.DrawString("Signature: _______________________", New Font("Arial", 12), Brushes.Black, New PointF(100, 500))
     End Sub
-
-
 
 End Class

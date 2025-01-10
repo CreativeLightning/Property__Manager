@@ -74,19 +74,21 @@ Partial Class frmTenants
         Me.lblTenantName = New System.Windows.Forms.Label()
         Me.btnRecordPayment = New System.Windows.Forms.Button()
         Me.cboPickProperty = New System.Windows.Forms.ComboBox()
-        Me.btnAssign = New System.Windows.Forms.Button()
-        Me.txtRentDue = New System.Windows.Forms.TextBox()
-        Me.lblRentDue = New System.Windows.Forms.Label()
-        Me.lblInvalidRentDue = New System.Windows.Forms.Label()
-        Me.lblRent = New System.Windows.Forms.Label()
-        Me.lblDeposit = New System.Windows.Forms.Label()
-        Me.txtRent = New System.Windows.Forms.TextBox()
-        Me.txtDeposit = New System.Windows.Forms.TextBox()
+        Me.grpRentInfo = New System.Windows.Forms.GroupBox()
         Me.chkDepositPaid = New System.Windows.Forms.CheckBox()
+        Me.txtDeposit = New System.Windows.Forms.TextBox()
+        Me.txtRent = New System.Windows.Forms.TextBox()
+        Me.lblDeposit = New System.Windows.Forms.Label()
+        Me.lblRent = New System.Windows.Forms.Label()
+        Me.lblInvalidRentDue = New System.Windows.Forms.Label()
+        Me.lblRentDue = New System.Windows.Forms.Label()
+        Me.txtRentDue = New System.Windows.Forms.TextBox()
+        Me.btnAssign = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpTenantInfo.SuspendLayout()
         Me.grpPayment.SuspendLayout()
+        Me.grpRentInfo.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label9
@@ -102,7 +104,7 @@ Partial Class frmTenants
         '
         Me.txtNotes.Location = New System.Drawing.Point(54, 336)
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.Size = New System.Drawing.Size(187, 106)
+        Me.txtNotes.Size = New System.Drawing.Size(164, 106)
         Me.txtNotes.TabIndex = 30
         Me.txtNotes.Text = ""
         '
@@ -581,86 +583,28 @@ Partial Class frmTenants
         Me.cboPickProperty.FormattingEnabled = True
         Me.cboPickProperty.Location = New System.Drawing.Point(251, 311)
         Me.cboPickProperty.Name = "cboPickProperty"
-        Me.cboPickProperty.Size = New System.Drawing.Size(196, 21)
+        Me.cboPickProperty.Size = New System.Drawing.Size(193, 21)
         Me.cboPickProperty.TabIndex = 49
         Me.cboPickProperty.Visible = False
         '
-        'btnAssign
+        'grpRentInfo
         '
-        Me.btnAssign.Location = New System.Drawing.Point(383, 406)
-        Me.btnAssign.Name = "btnAssign"
-        Me.btnAssign.Size = New System.Drawing.Size(66, 38)
-        Me.btnAssign.TabIndex = 50
-        Me.btnAssign.Text = "Assign Property"
-        Me.btnAssign.UseVisualStyleBackColor = True
-        Me.btnAssign.Visible = False
-        '
-        'txtRentDue
-        '
-        Me.txtRentDue.Location = New System.Drawing.Point(347, 339)
-        Me.txtRentDue.Name = "txtRentDue"
-        Me.txtRentDue.Size = New System.Drawing.Size(100, 20)
-        Me.txtRentDue.TabIndex = 51
-        Me.txtRentDue.Visible = False
-        '
-        'lblRentDue
-        '
-        Me.lblRentDue.AutoSize = True
-        Me.lblRentDue.Location = New System.Drawing.Point(263, 342)
-        Me.lblRentDue.Name = "lblRentDue"
-        Me.lblRentDue.Size = New System.Drawing.Size(81, 13)
-        Me.lblRentDue.TabIndex = 52
-        Me.lblRentDue.Text = "Next Date Due:"
-        Me.lblRentDue.Visible = False
-        '
-        'lblInvalidRentDue
-        '
-        Me.lblInvalidRentDue.AutoSize = True
-        Me.lblInvalidRentDue.ForeColor = System.Drawing.Color.Red
-        Me.lblInvalidRentDue.Location = New System.Drawing.Point(382, 371)
-        Me.lblInvalidRentDue.Name = "lblInvalidRentDue"
-        Me.lblInvalidRentDue.Size = New System.Drawing.Size(67, 13)
-        Me.lblInvalidRentDue.TabIndex = 53
-        Me.lblInvalidRentDue.Text = "Invalid Date:"
-        Me.lblInvalidRentDue.Visible = False
-        '
-        'lblRent
-        '
-        Me.lblRent.AutoSize = True
-        Me.lblRent.Location = New System.Drawing.Point(247, 374)
-        Me.lblRent.Name = "lblRent"
-        Me.lblRent.Size = New System.Drawing.Size(33, 13)
-        Me.lblRent.TabIndex = 54
-        Me.lblRent.Text = "Rent:"
-        Me.lblRent.Visible = False
-        '
-        'lblDeposit
-        '
-        Me.lblDeposit.AutoSize = True
-        Me.lblDeposit.Location = New System.Drawing.Point(251, 397)
-        Me.lblDeposit.Name = "lblDeposit"
-        Me.lblDeposit.Size = New System.Drawing.Size(30, 13)
-        Me.lblDeposit.TabIndex = 55
-        Me.lblDeposit.Text = "Dep:"
-        Me.lblDeposit.Visible = False
-        '
-        'txtRent
-        '
-        Me.txtRent.Location = New System.Drawing.Point(287, 371)
-        Me.txtRent.Name = "txtRent"
-        Me.txtRent.Size = New System.Drawing.Size(73, 20)
-        Me.txtRent.TabIndex = 56
-        Me.txtRent.Visible = False
-        Me.txtRent.WordWrap = False
-        '
-        'txtDeposit
-        '
-        Me.txtDeposit.Location = New System.Drawing.Point(287, 397)
-        Me.txtDeposit.Name = "txtDeposit"
-        Me.txtDeposit.Size = New System.Drawing.Size(73, 20)
-        Me.txtDeposit.TabIndex = 57
-        Me.txtDeposit.Visible = False
-        Me.txtDeposit.WordWrap = False
+        Me.grpRentInfo.Controls.Add(Me.btnAssign)
+        Me.grpRentInfo.Controls.Add(Me.chkDepositPaid)
+        Me.grpRentInfo.Controls.Add(Me.txtDeposit)
+        Me.grpRentInfo.Controls.Add(Me.txtRent)
+        Me.grpRentInfo.Controls.Add(Me.lblDeposit)
+        Me.grpRentInfo.Controls.Add(Me.lblRent)
+        Me.grpRentInfo.Controls.Add(Me.lblInvalidRentDue)
+        Me.grpRentInfo.Controls.Add(Me.lblRentDue)
+        Me.grpRentInfo.Controls.Add(Me.txtRentDue)
+        Me.grpRentInfo.Location = New System.Drawing.Point(228, 339)
+        Me.grpRentInfo.Name = "grpRentInfo"
+        Me.grpRentInfo.Size = New System.Drawing.Size(219, 125)
+        Me.grpRentInfo.TabIndex = 59
+        Me.grpRentInfo.TabStop = False
+        Me.grpRentInfo.Text = "Rent Info"
+        Me.grpRentInfo.Visible = False
         '
         'chkDepositPaid
         '
@@ -670,27 +614,87 @@ Partial Class frmTenants
         Me.chkDepositPaid.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chkDepositPaid.Checked = True
         Me.chkDepositPaid.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkDepositPaid.Location = New System.Drawing.Point(271, 425)
+        Me.chkDepositPaid.Location = New System.Drawing.Point(25, 99)
         Me.chkDepositPaid.Name = "chkDepositPaid"
         Me.chkDepositPaid.Size = New System.Drawing.Size(89, 17)
-        Me.chkDepositPaid.TabIndex = 58
+        Me.chkDepositPaid.TabIndex = 67
         Me.chkDepositPaid.Text = "Deposit Paid:"
         Me.chkDepositPaid.UseVisualStyleBackColor = True
-        Me.chkDepositPaid.Visible = False
+        '
+        'txtDeposit
+        '
+        Me.txtDeposit.Location = New System.Drawing.Point(41, 71)
+        Me.txtDeposit.Name = "txtDeposit"
+        Me.txtDeposit.Size = New System.Drawing.Size(73, 20)
+        Me.txtDeposit.TabIndex = 66
+        Me.txtDeposit.WordWrap = False
+        '
+        'txtRent
+        '
+        Me.txtRent.Location = New System.Drawing.Point(41, 45)
+        Me.txtRent.Name = "txtRent"
+        Me.txtRent.Size = New System.Drawing.Size(73, 20)
+        Me.txtRent.TabIndex = 65
+        '
+        'lblDeposit
+        '
+        Me.lblDeposit.AutoSize = True
+        Me.lblDeposit.Location = New System.Drawing.Point(5, 71)
+        Me.lblDeposit.Name = "lblDeposit"
+        Me.lblDeposit.Size = New System.Drawing.Size(30, 13)
+        Me.lblDeposit.TabIndex = 64
+        Me.lblDeposit.Text = "Dep:"
+        '
+        'lblRent
+        '
+        Me.lblRent.AutoSize = True
+        Me.lblRent.Location = New System.Drawing.Point(1, 48)
+        Me.lblRent.Name = "lblRent"
+        Me.lblRent.Size = New System.Drawing.Size(33, 13)
+        Me.lblRent.TabIndex = 63
+        Me.lblRent.Text = "Rent:"
+        '
+        'lblInvalidRentDue
+        '
+        Me.lblInvalidRentDue.AutoSize = True
+        Me.lblInvalidRentDue.ForeColor = System.Drawing.Color.Red
+        Me.lblInvalidRentDue.Location = New System.Drawing.Point(136, 45)
+        Me.lblInvalidRentDue.Name = "lblInvalidRentDue"
+        Me.lblInvalidRentDue.Size = New System.Drawing.Size(67, 13)
+        Me.lblInvalidRentDue.TabIndex = 62
+        Me.lblInvalidRentDue.Text = "Invalid Date:"
+        Me.lblInvalidRentDue.Visible = False
+        '
+        'lblRentDue
+        '
+        Me.lblRentDue.AutoSize = True
+        Me.lblRentDue.Location = New System.Drawing.Point(17, 16)
+        Me.lblRentDue.Name = "lblRentDue"
+        Me.lblRentDue.Size = New System.Drawing.Size(81, 13)
+        Me.lblRentDue.TabIndex = 61
+        Me.lblRentDue.Text = "Next Date Due:"
+        '
+        'txtRentDue
+        '
+        Me.txtRentDue.Location = New System.Drawing.Point(101, 13)
+        Me.txtRentDue.Name = "txtRentDue"
+        Me.txtRentDue.Size = New System.Drawing.Size(100, 20)
+        Me.txtRentDue.TabIndex = 60
+        '
+        'btnAssign
+        '
+        Me.btnAssign.Location = New System.Drawing.Point(132, 64)
+        Me.btnAssign.Name = "btnAssign"
+        Me.btnAssign.Size = New System.Drawing.Size(67, 39)
+        Me.btnAssign.TabIndex = 68
+        Me.btnAssign.Text = "Assign Property"
+        Me.btnAssign.UseVisualStyleBackColor = True
         '
         'frmTenants
         '
-        Me.ClientSize = New System.Drawing.Size(458, 454)
+        Me.ClientSize = New System.Drawing.Size(458, 468)
         Me.ControlBox = False
-        Me.Controls.Add(Me.chkDepositPaid)
-        Me.Controls.Add(Me.txtDeposit)
-        Me.Controls.Add(Me.txtRent)
-        Me.Controls.Add(Me.lblDeposit)
-        Me.Controls.Add(Me.lblRent)
-        Me.Controls.Add(Me.lblInvalidRentDue)
-        Me.Controls.Add(Me.lblRentDue)
-        Me.Controls.Add(Me.txtRentDue)
-        Me.Controls.Add(Me.btnAssign)
+        Me.Controls.Add(Me.grpRentInfo)
         Me.Controls.Add(Me.cboPickProperty)
         Me.Controls.Add(Me.grpPayment)
         Me.Controls.Add(Me.grpTenantInfo)
@@ -710,6 +714,8 @@ Partial Class frmTenants
         Me.grpTenantInfo.PerformLayout()
         Me.grpPayment.ResumeLayout(False)
         Me.grpPayment.PerformLayout()
+        Me.grpRentInfo.ResumeLayout(False)
+        Me.grpRentInfo.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -766,18 +772,19 @@ Partial Class frmTenants
     Friend WithEvents txtPaymentDate As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents cboPickProperty As ComboBox
-    Friend WithEvents btnAssign As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnExit As Button
-    Friend WithEvents txtRentDue As TextBox
-    Friend WithEvents lblRentDue As Label
-    Friend WithEvents lblInvalidRentDue As Label
-    Friend WithEvents lblRent As Label
-    Friend WithEvents lblDeposit As Label
-    Friend WithEvents txtRent As TextBox
-    Friend WithEvents txtDeposit As TextBox
-    Friend WithEvents chkDepositPaid As CheckBox
     Friend WithEvents txtRentAmount As TextBox
     Friend WithEvents lblRentAmount As Label
     Friend WithEvents btnRecordPaymentPrintReceipt As Button
+    Friend WithEvents grpRentInfo As GroupBox
+    Friend WithEvents chkDepositPaid As CheckBox
+    Friend WithEvents txtDeposit As TextBox
+    Friend WithEvents txtRent As TextBox
+    Friend WithEvents lblDeposit As Label
+    Friend WithEvents lblRent As Label
+    Friend WithEvents lblInvalidRentDue As Label
+    Friend WithEvents lblRentDue As Label
+    Friend WithEvents txtRentDue As TextBox
+    Friend WithEvents btnAssign As Button
 End Class
