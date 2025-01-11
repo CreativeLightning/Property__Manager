@@ -497,10 +497,13 @@ Public Class frmWorkOrders
         Dim labor As Decimal = txtLabor.Text
         Dim parts As Decimal = txtParts.Text
         Dim total As Decimal = labor + parts
-        Dim DateBilled As String = txtDateBilled.Text
-        Dim DatePaid As String = txtDatePaid.Text
+        Dim DateBilled As Date = Date.Parse(txtDateBilled.Text)
+        Dim DatePaid As Date
+        If txtDatePaid.Text <> "" Then
+            DatePaid = Date.Parse(txtDatePaid.Text)
+        End If
         Dim Paid As Boolean = chkPaid.Checked
-        Dim ChargeNotes As String = txtChargeNotes.Text
+            Dim ChargeNotes As String = txtChargeNotes.Text
         Using connection As OleDbConnection = New OleDbConnection(connectionString)
             Dim query As String = "INSERT INTO Charges (WOID, Labor, Parts, Total, DateBilled, DatePaid, Paid, ChargeNotes) VALUES (@WorkOrderID, @Labor, @Parts, @Total, @DateBilled, @DatePaid, @Paid, @Notes)"
             Using cmd As OleDbCommand = New OleDbCommand(query, connection)
@@ -559,9 +562,9 @@ Public Class frmWorkOrders
                 While reader.Read()
                     hasCharges = True
                     Dim ID As Integer = reader.GetInt32(0)
-                    Dim dateBilled As String = reader.GetString(1)
+                    Dim dateBilled As Date = reader.GetDateTime(1)
                     Dim total As Decimal = reader.GetDecimal(2)
-                    Dim charge As String = dateBilled & " " & total.ToString("C")
+                    Dim charge As String = dateBilled.ToString & " " & total.ToString("C")
                     Dim NextItem As New ComboBoxItem() With {.Text = charge, .Value = ID}
                     cboCharges.Items.Add(NextItem)
                 End While
@@ -695,11 +698,11 @@ Public Class frmWorkOrders
                     txtTheLabor.Text = reader.GetDecimal(0)
                     txtTheParts.Text = reader.GetDecimal(1)
                     txtTheTotal.Text = reader.GetDecimal(2)
-                    txtTheDateBilled.Text = reader.GetString(3)
+                    txtTheDateBilled.Text = reader.GetDateTime(3)
                     If reader.IsDBNull(4) Then
                         txtTheDatePaid.Text = ""
                     Else
-                        txtTheDatePaid.Text = reader.GetString(4)
+                        txtTheDatePaid.Text = reader.GetDateTime(4)
                     End If
                     chkThePaid.Checked = reader.GetBoolean(5)
                     txtTheNotes.Text = reader.GetString(6)
@@ -722,8 +725,11 @@ Public Class frmWorkOrders
         Dim labor As Decimal = txtTheLabor.Text
         Dim parts As Decimal = txtTheParts.Text
         Dim total As Decimal = txtTheTotal.Text
-        Dim DateBilled As String = txtTheDateBilled.Text
-        Dim DatePaid As String = txtTheDatePaid.Text
+        Dim DateBilled As String = Date.Parse(txtTheDateBilled.Text)
+        Dim DatePaid As Date
+        If txtDatePaid.Text <> "" Then
+            DatePaid = Date.Parse(txtTheDatePaid.Text)
+        End If
         Dim Paid As Boolean = chkThePaid.Checked
         Dim ChargeNotes As String = txtTheNotes.Text
         Using connection As OleDbConnection = New OleDbConnection(connectionString)
@@ -769,7 +775,12 @@ Public Class frmWorkOrders
     Private Sub cboEmployees_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmployees.SelectedIndexChanged
         If cboEmployees.SelectedIndex = 0 Then
             If cboVendors.Items.Count > 0 Then
-                cboVendors.SelectedIndex = 1
+                Try
+                    cboVendors.SelectedIndex = 1
+                Catch ex As Exception
+
+                End Try
+
             End If
         End If
         If cboEmployees.SelectedIndex <> 0 Then

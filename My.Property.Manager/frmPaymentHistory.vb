@@ -351,4 +351,8 @@ Public Class frmPaymentHistory
         e.Graphics.DrawString(paymentsDetails, New Font("Arial", 12), Brushes.Black, New PointF(100, 200))
 
     End Sub
+
+    Private Sub frmPaymentHistory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

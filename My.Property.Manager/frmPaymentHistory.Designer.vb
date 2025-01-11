@@ -24,6 +24,7 @@ Partial Class frmPaymentHistory
     Private Sub InitializeComponent()
         Me.gboxPaymentInformation = New System.Windows.Forms.GroupBox()
         Me.grpPropertyPayments = New System.Windows.Forms.GroupBox()
+        Me.btnPrintRentHistory = New System.Windows.Forms.Button()
         Me.grpTenantPayments = New System.Windows.Forms.GroupBox()
         Me.btnAllTenantPayments = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -37,7 +38,6 @@ Partial Class frmPaymentHistory
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnHome = New System.Windows.Forms.Button()
-        Me.btnPrintRentHistory = New System.Windows.Forms.Button()
         Me.gboxPaymentInformation.SuspendLayout()
         Me.grpPropertyPayments.SuspendLayout()
         Me.grpTenantPayments.SuspendLayout()
@@ -73,6 +73,15 @@ Partial Class frmPaymentHistory
         Me.grpPropertyPayments.TabStop = False
         Me.grpPropertyPayments.Text = "Payments by Property"
         Me.grpPropertyPayments.Visible = False
+        '
+        'btnPrintRentHistory
+        '
+        Me.btnPrintRentHistory.Location = New System.Drawing.Point(16, 20)
+        Me.btnPrintRentHistory.Name = "btnPrintRentHistory"
+        Me.btnPrintRentHistory.Size = New System.Drawing.Size(170, 23)
+        Me.btnPrintRentHistory.TabIndex = 1
+        Me.btnPrintRentHistory.Text = "Print All Rent History"
+        Me.btnPrintRentHistory.UseVisualStyleBackColor = True
         '
         'grpTenantPayments
         '
@@ -188,15 +197,6 @@ Partial Class frmPaymentHistory
         Me.btnHome.TabIndex = 0
         Me.btnHome.Text = "Home"
         Me.btnHome.UseVisualStyleBackColor = True
-        '
-        'btnPrintRentHistory
-        '
-        Me.btnPrintRentHistory.Location = New System.Drawing.Point(16, 20)
-        Me.btnPrintRentHistory.Name = "btnPrintRentHistory"
-        Me.btnPrintRentHistory.Size = New System.Drawing.Size(170, 23)
-        Me.btnPrintRentHistory.TabIndex = 1
-        Me.btnPrintRentHistory.Text = "Print All Rent History"
-        Me.btnPrintRentHistory.UseVisualStyleBackColor = True
         '
         'frmPaymentHistory
         '

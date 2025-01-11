@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnExpense = New System.Windows.Forms.Button()
         Me.btnCompany = New System.Windows.Forms.Button()
         Me.btnUsers = New System.Windows.Forms.Button()
         Me.chkHelpMessages = New System.Windows.Forms.CheckBox()
@@ -34,7 +35,6 @@ Partial Class Form1
         Me.btnTenants = New System.Windows.Forms.Button()
         Me.btnPayments = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.btnExpense = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -57,6 +57,15 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Begin Here"
+        '
+        'btnExpense
+        '
+        Me.btnExpense.Location = New System.Drawing.Point(7, 136)
+        Me.btnExpense.Name = "btnExpense"
+        Me.btnExpense.Size = New System.Drawing.Size(75, 23)
+        Me.btnExpense.TabIndex = 12
+        Me.btnExpense.Text = "Expenses"
+        Me.btnExpense.UseVisualStyleBackColor = True
         '
         'btnCompany
         '
@@ -160,15 +169,6 @@ Partial Class Form1
         Me.btnExit.TabIndex = 9
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
-        '
-        'btnExpense
-        '
-        Me.btnExpense.Location = New System.Drawing.Point(7, 136)
-        Me.btnExpense.Name = "btnExpense"
-        Me.btnExpense.Size = New System.Drawing.Size(75, 23)
-        Me.btnExpense.TabIndex = 12
-        Me.btnExpense.Text = "Expenses"
-        Me.btnExpense.UseVisualStyleBackColor = True
         '
         'Form1
         '
