@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmWorkOrders
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmWorkOrders
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpStartHere = New System.Windows.Forms.GroupBox()
         Me.btnExit = New System.Windows.Forms.Button()
@@ -36,6 +36,7 @@ Partial Class frmWorkOrders
         Me.cboSelections = New System.Windows.Forms.ComboBox()
         Me.lblChoose = New System.Windows.Forms.Label()
         Me.grpNewWO = New System.Windows.Forms.GroupBox()
+        Me.btnVendors = New System.Windows.Forms.Button()
         Me.btnGetByProperty = New System.Windows.Forms.Button()
         Me.btnViewCharges = New System.Windows.Forms.Button()
         Me.btnAddCharges = New System.Windows.Forms.Button()
@@ -59,7 +60,7 @@ Partial Class frmWorkOrders
         Me.cboProperties = New System.Windows.Forms.ComboBox()
         Me.txtCloseDate = New System.Windows.Forms.TextBox()
         Me.txtOpenDate = New System.Windows.Forms.TextBox()
-        Me.grpCharges = New System.Windows.Forms.GroupBox()
+        Me.grpNewCharge = New System.Windows.Forms.GroupBox()
         Me.chkPaid = New System.Windows.Forms.CheckBox()
         Me.btnCancelCharge = New System.Windows.Forms.Button()
         Me.btnSaveCharge = New System.Windows.Forms.Button()
@@ -78,12 +79,29 @@ Partial Class frmWorkOrders
         Me.grpByNumber = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtWOID = New System.Windows.Forms.TextBox()
-        Me.btnVendors = New System.Windows.Forms.Button()
+        Me.grpCharges = New System.Windows.Forms.GroupBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.cboCharges = New System.Windows.Forms.ComboBox()
+        Me.chkThePaid = New System.Windows.Forms.CheckBox()
+        Me.btnUpdateCharge = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtTheNotes = New System.Windows.Forms.TextBox()
+        Me.txtTheDatePaid = New System.Windows.Forms.TextBox()
+        Me.txtTheDateBilled = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtTheTotal = New System.Windows.Forms.TextBox()
+        Me.txtTheLabor = New System.Windows.Forms.TextBox()
+        Me.txtTheParts = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.grpStartHere.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpNewWO.SuspendLayout()
-        Me.grpCharges.SuspendLayout()
+        Me.grpNewCharge.SuspendLayout()
         Me.grpByNumber.SuspendLayout()
+        Me.grpCharges.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpStartHere
@@ -248,6 +266,15 @@ Partial Class frmWorkOrders
         Me.grpNewWO.Text = "Work Order Details"
         Me.grpNewWO.Visible = False
         '
+        'btnVendors
+        '
+        Me.btnVendors.Location = New System.Drawing.Point(372, 70)
+        Me.btnVendors.Name = "btnVendors"
+        Me.btnVendors.Size = New System.Drawing.Size(75, 23)
+        Me.btnVendors.TabIndex = 24
+        Me.btnVendors.Text = "Vendors"
+        Me.btnVendors.UseVisualStyleBackColor = True
+        '
         'btnGetByProperty
         '
         Me.btnGetByProperty.Location = New System.Drawing.Point(372, 44)
@@ -260,9 +287,9 @@ Partial Class frmWorkOrders
         '
         'btnViewCharges
         '
-        Me.btnViewCharges.Location = New System.Drawing.Point(363, 124)
+        Me.btnViewCharges.Location = New System.Drawing.Point(388, 124)
         Me.btnViewCharges.Name = "btnViewCharges"
-        Me.btnViewCharges.Size = New System.Drawing.Size(84, 23)
+        Me.btnViewCharges.Size = New System.Drawing.Size(56, 23)
         Me.btnViewCharges.TabIndex = 22
         Me.btnViewCharges.Text = "Charges"
         Me.btnViewCharges.UseVisualStyleBackColor = True
@@ -270,7 +297,7 @@ Partial Class frmWorkOrders
         '
         'btnAddCharges
         '
-        Me.btnAddCharges.Location = New System.Drawing.Point(277, 124)
+        Me.btnAddCharges.Location = New System.Drawing.Point(298, 122)
         Me.btnAddCharges.Name = "btnAddCharges"
         Me.btnAddCharges.Size = New System.Drawing.Size(84, 23)
         Me.btnAddCharges.TabIndex = 21
@@ -372,7 +399,7 @@ Partial Class frmWorkOrders
         Me.cboVendors.FormattingEnabled = True
         Me.cboVendors.Location = New System.Drawing.Point(130, 126)
         Me.cboVendors.Name = "cboVendors"
-        Me.cboVendors.Size = New System.Drawing.Size(139, 21)
+        Me.cboVendors.Size = New System.Drawing.Size(134, 21)
         Me.cboVendors.TabIndex = 10
         '
         'cboEmployees
@@ -380,7 +407,7 @@ Partial Class frmWorkOrders
         Me.cboEmployees.FormattingEnabled = True
         Me.cboEmployees.Location = New System.Drawing.Point(130, 96)
         Me.cboEmployees.Name = "cboEmployees"
-        Me.cboEmployees.Size = New System.Drawing.Size(139, 21)
+        Me.cboEmployees.Size = New System.Drawing.Size(134, 21)
         Me.cboEmployees.TabIndex = 9
         '
         'Label4
@@ -451,30 +478,30 @@ Partial Class frmWorkOrders
         Me.txtOpenDate.Size = New System.Drawing.Size(100, 20)
         Me.txtOpenDate.TabIndex = 3
         '
-        'grpCharges
+        'grpNewCharge
         '
-        Me.grpCharges.Controls.Add(Me.chkPaid)
-        Me.grpCharges.Controls.Add(Me.btnCancelCharge)
-        Me.grpCharges.Controls.Add(Me.btnSaveCharge)
-        Me.grpCharges.Controls.Add(Me.Label12)
-        Me.grpCharges.Controls.Add(Me.txtChargeNotes)
-        Me.grpCharges.Controls.Add(Me.txtDatePaid)
-        Me.grpCharges.Controls.Add(Me.txtDateBilled)
-        Me.grpCharges.Controls.Add(Me.Label11)
-        Me.grpCharges.Controls.Add(Me.Label10)
-        Me.grpCharges.Controls.Add(Me.txtTotal)
-        Me.grpCharges.Controls.Add(Me.txtLabor)
-        Me.grpCharges.Controls.Add(Me.txtParts)
-        Me.grpCharges.Controls.Add(Me.Label9)
-        Me.grpCharges.Controls.Add(Me.Label8)
-        Me.grpCharges.Controls.Add(Me.Label1)
-        Me.grpCharges.Location = New System.Drawing.Point(166, 328)
-        Me.grpCharges.Name = "grpCharges"
-        Me.grpCharges.Size = New System.Drawing.Size(462, 161)
-        Me.grpCharges.TabIndex = 3
-        Me.grpCharges.TabStop = False
-        Me.grpCharges.Text = "New Charge Information"
-        Me.grpCharges.Visible = False
+        Me.grpNewCharge.Controls.Add(Me.chkPaid)
+        Me.grpNewCharge.Controls.Add(Me.btnCancelCharge)
+        Me.grpNewCharge.Controls.Add(Me.btnSaveCharge)
+        Me.grpNewCharge.Controls.Add(Me.Label12)
+        Me.grpNewCharge.Controls.Add(Me.txtChargeNotes)
+        Me.grpNewCharge.Controls.Add(Me.txtDatePaid)
+        Me.grpNewCharge.Controls.Add(Me.txtDateBilled)
+        Me.grpNewCharge.Controls.Add(Me.Label11)
+        Me.grpNewCharge.Controls.Add(Me.Label10)
+        Me.grpNewCharge.Controls.Add(Me.txtTotal)
+        Me.grpNewCharge.Controls.Add(Me.txtLabor)
+        Me.grpNewCharge.Controls.Add(Me.txtParts)
+        Me.grpNewCharge.Controls.Add(Me.Label9)
+        Me.grpNewCharge.Controls.Add(Me.Label8)
+        Me.grpNewCharge.Controls.Add(Me.Label1)
+        Me.grpNewCharge.Location = New System.Drawing.Point(166, 328)
+        Me.grpNewCharge.Name = "grpNewCharge"
+        Me.grpNewCharge.Size = New System.Drawing.Size(462, 161)
+        Me.grpNewCharge.TabIndex = 3
+        Me.grpNewCharge.TabStop = False
+        Me.grpNewCharge.Text = "New Charge Information"
+        Me.grpNewCharge.Visible = False
         '
         'chkPaid
         '
@@ -634,23 +661,179 @@ Partial Class frmWorkOrders
         Me.txtWOID.Size = New System.Drawing.Size(100, 20)
         Me.txtWOID.TabIndex = 0
         '
-        'btnVendors
+        'grpCharges
         '
-        Me.btnVendors.Location = New System.Drawing.Point(372, 70)
-        Me.btnVendors.Name = "btnVendors"
-        Me.btnVendors.Size = New System.Drawing.Size(75, 23)
-        Me.btnVendors.TabIndex = 24
-        Me.btnVendors.Text = "Vendors"
-        Me.btnVendors.UseVisualStyleBackColor = True
+        Me.grpCharges.Controls.Add(Me.Label19)
+        Me.grpCharges.Controls.Add(Me.cboCharges)
+        Me.grpCharges.Controls.Add(Me.chkThePaid)
+        Me.grpCharges.Controls.Add(Me.btnUpdateCharge)
+        Me.grpCharges.Controls.Add(Me.Label13)
+        Me.grpCharges.Controls.Add(Me.txtTheNotes)
+        Me.grpCharges.Controls.Add(Me.txtTheDatePaid)
+        Me.grpCharges.Controls.Add(Me.txtTheDateBilled)
+        Me.grpCharges.Controls.Add(Me.Label14)
+        Me.grpCharges.Controls.Add(Me.Label15)
+        Me.grpCharges.Controls.Add(Me.txtTheTotal)
+        Me.grpCharges.Controls.Add(Me.txtTheLabor)
+        Me.grpCharges.Controls.Add(Me.txtTheParts)
+        Me.grpCharges.Controls.Add(Me.Label16)
+        Me.grpCharges.Controls.Add(Me.Label17)
+        Me.grpCharges.Controls.Add(Me.Label18)
+        Me.grpCharges.Location = New System.Drawing.Point(648, 332)
+        Me.grpCharges.Name = "grpCharges"
+        Me.grpCharges.Size = New System.Drawing.Size(462, 157)
+        Me.grpCharges.TabIndex = 5
+        Me.grpCharges.TabStop = False
+        Me.grpCharges.Text = "Charge Information"
+        Me.grpCharges.Visible = False
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(6, 23)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(46, 13)
+        Me.Label19.TabIndex = 15
+        Me.Label19.Text = "Choose:"
+        '
+        'cboCharges
+        '
+        Me.cboCharges.FormattingEnabled = True
+        Me.cboCharges.Location = New System.Drawing.Point(56, 20)
+        Me.cboCharges.Name = "cboCharges"
+        Me.cboCharges.Size = New System.Drawing.Size(99, 21)
+        Me.cboCharges.TabIndex = 14
+        '
+        'chkThePaid
+        '
+        Me.chkThePaid.AutoSize = True
+        Me.chkThePaid.Location = New System.Drawing.Point(335, 22)
+        Me.chkThePaid.Name = "chkThePaid"
+        Me.chkThePaid.Size = New System.Drawing.Size(47, 17)
+        Me.chkThePaid.TabIndex = 13
+        Me.chkThePaid.Text = "Paid"
+        Me.chkThePaid.UseVisualStyleBackColor = True
+        '
+        'btnUpdateCharge
+        '
+        Me.btnUpdateCharge.Location = New System.Drawing.Point(335, 70)
+        Me.btnUpdateCharge.Name = "btnUpdateCharge"
+        Me.btnUpdateCharge.Size = New System.Drawing.Size(102, 23)
+        Me.btnUpdateCharge.TabIndex = 11
+        Me.btnUpdateCharge.Text = "Update Charge"
+        Me.btnUpdateCharge.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(168, 80)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(75, 13)
+        Me.Label13.TabIndex = 10
+        Me.Label13.Text = "Charge Notes:"
+        '
+        'txtTheNotes
+        '
+        Me.txtTheNotes.Location = New System.Drawing.Point(168, 99)
+        Me.txtTheNotes.Multiline = True
+        Me.txtTheNotes.Name = "txtTheNotes"
+        Me.txtTheNotes.Size = New System.Drawing.Size(254, 56)
+        Me.txtTheNotes.TabIndex = 9
+        '
+        'txtTheDatePaid
+        '
+        Me.txtTheDatePaid.Location = New System.Drawing.Point(228, 46)
+        Me.txtTheDatePaid.Name = "txtTheDatePaid"
+        Me.txtTheDatePaid.Size = New System.Drawing.Size(100, 20)
+        Me.txtTheDatePaid.TabIndex = 8
+        '
+        'txtTheDateBilled
+        '
+        Me.txtTheDateBilled.Location = New System.Drawing.Point(228, 20)
+        Me.txtTheDateBilled.Name = "txtTheDateBilled"
+        Me.txtTheDateBilled.Size = New System.Drawing.Size(100, 20)
+        Me.txtTheDateBilled.TabIndex = 6
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(165, 49)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(57, 13)
+        Me.Label14.TabIndex = 7
+        Me.Label14.Text = "Date Paid:"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(161, 23)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(61, 13)
+        Me.Label15.TabIndex = 6
+        Me.Label15.Text = "Date Billed:"
+        '
+        'txtTheTotal
+        '
+        Me.txtTheTotal.Location = New System.Drawing.Point(56, 101)
+        Me.txtTheTotal.Name = "txtTheTotal"
+        Me.txtTheTotal.Size = New System.Drawing.Size(100, 20)
+        Me.txtTheTotal.TabIndex = 5
+        Me.txtTheTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtTheTotal.Visible = False
+        '
+        'txtTheLabor
+        '
+        Me.txtTheLabor.Location = New System.Drawing.Point(56, 75)
+        Me.txtTheLabor.Name = "txtTheLabor"
+        Me.txtTheLabor.Size = New System.Drawing.Size(100, 20)
+        Me.txtTheLabor.TabIndex = 4
+        Me.txtTheLabor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTheParts
+        '
+        Me.txtTheParts.Location = New System.Drawing.Point(56, 49)
+        Me.txtTheParts.Name = "txtTheParts"
+        Me.txtTheParts.Size = New System.Drawing.Size(100, 20)
+        Me.txtTheParts.TabIndex = 3
+        Me.txtTheParts.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(15, 104)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(34, 13)
+        Me.Label16.TabIndex = 2
+        Me.Label16.Text = "Total:"
+        Me.Label16.Visible = False
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(13, 77)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(37, 13)
+        Me.Label17.TabIndex = 1
+        Me.Label17.Text = "Labor:"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(14, 49)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(34, 13)
+        Me.Label18.TabIndex = 0
+        Me.Label18.Text = "Parts:"
         '
         'frmWorkOrders
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(665, 503)
+        Me.ClientSize = New System.Drawing.Size(637, 493)
         Me.ControlBox = False
-        Me.Controls.Add(Me.grpByNumber)
         Me.Controls.Add(Me.grpCharges)
+        Me.Controls.Add(Me.grpByNumber)
+        Me.Controls.Add(Me.grpNewCharge)
         Me.Controls.Add(Me.grpNewWO)
         Me.Controls.Add(Me.grpSearch)
         Me.Controls.Add(Me.grpStartHere)
@@ -661,10 +844,12 @@ Partial Class frmWorkOrders
         Me.grpSearch.ResumeLayout(False)
         Me.grpNewWO.ResumeLayout(False)
         Me.grpNewWO.PerformLayout()
-        Me.grpCharges.ResumeLayout(False)
-        Me.grpCharges.PerformLayout()
+        Me.grpNewCharge.ResumeLayout(False)
+        Me.grpNewCharge.PerformLayout()
         Me.grpByNumber.ResumeLayout(False)
         Me.grpByNumber.PerformLayout()
+        Me.grpCharges.ResumeLayout(False)
+        Me.grpCharges.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -702,7 +887,7 @@ Partial Class frmWorkOrders
     Friend WithEvents btnGetByVendor As Button
     Friend WithEvents btnSaveNewWO As Button
     Friend WithEvents btnAddCharges As Button
-    Friend WithEvents grpCharges As GroupBox
+    Friend WithEvents grpNewCharge As GroupBox
     Friend WithEvents txtTotal As TextBox
     Friend WithEvents txtLabor As TextBox
     Friend WithEvents txtParts As TextBox
@@ -726,4 +911,21 @@ Partial Class frmWorkOrders
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtWOID As TextBox
     Friend WithEvents btnVendors As Button
+    Friend WithEvents grpCharges As GroupBox
+    Friend WithEvents chkThePaid As CheckBox
+    Friend WithEvents btnUpdateCharge As Button
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtTheNotes As TextBox
+    Friend WithEvents txtTheDatePaid As TextBox
+    Friend WithEvents txtTheDateBilled As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtTheTotal As TextBox
+    Friend WithEvents txtTheLabor As TextBox
+    Friend WithEvents txtTheParts As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents cboCharges As ComboBox
 End Class

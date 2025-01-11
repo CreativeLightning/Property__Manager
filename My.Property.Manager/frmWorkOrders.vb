@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Net.Http.Headers
 Imports My_Property_Manager.frmProperties
 
 Public Class frmWorkOrders
@@ -35,8 +36,9 @@ Public Class frmWorkOrders
         FillcboVendors()
     End Sub
     Private Sub frmWorkOrders_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        grpCharges.Location = New Point(166, 328)
     End Sub
+
     Private Sub FillcboVendors()
         cboVendors.Items.Clear()
         Dim dt As DataTable = Globals.VendorsTableAdapter.GetData()
@@ -452,18 +454,19 @@ Public Class frmWorkOrders
         btnCancelWO.Visible = False
         btnSaveNewWO.Visible = False
         btnAddCharges.Visible = False
-        grpCharges.Visible = False
+        grpNewCharge.Visible = False
         grpByNumber.Visible = False
         btnViewCharges.Visible = False
     End Sub
 
     Public Sub btnAddCharges_Click(sender As Object, e As EventArgs) Handles btnAddCharges.Click
         'Open the charges form
-        grpCharges.Visible = True
+        grpNewCharge.Visible = True
+        grpCharges.Visible = False
         txtDateBilled.Text = Date.Today
     End Sub
     Private Sub btnCancelCharge_Click(sender As Object, e As EventArgs) Handles btnCancelCharge.Click
-        grpCharges.Visible = False
+        grpNewCharge.Visible = False
     End Sub
     Private Sub cboVendors_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboVendors.SelectedIndexChanged
         'Get the ID of the selected vendor
@@ -475,7 +478,7 @@ Public Class frmWorkOrders
         End If
     End Sub
     Private Sub btnSaveCharge_Click(sender As Object, e As EventArgs) Handles btnSaveCharge.Click
-        'Save the charges entered on grpCharges
+        'Save the charges entered on grpNewCharge
         If txtLabor.Text = "" Then
             txtLabor.Text = 0
         End If
@@ -533,7 +536,33 @@ Public Class frmWorkOrders
     End Sub
 
     Private Sub btnViewCharges_Click(sender As Object, e As EventArgs) Handles btnViewCharges.Click
-        frmCharges.Show()
+        'hide new charges group and show charges for the selected work order
+        grpNewCharge.Visible = False
+        grpCharges.Visible = True
+        'Get charges for selected work order,WOID and fill cboCharges
+        cboCharges.Items.Clear()
+        Using connection As OleDbConnection = New OleDbConnection(connectionString)
+            Dim query As String = "SELECT ID, dateBilled, Total FROM Charges WHERE WOID = " & WOID
+            Using cmd As OleDbCommand = New OleDbCommand(query, connection)
+                connection.Open()
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                Dim hasCharges As Boolean = False
+                While reader.Read()
+                    hasCharges = True
+                    Dim ID As Integer = reader.GetInt32(0)
+                    Dim dateBilled As String = reader.GetString(1)
+                    Dim total As Decimal = reader.GetDecimal(2)
+                    Dim charge As String = dateBilled & " " & total.ToString("C")
+                    Dim NextItem As New ComboBoxItem() With {.Text = charge, .Value = ID}
+                    cboCharges.Items.Add(NextItem)
+                End While
+                If Not hasCharges Then
+                    cboCharges.Text = "No Charges"
+                Else
+                    cboCharges.SelectedIndex = 0
+                End If
+            End Using
+        End Using
     End Sub
 
     Private Sub btnWOByProperty_Click(sender As Object, e As EventArgs) Handles btnWOByProperty.Click
@@ -641,5 +670,90 @@ Public Class frmWorkOrders
 
     Private Sub btnVendors_Click(sender As Object, e As EventArgs) Handles btnVendors.Click
         frmVendors.Show()
+    End Sub
+
+    Private Sub cboCharges_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCharges.SelectedIndexChanged
+        'Get the ID of the selected charge, fill the charge fields txtTheParts , txtTheLabor, txtTheTotal, txtTheDateBilled, txtTheDatePaid, chkThePaid, txtTheChargeNotes
+        Dim selectedItem As ComboBoxItem = CType(cboCharges.SelectedItem, ComboBoxItem)
+        Dim chgID As Integer = selectedItem.Value
+        ChargeID = chgID
+        Using connection As OleDbConnection = New OleDbConnection(connectionString)
+            Dim query As String = "SELECT Labor, Parts, Total, DateBilled, DatePaid, Paid, ChargeNotes FROM Charges WHERE ID = " & ChargeID
+            Using cmd As OleDbCommand = New OleDbCommand(query, connection)
+                connection.Open()
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    txtTheLabor.Text = reader.GetDecimal(0)
+                    txtTheParts.Text = reader.GetDecimal(1)
+                    txtTheTotal.Text = reader.GetDecimal(2)
+                    txtTheDateBilled.Text = reader.GetString(3)
+                    If reader.IsDBNull(4) Then
+                        txtTheDatePaid.Text = ""
+                    Else
+                        txtTheDatePaid.Text = reader.GetString(4)
+                    End If
+                    chkThePaid.Checked = reader.GetBoolean(5)
+                    txtTheNotes.Text = reader.GetString(6)
+                End While
+            End Using
+        End Using
+    End Sub
+
+    Private Sub btnUpdateCharge_Click(sender As Object, e As EventArgs) Handles btnUpdateCharge.Click
+        'Update the selected charge using ChargeID
+        If txtTheLabor.Text = "" Then
+            txtTheLabor.Text = 0
+        End If
+        If txtTheParts.Text = "" Then
+            txtTheParts.Text = 0
+        End If
+        If txtTheTotal.Text = "" Then
+            txtTheTotal.Text = 0
+        End If
+        Dim labor As Decimal = txtTheLabor.Text
+        Dim parts As Decimal = txtTheParts.Text
+        Dim total As Decimal = txtTheTotal.Text
+        Dim DateBilled As String = txtTheDateBilled.Text
+        Dim DatePaid As String = txtTheDatePaid.Text
+        Dim Paid As Boolean = chkThePaid.Checked
+        Dim ChargeNotes As String = txtTheNotes.Text
+        Using connection As OleDbConnection = New OleDbConnection(connectionString)
+            Dim query As String = "UPDATE Charges SET Labor = @Labor, Parts = @Parts, Total = @Total, DateBilled = @DateBilled, DatePaid = @DatePaid, Paid = @Paid, ChargeNotes = @Notes WHERE ID = " & ChargeID
+            Using cmd As OleDbCommand = New OleDbCommand(query, connection)
+                cmd.Parameters.AddWithValue("@Labor", labor)
+                cmd.Parameters.AddWithValue("@Parts", parts)
+                cmd.Parameters.AddWithValue("@Total", total)
+                cmd.Parameters.AddWithValue("@DateBilled", DateBilled)
+                cmd.Parameters.AddWithValue("@DatePaid", DatePaid)
+                cmd.Parameters.AddWithValue("@Paid", Paid)
+                cmd.Parameters.AddWithValue("@Notes", ChargeNotes)
+                connection.Open()
+                Try
+                    cmd.ExecuteNonQuery()
+                    If HelpMessages = True Then
+                        MsgBox("Charge Updated")
+                        txtTheTotal.Clear()
+                        txtTheLabor.Clear()
+                        txtTheParts.Clear()
+                        txtTheDateBilled.Clear()
+                        txtTheDatePaid.Clear()
+                        txtTheNotes.Clear()
+                        chkThePaid.Checked = False
+                        grpCharges.Visible = False
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error Updating Charge")
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    Private Sub chkThePaid_CheckedChanged(sender As Object, e As EventArgs) Handles chkThePaid.CheckedChanged
+        'If chkThePaid is checked, set txtTheDatePaid to today, else clear txtTheDatePaid
+        If chkThePaid.Checked = True Then
+            txtTheDatePaid.Text = Date.Today
+        Else
+            txtTheDatePaid.Text = ""
+        End If
     End Sub
 End Class
