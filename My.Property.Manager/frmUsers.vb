@@ -62,11 +62,13 @@ Public Class frmUsers
     Private Sub cboUsers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboUsers.SelectedIndexChanged
         If cboUsers.SelectedIndex = 0 Then
             btnDelete.Enabled = False
+            chkAdmin.Enabled = False
             If HelpMessages = True Then
                 MessageBox.Show("You cannot delete the Primary user.")
             End If
         Else
             btnDelete.Enabled = True
+            chkAdmin.Enabled = True
         End If
         'load user info into textboxes
         Using Conn As OleDbConnection = New OleDbConnection(connectionString)
@@ -182,6 +184,8 @@ Public Class frmUsers
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         ClearTextBoxes()
+        cboUsers.Items.Clear()
+        cboUsers.Text = ""
         btnAdd.Visible = False
         txtUsername.Focus()
         btnSave.Visible = False

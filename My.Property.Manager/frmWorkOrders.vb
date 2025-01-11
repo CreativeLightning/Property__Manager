@@ -22,7 +22,9 @@ Public Class frmWorkOrders
 
     Private Sub btnNewWO_Click(sender As Object, e As EventArgs) Handles btnNewWO.Click
         ClearAll()
-        MsgBox("After you save the Work Order, you can add charges. Create Work Orders for Internal Charges to allow for easy expense tracking and filing taxes.")
+        If HelpMessages = True Then
+            MsgBox("After you save the Work Order, you can add charges. Create Work Orders for Internal Charges to allow for easy expense tracking and filing taxes.")
+        End If
         btnSaveNewWO.Visible = True
         btnCancelWO.Visible = True
         txtOpenDate.Text = Date.Today
@@ -31,6 +33,8 @@ Public Class frmWorkOrders
         chkCompleted.Checked = False
         txtDescription.Text = ""
         txtNotes.Text = ""
+        lblProperties.Visible = True
+        cboProperties.Visible = True
         FillcboProperties()
         FillCboEmployees()
         FillcboVendors()
@@ -476,6 +480,11 @@ Public Class frmWorkOrders
                 cboEmployees.SelectedIndex = 0
             End If
         End If
+        If cboVendors.SelectedIndex = 0 Then
+            If cboEmployees.Items.Count > 0 Then
+                cboEmployees.SelectedIndex = 1
+            End If
+        End If
     End Sub
     Private Sub btnSaveCharge_Click(sender As Object, e As EventArgs) Handles btnSaveCharge.Click
         'Save the charges entered on grpNewCharge
@@ -571,7 +580,7 @@ Public Class frmWorkOrders
         cboSelections.Text = ""
         grpNewWO.Visible = True
         If HelpMessages = True Then
-            MsgBox("Select Property the Press Get Wos")
+            MsgBox("Select Property THEN PRESS Get Wos")
         End If
         btnSaveWO.Visible = False
         btnGetByProperty.Visible = True
@@ -754,6 +763,17 @@ Public Class frmWorkOrders
             txtTheDatePaid.Text = Date.Today
         Else
             txtTheDatePaid.Text = ""
+        End If
+    End Sub
+
+    Private Sub cboEmployees_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEmployees.SelectedIndexChanged
+        If cboEmployees.SelectedIndex = 0 Then
+            If cboVendors.Items.Count > 0 Then
+                cboVendors.SelectedIndex = 1
+            End If
+        End If
+        If cboEmployees.SelectedIndex <> 0 Then
+            cboVendors.SelectedIndex = 0
         End If
     End Sub
 End Class

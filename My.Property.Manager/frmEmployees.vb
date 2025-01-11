@@ -205,8 +205,15 @@
             command.Parameters.AddWithValue("@EndDate", txtEndDate.Text)
             command.Parameters.AddWithValue("@Active", If(chkInactive.Checked, "n", "y"))
 
-            ' Execute the command
-            command.ExecuteNonQuery()
+            ' Try and execute the command, if successful and HelpMessages is True, show a message box "Employee Added"
+            Try
+                command.ExecuteNonQuery()
+                If HelpMessages = True Then
+                    MessageBox.Show("Employee Added")
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
         End Using
         btnSaveNew.Visible = False
         btnCanel.Visible = False

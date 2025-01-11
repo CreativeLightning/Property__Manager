@@ -11,7 +11,8 @@
     Public PaymentID As Integer ' Payment ID
     Public TenantID As Integer ' Tenant ID
     Public TenantName As String ' Tenant Name
-    Public TenantTotalPaid As Decimal ' Tenant Total Paid
+    Public TenantTotalPaid As Decimal ' Total Paid Per Tenant
+    Public TotalPropertyPaid As Decimal ' Total Paid Per Property
     Public Rent As String
     Public DueDate As String
     Public CompanyID As Integer = 1
