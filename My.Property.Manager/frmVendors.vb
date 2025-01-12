@@ -6,10 +6,7 @@ Public Class frmVendors
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Dim result As MsgBoxResult = MsgBox("Are you sure you want to exit?", MsgBoxStyle.YesNo)
-        If result = MsgBoxResult.Yes Then
-            Me.Close()
-        End If
+        VerifyExit(sender, e, btnExit)
     End Sub
 
     Private Sub frmVendors_Load(sender As Object, e As EventArgs) Handles MyBase.Load

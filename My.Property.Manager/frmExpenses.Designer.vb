@@ -23,14 +23,14 @@ Partial Class frmExpenses
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnHome = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
+        Me.btnHome = New System.Windows.Forms.Button()
         Me.grpReports = New System.Windows.Forms.GroupBox()
-        Me.dtpStart = New System.Windows.Forms.DateTimePicker()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.dtpEnd = New System.Windows.Forms.DateTimePicker()
         Me.btnTotalWOs = New System.Windows.Forms.Button()
+        Me.dtpEnd = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dtpStart = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox1.SuspendLayout()
         Me.grpReports.SuspendLayout()
         Me.SuspendLayout()
@@ -46,15 +46,6 @@ Partial Class frmExpenses
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Options"
         '
-        'btnHome
-        '
-        Me.btnHome.Location = New System.Drawing.Point(7, 20)
-        Me.btnHome.Name = "btnHome"
-        Me.btnHome.Size = New System.Drawing.Size(54, 23)
-        Me.btnHome.TabIndex = 0
-        Me.btnHome.Text = "Home"
-        Me.btnHome.UseVisualStyleBackColor = True
-        '
         'btnExit
         '
         Me.btnExit.Location = New System.Drawing.Point(6, 49)
@@ -63,6 +54,15 @@ Partial Class frmExpenses
         Me.btnExit.TabIndex = 1
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
+        '
+        'btnHome
+        '
+        Me.btnHome.Location = New System.Drawing.Point(7, 20)
+        Me.btnHome.Name = "btnHome"
+        Me.btnHome.Size = New System.Drawing.Size(54, 23)
+        Me.btnHome.TabIndex = 0
+        Me.btnHome.Text = "Home"
+        Me.btnHome.UseVisualStyleBackColor = True
         '
         'grpReports
         '
@@ -78,32 +78,14 @@ Partial Class frmExpenses
         Me.grpReports.TabStop = False
         Me.grpReports.Text = "Report Options"
         '
-        'dtpStart
+        'btnTotalWOs
         '
-        Me.dtpStart.CustomFormat = "MMM dd yyyy"
-        Me.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStart.Location = New System.Drawing.Point(10, 45)
-        Me.dtpStart.Name = "dtpStart"
-        Me.dtpStart.Size = New System.Drawing.Size(99, 20)
-        Me.dtpStart.TabIndex = 2
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 20)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 13)
-        Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Start Date:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(144, 20)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(55, 13)
-        Me.Label2.TabIndex = 4
-        Me.Label2.Text = "End Date:"
+        Me.btnTotalWOs.Location = New System.Drawing.Point(10, 72)
+        Me.btnTotalWOs.Name = "btnTotalWOs"
+        Me.btnTotalWOs.Size = New System.Drawing.Size(75, 23)
+        Me.btnTotalWOs.TabIndex = 6
+        Me.btnTotalWOs.Text = "Total WOs"
+        Me.btnTotalWOs.UseVisualStyleBackColor = True
         '
         'dtpEnd
         '
@@ -114,14 +96,32 @@ Partial Class frmExpenses
         Me.dtpEnd.Size = New System.Drawing.Size(99, 20)
         Me.dtpEnd.TabIndex = 5
         '
-        'btnTotalWOs
+        'Label2
         '
-        Me.btnTotalWOs.Location = New System.Drawing.Point(10, 72)
-        Me.btnTotalWOs.Name = "btnTotalWOs"
-        Me.btnTotalWOs.Size = New System.Drawing.Size(75, 23)
-        Me.btnTotalWOs.TabIndex = 6
-        Me.btnTotalWOs.Text = "Total WOs"
-        Me.btnTotalWOs.UseVisualStyleBackColor = True
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(144, 20)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(55, 13)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "End Date:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 20)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(58, 13)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Start Date:"
+        '
+        'dtpStart
+        '
+        Me.dtpStart.CustomFormat = "MMM dd yyyy"
+        Me.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpStart.Location = New System.Drawing.Point(10, 45)
+        Me.dtpStart.Name = "dtpStart"
+        Me.dtpStart.Size = New System.Drawing.Size(99, 20)
+        Me.dtpStart.TabIndex = 2
         '
         'frmExpenses
         '
@@ -131,6 +131,7 @@ Partial Class frmExpenses
         Me.Controls.Add(Me.grpReports)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmExpenses"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Expense Reports"
         Me.GroupBox1.ResumeLayout(False)
         Me.grpReports.ResumeLayout(False)

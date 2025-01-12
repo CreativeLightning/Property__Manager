@@ -153,7 +153,8 @@ Public Class frmWorkOrders
     Private Sub SaveWO()
         Dim openDate As String = txtOpenDate.Text
         Dim closeDate As String = txtCloseDate.Text
-        Dim propertyID As Integer = WOProperty
+
+        PropertyID = WOProperty
         If propertyID = 0 Then
             MsgBox("Choose a Property")
         End If
@@ -505,7 +506,7 @@ Public Class frmWorkOrders
         Dim Paid As Boolean = chkPaid.Checked
             Dim ChargeNotes As String = txtChargeNotes.Text
         Using connection As OleDbConnection = New OleDbConnection(connectionString)
-            Dim query As String = "INSERT INTO Charges (WOID, Labor, Parts, Total, DateBilled, DatePaid, Paid, ChargeNotes) VALUES (@WorkOrderID, @Labor, @Parts, @Total, @DateBilled, @DatePaid, @Paid, @Notes)"
+            Dim query As String = "INSERT INTO Charges (WOID, Labor, Parts, Total, DateBilled, DatePaid, Paid, ChargeNotes, PropertyID) VALUES (@WorkOrderID, @Labor, @Parts, @Total, @DateBilled, @DatePaid, @Paid, @Notes, @PropertyID)"
             Using cmd As OleDbCommand = New OleDbCommand(query, connection)
                 cmd.Parameters.AddWithValue("@WorkOrderID", WOID)
                 cmd.Parameters.AddWithValue("@Labor", labor)
@@ -515,6 +516,7 @@ Public Class frmWorkOrders
                 cmd.Parameters.AddWithValue("@DatePaid", DatePaid)
                 cmd.Parameters.AddWithValue("@Paid", Paid)
                 cmd.Parameters.AddWithValue("@Notes", ChargeNotes)
+                cmd.Parameters.AddWithValue("@PropertyID", PropertyID)
                 connection.Open()
                 Try
                     cmd.ExecuteNonQuery()
@@ -541,10 +543,7 @@ Public Class frmWorkOrders
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Dim result As MsgBoxResult = MsgBox("Are you sure you want to exit?", MsgBoxStyle.YesNo)
-        If result = MsgBoxResult.Yes Then
-            Application.Exit()
-        End If
+        VerifyExit(sender, e, btnExit)
     End Sub
 
     Private Sub btnViewCharges_Click(sender As Object, e As EventArgs) Handles btnViewCharges.Click
@@ -621,6 +620,7 @@ Public Class frmWorkOrders
                         txtCloseDate.Text = reader.GetString(1)
                     End If
                     WOProperty = reader.GetInt32(2)
+                    PropertyID = reader.GetInt32(2)
                     FillCboEmployees()
                     FillcboVendors()
                     cboEmployees.SelectedIndex = cboEmployees.FindString(reader.GetInt32(3).ToString())

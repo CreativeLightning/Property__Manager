@@ -16,11 +16,7 @@ Public Class frmPaymentHistory
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        'confirm the user wants to close the application
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If result = DialogResult.Yes Then
-            Application.Exit()
-        End If
+        VerifyExit(sender, e, btnExit)
     End Sub
 
     Private Sub txtSearchByTenant_TextChanged(sender As Object, e As EventArgs) Handles txtSearchByTenant.TextChanged
@@ -67,43 +63,25 @@ Public Class frmPaymentHistory
     End Sub
 
     Private Sub btnAllTenantPayments_Click(sender As Object, e As EventArgs) Handles btnAllTenantPayments.Click
-        'we have tenantID assigned by cboTenants_SelectedIndexChanged
-        'here we collect all payments for the tenantID from the payments table
-        'connection string is defined in the module as ConnectionString
-        'code is as follows
-        'use substring to get ID value from cbotenants and assign it to TenantID
+
         TenantID = Convert.ToInt32(cboTenants.Text.Substring(0, cboTenants.Text.IndexOf(" ")))
 
-        'connect to the database
         con.ConnectionString = connectionString
         con.Open()
         cmd.Connection = con
         cmd.CommandText = "SELECT * FROM Payments WHERE Tenant = " & TenantID
-        'run the query
         da.SelectCommand = cmd
         Dim dt As New DataTable
         da.Fill(dt)
-        'if there are no results, msgbox No Payments Found
         If dt.Rows.Count = 0 Then
             MessageBox.Show("No Payments Found", "No Payments", MessageBoxButtons.OK, MessageBoxIcon.Information)
             con.Close()
             Exit Sub
         ElseIf dt.Rows.Count > 0 Then
-            'if there are results, we print them in a document
-            'we first print Company, Address, Address2, City, State, Zip, Phone, Fax from the Company table
-            'then we print the tenant name and address from the tenants table
-            'then we print the payments in a table with Payment Date, Payment Type, Payment Amount, Payment Note
-            'we print the total of the payments
-            'we print the Rent, Due Date, and Total Due from the tenants table
-            'code to get the company information is as follows, company id is always 1
             cmd.CommandText = "SELECT * FROM Company WHERE ID = 1"
             da.SelectCommand = cmd
             Dim dtCompany As New DataTable
             da.Fill(dtCompany)
-            'print the company information  
-            'display Company on the first line in upper case bold letters, display address and address2 on the next line, display city, state, zip on the next line
-            'display phone and fax on the next line with prefix Phone: and Fax:
-            'code is as follows
             Dim company As String = dtCompany.Rows(0).Item("Company")
             Dim address As String = dtCompany.Rows(0).Item("Address")
             Dim address2 As String = dtCompany.Rows(0).Item("Address2")
@@ -130,31 +108,6 @@ Public Class frmPaymentHistory
     End Sub
 
     Private Sub PrintPayments(sender As Object, e As Printing.PrintPageEventArgs)
-        ' Ensure the dataset is filled with data
-        Dim connection As New OleDbConnection(connectionString)
-        connection.Open()
-        Dim command As New OleDbCommand("SELECT * FROM Company WHERE ID = 1", connection)
-        Dim adapter As New OleDbDataAdapter(command)
-        Dim companyTable As New DataTable()
-        adapter.Fill(companyTable)
-        connection.Close()
-
-        ' Get company details from the company table
-        Dim companyRow As DataRow = companyTable.Rows(0)
-        Dim companyName As String = companyRow("Company").ToString().ToUpper()
-        Dim address As String = companyRow("Address").ToString()
-        Dim address2 As String = companyRow("Address2").ToString()
-        Dim city As String = companyRow("City").ToString()
-        Dim state As String = companyRow("State").ToString()
-        Dim zip As String = companyRow("Zip").ToString()
-        Dim phone As String = companyRow("Phone").ToString()
-        Dim fax As String = companyRow("Fax").ToString()
-
-        ' Print the company details at the top of the receipt
-        Dim companyDetails As String = $"{companyName}" & Environment.NewLine &
-                                       $"{address} {address2}" & Environment.NewLine &
-                                       $"{city}, {state} {zip}" & Environment.NewLine &
-                                       $"Phone: {phone} Fax: {fax}" & Environment.NewLine & Environment.NewLine
 
         ' Get tenant details
         Dim tenantName As String = cboTenants.Text
@@ -183,7 +136,8 @@ Public Class frmPaymentHistory
         paymentsDetails &= "------------------------------------------------------------" & Environment.NewLine
         paymentsDetails &= "Total Paid: " & TenantTotalPaid.ToString("C") & Environment.NewLine
         ' Draw the company details, tenant details, and payments on the print document
-        e.Graphics.DrawString(companyDetails, New Font("Arial", 12, FontStyle.Bold), Brushes.Black, New PointF(100, 50))
+        GetCompanyDetails()
+        e.Graphics.DrawString(CompanyDetails, New Font("Arial", 12, FontStyle.Bold), Brushes.Black, New PointF(100, 50))
         e.Graphics.DrawString(tenantDetails, New Font("Arial", 12), Brushes.Black, New PointF(100, 150))
         e.Graphics.DrawString(paymentsDetails, New Font("Arial", 12), Brushes.Black, New PointF(100, 200))
         ' Print the total paid by the tenant
@@ -258,31 +212,7 @@ Public Class frmPaymentHistory
             con.Close()
             Exit Sub
         ElseIf dt.Rows.Count > 0 Then
-            'If there are results, we print them in a document
-            'We first print Company, Address, Address2, City, State, Zip, Phone, Fax from the Company table
-            'Then we print the Property Address from the properties table
-            'Then we print the payments in a table with Payment Date, Payment Type, Payment Amount, Payment Note
-            'We print the total of the payments
-            'We print the Rent, Due Date, and Total Due from the properties table
-            'Code to get the company information is as follows, company id is always 1
-            cmd.CommandText = "SELECT * FROM Company WHERE ID = 1"
-            da.SelectCommand = cmd
-            Dim dtCompany As New DataTable
-            da.Fill(dtCompany)
-            'Print the company information  
-            'Display Company on the first line in upper case bold letters, display address and address2 on the next line, display city, state, zip on the next line
-            'Display phone and fax on the next line with prefix Phone: and Fax:
-            'Code is as follows
-            Dim company As String = dtCompany.Rows(0).Item("Company")
-            Dim address As String = dtCompany.Rows(0).Item("Address")
-            Dim address2 As String = dtCompany.Rows(0).Item("Address2")
-            Dim city As String = dtCompany.Rows(0).Item("City")
-            Dim state As String = dtCompany.Rows(0).Item("State")
-            Dim zip As String = dtCompany.Rows(0).Item("Zip")
-            Dim phone As String = dtCompany.Rows(0).Item("Phone")
-            Dim fax As String = dtCompany.Rows(0).Item("Fax")
-            'Close connection
-            con.Close()
+
             'Create a PrintDocument object and handle its PrintPage event
             Dim printDocument As New Printing.PrintDocument()
             AddHandler printDocument.PrintPage, AddressOf PrintRent
@@ -297,30 +227,8 @@ Public Class frmPaymentHistory
     End Sub
 
 
-    Private Sub PrintRent(nder As Object, e As Printing.PrintPageEventArgs)
-        ' Ensure the dataset is filled with data
-        Dim connection As New OleDbConnection(connectionString)
-        connection.Open()
-        Dim command As New OleDbCommand("SELECT * FROM Company WHERE ID = 1", connection)
-        Dim adapter As New OleDbDataAdapter(command)
-        Dim companyTable As New DataTable()
-        adapter.Fill(companyTable)
-        connection.Close()
-        ' Get company details from the company table
-        Dim companyRow As DataRow = companyTable.Rows(0)
-        Dim companyName As String = companyRow("Company").ToString().ToUpper()
-        Dim address As String = companyRow("Address").ToString()
-        Dim address2 As String = companyRow("Address2").ToString()
-        Dim city As String = companyRow("City").ToString()
-        Dim state As String = companyRow("State").ToString()
-        Dim zip As String = companyRow("Zip").ToString()
-        Dim phone As String = companyRow("Phone").ToString()
-        Dim fax As String = companyRow("Fax").ToString()
-        ' Print the company details at the top of the receipt
-        Dim companyDetails As String = $"{companyName}" & Environment.NewLine &
-                                       $"{address} {address2}" & Environment.NewLine &
-                                       $"{city}, {state} {zip}" & Environment.NewLine &
-                                       $"Phone: {phone} Fax: {fax}" & Environment.NewLine & Environment.NewLine
+    Private Sub PrintRent(Sender As Object, e As Printing.PrintPageEventArgs)
+
         ' Get property details
         Dim propertyAddress As String = cboProperties.Text
         ' Print the property details
@@ -328,8 +236,7 @@ Public Class frmPaymentHistory
         ' Print the payments
         Dim paymentsDetails As String = "Date Received" & Environment.NewLine
         ' Collect payment details from the payments table using PropertyID
-        con.ConnectionString = connectionString
-        con.Open()
+
         cmd.Connection = con
         cmd.CommandText = "SELECT * FROM Payments WHERE Property = " & PropertyID
         da.SelectCommand = cmd
@@ -345,8 +252,9 @@ Public Class frmPaymentHistory
         'add TotalPropertyPaid to the paymentsDetails
         paymentsDetails &= "------------------------------------------------------------" & Environment.NewLine
         paymentsDetails &= "Total Received: " & TotalPropertyPaid.ToString("C") & Environment.NewLine
+        GetCompanyDetails()
         ' Draw the company details, property details, and payments on the print document
-        e.Graphics.DrawString(companyDetails, New Font("Arial", 12, FontStyle.Bold), Brushes.Black, New PointF(100, 50))
+        e.Graphics.DrawString(CompanyDetails, New Font("Arial", 12, FontStyle.Bold), Brushes.Black, New PointF(100, 50))
         e.Graphics.DrawString(propertyDetails, New Font("Arial", 12), Brushes.Black, New PointF(100, 150))
         e.Graphics.DrawString(paymentsDetails, New Font("Arial", 12), Brushes.Black, New PointF(100, 200))
 

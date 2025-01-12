@@ -520,7 +520,7 @@ Public Class frmTenants
                 Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
 
                 ' Add parameters to the command
-                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", txtPaymentDate.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", Date.Parse(txtPaymentDate.Text)))
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", txtPaymentIDNumber.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("Amount", amountValue))
@@ -697,10 +697,7 @@ Public Class frmTenants
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If result = DialogResult.Yes Then
-            Application.Exit()
-        End If
+        VerifyExit(sender, e, btnExit)
     End Sub
 
     Private Sub txtRentDue_TextChanged(sender As Object, e As EventArgs)
@@ -763,7 +760,7 @@ Public Class frmTenants
                 ' Create a command object
                 Dim command As New OleDb.OleDbCommand("INSERT INTO Payments (PaymentDate, PaymentType, PaymentIDNumber, Amount, Tenant, Property, TakenBy, Notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection, transaction)
                 ' Add parameters to the command
-                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", txtPaymentDate.Text))
+                command.Parameters.Add(New OleDb.OleDbParameter("PaymentDate", Date.Parse(txtPaymentDate.Text)))
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentType", cboPaymentType.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("PaymentIDNumber", txtPaymentIDNumber.Text))
                 command.Parameters.Add(New OleDb.OleDbParameter("Amount", AmountPaid))
@@ -844,7 +841,7 @@ Public Class frmTenants
         "Receipt No: 1001" & PaymentID
         ' Print the receipt with Tenant Name, Payment Date, Payment Type, Amount Paid, and Notes
         Dim tenantName As String = txtFName.Text & " " & txtLName.Text
-        Dim paymentDate As String = txtPaymentDate.Text
+        Dim paymentDate As Date = DateTime.ParseExact(txtPaymentDate.Text, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture).Date
         Dim paymentType As String = cboPaymentType.Text
         Dim amountPaid As String = Convert.ToDecimal(txtAmount.Text).ToString("C")
         Dim notes As String = txtNotes.Text

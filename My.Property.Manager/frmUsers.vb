@@ -284,11 +284,7 @@ Public Class frmUsers
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        Dim response As MsgBoxResult
-        response = MsgBox("Are you sure you want to exit?", MsgBoxStyle.YesNo, "Exit")
-        If response = MsgBoxResult.Yes Then
-            Application.Exit()
-        End If
+        VerifyExit(sender, e, btnExit)
     End Sub
 
     Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged

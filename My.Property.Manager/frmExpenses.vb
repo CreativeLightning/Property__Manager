@@ -1,6 +1,7 @@
 ﻿Public Class frmExpenses
     Private Sub frmExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        dtpStart.Value = Today.AddDays(-30) ' Set the start date to 30 days ago
+        dtpEnd.Value = Today.AddDays(1) ' Set the end date to tomorrow
     End Sub
 
     Private Sub btnTotalWOs_Click(sender As Object, e As EventArgs) Handles btnTotalWOs.Click
@@ -12,20 +13,20 @@
         Dim WOcount As Integer = 0
         Dim WO As String = ""
         Dim WOlist As String = ""
-        Dim WOcharge As Decimal = 0
-        Dim WOtotalcharge As Decimal = 0
-        Dim theStartDate As String = dtpStart.Value.ToShortDateString
-        Dim theEndDate As String = dtpEnd.Value.ToShortDateString
-        ' If theStartDate > theEndDate Then
-        'MessageBox.Show("The start date must be before the end date", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'Exit Sub
-        'End If
-        'use ConnectionString Globals.vb
+        Dim WOcharges As Decimal = 0
+        WOtotalcharge = 0
+        ChargeDetails = ""
+        Dim theStartDate As Date = dtpStart.Value ' Start date is the date selected
+        Dim theEndDate As Date = dtpEnd.Value ' End date is the date selected
+        If theStartDate >= theEndDate Then
+            MessageBox.Show("The start date must be before the end date", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         Dim conn As New OleDb.OleDbConnection(connectionString)
         Dim cmdDistinctProperty As New OleDb.OleDbCommand
         Dim cmdProperty As New OleDb.OleDbCommand
         Dim cmdCharges As New OleDb.OleDbCommand
-        Dim dr As OleDb.OleDbDataReader
         Try
             ' Open the connection
             If conn.State = ConnectionState.Closed Then
@@ -39,36 +40,71 @@
 
             ' Set up the command text (SQL)
             cmdDistinctProperty.CommandText = "SELECT DISTINCT PropertyID from Charges"
-            Dim ChargeDetails As String = ""
-            dr = cmdDistinctProperty.ExecuteReader()
-
+            GetCompanyDetails()
             ' For each PropertyID in the charges table, get the PropertyDetails
-            While dr.Read()
-                Dim PropertyID As Integer = dr("PropertyID")
+            Dim dtProperties As New DataTable()
+            Dim dtCharges As New DataTable()
 
-                cmdProperty.CommandText = "SELECT StreetNumber, StreetName, AptSuiteNumber, City, State, Zip FROM Properties WHERE ID = @PropertyID"
-                cmdProperty.Parameters.Clear()
-                cmdProperty.Parameters.AddWithValue("@PropertyID", PropertyID)
-                Dim drProperty As OleDb.OleDbDataReader = cmdProperty.ExecuteReader()
-                If drProperty.Read() Then
-                    ChargeDetails &= drProperty("StreetNumber") & " " & drProperty("StreetName") & " " & drProperty("AptSuiteNumber") & " " & drProperty("City") & " " & drProperty("State") & " " & drProperty("Zip") & vbCrLf
+            ' Fill dtProperties with distinct PropertyIDs
+            Using daProperties As New OleDb.OleDbDataAdapter("SELECT DISTINCT PropertyID FROM Charges", conn)
+                daProperties.Fill(dtProperties)
+            End Using
+            'if there are no properties, msgbox and exit
+            If dtProperties.Rows.Count = 0 Then
+                MessageBox.Show("There are no properties with charges in the database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+            For Each row As DataRow In dtProperties.Rows
+                Dim PropertyID As Integer = row("PropertyID")
 
-                    ' Get all charges for this property by using the PropertyID, StartDate, and EndDate
-                    cmdCharges.CommandText = "SELECT DateBilled, Total FROM Charges WHERE PropertyID = @PropertyID AND DateBilled >= @StartDate AND DateBilled <= @EndDate"
-                    cmdCharges.Parameters.Clear()
-                    cmdCharges.Parameters.AddWithValue("@PropertyID", PropertyID)
-                    cmdCharges.Parameters.AddWithValue("@StartDate", theStartDate)
-                    cmdCharges.Parameters.AddWithValue("@EndDate", theEndDate)
-                    Dim drCharges As OleDb.OleDbDataReader = cmdCharges.ExecuteReader()
-                    While drCharges.Read()
-                        ChargeDetails &= "Date: " & drCharges("DateBilled") & " Total: " & drCharges("Total") & vbCrLf
-                    End While
-                    drCharges.Close()
-                End If
-                drProperty.Close()
-            End While
-            dr.Close()
-            MsgBox(ChargeDetails)
+                ' Fill dtPropertyDetails with property details
+                Using daPropertyDetails As New OleDb.OleDbDataAdapter("SELECT StreetNumber, StreetName, AptSuiteNumber, City, State, Zip FROM Properties WHERE ID = @PropertyID", conn)
+                    daPropertyDetails.SelectCommand.Parameters.AddWithValue("@PropertyID", PropertyID)
+                    Dim dtPropertyDetails As New DataTable()
+                    daPropertyDetails.Fill(dtPropertyDetails)
+                    'if there are no property details, msgbox and exit
+                    If dtPropertyDetails.Rows.Count = 0 Then
+                        MessageBox.Show("There are no property details for PropertyID " & PropertyID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+                    If dtPropertyDetails.Rows.Count > 0 Then
+                        Dim propertyRow As DataRow = dtPropertyDetails.Rows(0)
+                        ChargeDetails &= propertyRow("StreetNumber") & " " & propertyRow("StreetName") & " " & propertyRow("AptSuiteNumber") & " " & propertyRow("City") & " " & propertyRow("State") & " " & propertyRow("Zip") & vbCrLf
+                        WOcharges = 0
+                        ' Fill dtCharges with charges for this property
+                        Using daCharges As New OleDb.OleDbDataAdapter("SELECT DateBilled, Total FROM Charges WHERE PropertyID = @PropertyID AND DateBilled >= @StartDate AND DateBilled <= @EndDate", conn)
+                            daCharges.SelectCommand.Parameters.AddWithValue("@PropertyID", PropertyID)
+                            daCharges.SelectCommand.Parameters.AddWithValue("@StartDate", theStartDate)
+                            daCharges.SelectCommand.Parameters.AddWithValue("@EndDate", theEndDate)
+                            dtCharges.Clear()
+                            daCharges.Fill(dtCharges)
+                            'if there are no charges, msgbox and exit
+                            If dtCharges.Rows.Count = 0 Then
+                                ChargeDetails &= "No charges for this property" & vbCrLf
+                            End If
+                            For Each chargeRow As DataRow In dtCharges.Rows
+                                ChargeDetails &= "Date: " & chargeRow("DateBilled") & " Total: $" & chargeRow("Total") & vbCrLf
+                                WOtotalcharge += chargeRow("Total") 'Total charges for all work orders
+                                WOcharges += chargeRow("Total") 'Total charges for this work order
+                            Next
+                            ChargeDetails &= "Total of Work Orders for this property: $" & WOcharges & vbCrLf
+                        End Using
+                        ChargeDetails &= vbCrLf
+                    End If
+                End Using
+            Next
+
+            ' Create a PrintDocument object and handle its PrintPage event
+            Dim printDocument As New Printing.PrintDocument()
+            AddHandler printDocument.PrintPage, AddressOf PrintWOExpenses
+
+            ' Create a PrintPreviewDialog object and set its Document property
+            Dim printPreviewDialog As New PrintPreviewDialog()
+            printPreviewDialog.Document = printDocument
+
+            ' Show the print preview dialog
+            printPreviewDialog.ShowDialog()
+
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -78,4 +114,22 @@
         End Try
     End Sub
 
+    Private Sub PrintWOExpenses(ByVal sender As Object, ByVal e As Printing.PrintPageEventArgs)
+
+        ' Print CompanyDetails in Bold 14 point font
+        GetCompanyDetails()
+        Dim companyFont As New Font("Arial", 14, FontStyle.Bold)
+        e.Graphics.DrawString(CompanyDetails, companyFont, Brushes.Black, 100, 100)
+        ' Print ChargeDetails and WOtotalcharge in 12 point font using & vbCrLf to separate lines
+        Dim chargeFont As New Font("Arial", 12)
+        e.Graphics.DrawString(ChargeDetails & vbCrLf & "Work Order Expense for all properties from:" & dtpStart.Value & " to:" & dtpEnd.Value & " $" & WOtotalcharge, chargeFont, Brushes.Black, 100, 240)
+    End Sub
+
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        VerifyExit(sender, e, btnExit)
+    End Sub
 End Class
