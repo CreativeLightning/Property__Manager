@@ -1,8 +1,10 @@
 ﻿Public Class frmExpenses
+
     Private Sub frmExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dtpStart.Value = Today.AddDays(-30) ' Set the start date to 30 days ago
-        dtpEnd.Value = Today.AddDays(1) ' Set the end date to tomorrow
+        dtpStart.Value = New Date(Today.Year, 1, 1) ' Set the start date to January 1st of the current year
+        dtpEnd.Value = New Date(Today.Year, 12, 31) ' Set the end date to December 31st of the current year
     End Sub
+
 
     Private Sub btnTotalWOs_Click(sender As Object, e As EventArgs) Handles btnTotalWOs.Click
         ' Calculate the total of the work orders from the charges table

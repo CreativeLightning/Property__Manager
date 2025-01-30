@@ -860,4 +860,9 @@ Public Class frmTenants
         e.Graphics.DrawString("Signature: _______________________", New Font("Arial", 12), Brushes.Black, New PointF(100, 500))
     End Sub
 
+    Private Sub btnDueDate_Click(sender As Object, e As EventArgs) Handles btnDueDate.Click
+        txtPaymentDate.Text = Date.Parse(DueDate).ToString("MM/dd/yyyy")
+    End Sub
+
+
 End Class

@@ -75,6 +75,7 @@ Partial Class frmTenants
         Me.btnRecordPayment = New System.Windows.Forms.Button()
         Me.cboPickProperty = New System.Windows.Forms.ComboBox()
         Me.grpRentInfo = New System.Windows.Forms.GroupBox()
+        Me.btnAssign = New System.Windows.Forms.Button()
         Me.chkDepositPaid = New System.Windows.Forms.CheckBox()
         Me.txtDeposit = New System.Windows.Forms.TextBox()
         Me.txtRent = New System.Windows.Forms.TextBox()
@@ -83,7 +84,7 @@ Partial Class frmTenants
         Me.lblInvalidRentDue = New System.Windows.Forms.Label()
         Me.lblRentDue = New System.Windows.Forms.Label()
         Me.txtRentDue = New System.Windows.Forms.TextBox()
-        Me.btnAssign = New System.Windows.Forms.Button()
+        Me.btnDueDate = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpTenantInfo.SuspendLayout()
@@ -458,6 +459,7 @@ Partial Class frmTenants
         '
         'grpPayment
         '
+        Me.grpPayment.Controls.Add(Me.btnDueDate)
         Me.grpPayment.Controls.Add(Me.btnRecordPaymentPrintReceipt)
         Me.grpPayment.Controls.Add(Me.txtPaymentDate)
         Me.grpPayment.Controls.Add(Me.Label13)
@@ -606,6 +608,15 @@ Partial Class frmTenants
         Me.grpRentInfo.Text = "Rent Info"
         Me.grpRentInfo.Visible = False
         '
+        'btnAssign
+        '
+        Me.btnAssign.Location = New System.Drawing.Point(132, 64)
+        Me.btnAssign.Name = "btnAssign"
+        Me.btnAssign.Size = New System.Drawing.Size(67, 39)
+        Me.btnAssign.TabIndex = 68
+        Me.btnAssign.Text = "Assign Property"
+        Me.btnAssign.UseVisualStyleBackColor = True
+        '
         'chkDepositPaid
         '
         Me.chkDepositPaid.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -681,18 +692,18 @@ Partial Class frmTenants
         Me.txtRentDue.Size = New System.Drawing.Size(100, 20)
         Me.txtRentDue.TabIndex = 60
         '
-        'btnAssign
+        'btnDueDate
         '
-        Me.btnAssign.Location = New System.Drawing.Point(132, 64)
-        Me.btnAssign.Name = "btnAssign"
-        Me.btnAssign.Size = New System.Drawing.Size(67, 39)
-        Me.btnAssign.TabIndex = 68
-        Me.btnAssign.Text = "Assign Property"
-        Me.btnAssign.UseVisualStyleBackColor = True
+        Me.btnDueDate.Location = New System.Drawing.Point(211, 44)
+        Me.btnDueDate.Name = "btnDueDate"
+        Me.btnDueDate.Size = New System.Drawing.Size(75, 23)
+        Me.btnDueDate.TabIndex = 64
+        Me.btnDueDate.Text = "Due Date"
+        Me.btnDueDate.UseVisualStyleBackColor = True
         '
         'frmTenants
         '
-        Me.ClientSize = New System.Drawing.Size(458, 468)
+        Me.ClientSize = New System.Drawing.Size(457, 471)
         Me.ControlBox = False
         Me.Controls.Add(Me.grpRentInfo)
         Me.Controls.Add(Me.cboPickProperty)
@@ -787,4 +798,5 @@ Partial Class frmTenants
     Friend WithEvents lblRentDue As Label
     Friend WithEvents txtRentDue As TextBox
     Friend WithEvents btnAssign As Button
+    Friend WithEvents btnDueDate As Button
 End Class

@@ -69,7 +69,7 @@ Public Class frmPaymentHistory
         con.ConnectionString = connectionString
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT * FROM Payments WHERE Tenant = " & TenantID
+        cmd.CommandText = "SELECT * FROM Payments WHERE Tenant = " & TenantID & " AND PaymentDate >= #" & dtpStart.Value.ToString("MM/dd/yyyy") & "# AND PaymentDate <= #" & dtpEnd.Value.ToString("MM/dd/yyyy") & "#"
         da.SelectCommand = cmd
         Dim dt As New DataTable
         da.Fill(dt)
@@ -121,7 +121,7 @@ Public Class frmPaymentHistory
         con.ConnectionString = connectionString
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT * FROM Payments WHERE Tenant = " & TenantID
+        cmd.CommandText = "SELECT * FROM Payments WHERE Tenant = " & TenantID & " AND PaymentDate >= #" & dtpStart.Value.ToString("MM/dd/yyyy") & "# AND PaymentDate <= #" & dtpEnd.Value.ToString("MM/dd/yyyy") & "#"
         da.SelectCommand = cmd
         Dim dtPayments As New DataTable
         da.Fill(dtPayments)
@@ -201,7 +201,7 @@ Public Class frmPaymentHistory
         con.ConnectionString = connectionString
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT * FROM Payments WHERE Property = " & PropertyID
+        cmd.CommandText = "SELECT * FROM Payments WHERE Property = " & PropertyID & " AND PaymentDate >= #" & dtpStart.Value.ToString("MM/dd/yyyy") & "# AND PaymentDate <= #" & dtpEnd.Value.ToString("MM/dd/yyyy") & "#"
         'Run the query
         da.SelectCommand = cmd
         Dim dt As New DataTable
@@ -238,7 +238,7 @@ Public Class frmPaymentHistory
         ' Collect payment details from the payments table using PropertyID
 
         cmd.Connection = con
-        cmd.CommandText = "SELECT * FROM Payments WHERE Property = " & PropertyID
+        cmd.CommandText = "SELECT * FROM Payments WHERE Property = " & PropertyID & " AND PaymentDate >= #" & dtpStart.Value.ToString("MM/dd/yyyy") & "# AND PaymentDate <= #" & dtpEnd.Value.ToString("MM/dd/yyyy") & "#"
         da.SelectCommand = cmd
         Dim dtPayments As New DataTable
         da.Fill(dtPayments)
@@ -261,6 +261,14 @@ Public Class frmPaymentHistory
     End Sub
 
     Private Sub frmPaymentHistory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Set custom format for dtpStart and dtpEnd
+        dtpStart.Format = DateTimePickerFormat.Custom
+        dtpStart.CustomFormat = "MM/dd/yyyy"
+        dtpEnd.Format = DateTimePickerFormat.Custom
+        dtpEnd.CustomFormat = "MM/dd/yyyy"
 
+        ' Set default values for dtpStart and dtpEnd
+        dtpStart.Value = New DateTime(DateTime.Now.Year, 1, 1)
+        dtpEnd.Value = New DateTime(DateTime.Now.Year, 12, 31)
     End Sub
 End Class

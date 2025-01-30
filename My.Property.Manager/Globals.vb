@@ -2,7 +2,7 @@
     Public User As Integer  ' User ID
     Public Login As Boolean = False ' User Logged In
     Public Admin As Boolean = False ' Admin User
-    Public HelpMessages As Boolean = True ' Show Help Messages
+    Public HelpMessages As Boolean = False ' Show Help Messages
     Public WOProperty As Integer ' Work Order Property ID
     Public WOID As Integer ' Work Order ID
     Public VendorID As Integer ' Vendor ID
@@ -52,11 +52,15 @@
             If conn.State = ConnectionState.Open Then
                 conn.Close()
             End If
+
         End Try
     End Sub
     ' Routine to verify the user wants to exit the application
     ' Need to pass the button that was clicked
     Public Sub VerifyExit(sender As Object, e As EventArgs, exitButton As Button)
+        ' Remove any existing handlers to avoid multiple additions
+        RemoveHandler exitButton.Click, AddressOf VerifyExitHandler
+        ' Add the handler
         AddHandler exitButton.Click, AddressOf VerifyExitHandler
     End Sub
 

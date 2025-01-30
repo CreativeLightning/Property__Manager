@@ -300,6 +300,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmAccounting.Designer.vb">
+      <DependentUpon>frmAccounting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAccounting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCharges.Designer.vb">
       <DependentUpon>frmCharges.vb</DependentUpon>
     </Compile>
@@ -394,6 +400,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAccounting.resx">
+      <DependentUpon>frmAccounting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCharges.resx">
       <DependentUpon>frmCharges.vb</DependentUpon>

@@ -14,7 +14,7 @@ Public Class Form1
             btnVendors.Enabled = False
             btnPayments.Enabled = False
             btnProperties.Enabled = False
-            btnCharges.Enabled = False
+            btnAccounting.Enabled = False
             btnUsers.Enabled = False
             btnCompany.Enabled = False
             btnExpense.Enabled = False
@@ -80,5 +80,9 @@ Public Class Form1
 
     Private Sub btnExpense_Click(sender As Object, e As EventArgs) Handles btnExpense.Click
         frmExpenses.Show()
+    End Sub
+
+    Private Sub btnAccounting_Click(sender As Object, e As EventArgs) Handles btnAccounting.Click
+        frmAccounting.Show()
     End Sub
 End Class

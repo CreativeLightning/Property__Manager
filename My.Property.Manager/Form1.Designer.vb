@@ -27,7 +27,7 @@ Partial Class Form1
         Me.btnCompany = New System.Windows.Forms.Button()
         Me.btnUsers = New System.Windows.Forms.Button()
         Me.chkHelpMessages = New System.Windows.Forms.CheckBox()
-        Me.btnCharges = New System.Windows.Forms.Button()
+        Me.btnAccounting = New System.Windows.Forms.Button()
         Me.btnVendors = New System.Windows.Forms.Button()
         Me.btnEmployees = New System.Windows.Forms.Button()
         Me.btnWorkOrders = New System.Windows.Forms.Button()
@@ -44,7 +44,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.btnCompany)
         Me.GroupBox1.Controls.Add(Me.btnUsers)
         Me.GroupBox1.Controls.Add(Me.chkHelpMessages)
-        Me.GroupBox1.Controls.Add(Me.btnCharges)
+        Me.GroupBox1.Controls.Add(Me.btnAccounting)
         Me.GroupBox1.Controls.Add(Me.btnVendors)
         Me.GroupBox1.Controls.Add(Me.btnEmployees)
         Me.GroupBox1.Controls.Add(Me.btnWorkOrders)
@@ -88,8 +88,6 @@ Partial Class Form1
         'chkHelpMessages
         '
         Me.chkHelpMessages.AutoSize = True
-        Me.chkHelpMessages.Checked = True
-        Me.chkHelpMessages.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkHelpMessages.Location = New System.Drawing.Point(16, 176)
         Me.chkHelpMessages.Name = "chkHelpMessages"
         Me.chkHelpMessages.Size = New System.Drawing.Size(135, 17)
@@ -97,15 +95,14 @@ Partial Class Form1
         Me.chkHelpMessages.Text = "Enable Help Messages"
         Me.chkHelpMessages.UseVisualStyleBackColor = True
         '
-        'btnCharges
+        'btnAccounting
         '
-        Me.btnCharges.Enabled = False
-        Me.btnCharges.Location = New System.Drawing.Point(87, 137)
-        Me.btnCharges.Name = "btnCharges"
-        Me.btnCharges.Size = New System.Drawing.Size(75, 23)
-        Me.btnCharges.TabIndex = 5
-        Me.btnCharges.Text = "Charges"
-        Me.btnCharges.UseVisualStyleBackColor = True
+        Me.btnAccounting.Location = New System.Drawing.Point(87, 137)
+        Me.btnAccounting.Name = "btnAccounting"
+        Me.btnAccounting.Size = New System.Drawing.Size(75, 23)
+        Me.btnAccounting.TabIndex = 5
+        Me.btnAccounting.Text = "Accounting"
+        Me.btnAccounting.UseVisualStyleBackColor = True
         '
         'btnVendors
         '
@@ -195,7 +192,7 @@ Partial Class Form1
     Friend WithEvents btnEmployees As Button
     Friend WithEvents btnVendors As Button
     Friend WithEvents btnExit As Button
-    Friend WithEvents btnCharges As Button
+    Friend WithEvents btnAccounting As Button
     Friend WithEvents chkHelpMessages As CheckBox
     Friend WithEvents btnUsers As Button
     Friend WithEvents btnCompany As Button
